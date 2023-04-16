@@ -1,6 +1,18 @@
 import Image from "next/image";
+import Modal from './modal';
+import { useState } from "react";
 
 const Table = ({ data }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <header className="flex justify-between items-center p-4  pl-[50px] mt-[25px]">
@@ -22,9 +34,10 @@ const Table = ({ data }) => {
           <span className="ml-2 text-gray-800 font-medium pr-[10px] inline-flex text-white">
             <div className="m-auto text-[#808080]">Filter by &nbsp;</div><div className="border border-10 border-[#303030] rounded-[8px] p-[4px] pl-[8px] pr-[8px] text-white">Email all </div>
           </span>
-        <div className="text-xl text-right flex-1 border border-10 border-[#303030] rounded-[8px] p-[4px] pl-[8px] pr-[8px]">&#43; &nbsp; Contact</div>
+        <div onClick={handleOpenModal} className="cursor-pointer text-xl text-right flex-1 border border-10 border-[#303030] rounded-[8px] p-[4px] pl-[8px] pr-[8px]">&#43; &nbsp; Contact</div>
         </div>
       </header>
+      <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} />
       <table className="table-fixed w-full border-collapse border border-[#303030]">
         <thead>
           <tr>
