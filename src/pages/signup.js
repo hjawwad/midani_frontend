@@ -1,9 +1,20 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
+import { useRouter } from 'next/router'
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Signup() {
+  const router = useRouter()
+
+  const handleLoginClick = () => {
+    router.push('/')
+  }
+
+  const handleSignupClick = () => {
+    router.push('/')
+  }
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
@@ -55,13 +66,13 @@ export default function Signup() {
             </div>
 
             <div>
-              <button className="text-xl border border-slate-300 rounded-md p-2 w-full border-none" style={{ 'background-color': '#7F56D9' }}>
+              <button onClick={handleSignupClick} className="text-xl border border-slate-300 rounded-md p-2 w-full border-none" style={{ 'background-color': '#7F56D9' }}>
                 Get Started
               </button>
             </div>
             <div className="text-center pt-[32px]  text-[#475467]">
               <span>Already have an account?&nbsp;</span>
-              <span className="cursor-pointer" style={{ 'color': '#7F56D9' }}>
+              <span className="cursor-pointer" onClick={handleLoginClick} style={{ 'color': '#7F56D9' }}>
                 Log in
               </span>
             </div>
