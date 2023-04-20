@@ -1,11 +1,19 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
+import Cookies from 'js-cookie';
+import { login } from './api/register'
+import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const router = useRouter()
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [remember, setRemember] = useState(false);
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   const handleSignupClick = () => {
     router.push('/signup')
@@ -15,13 +23,26 @@ export default function Home() {
     router.push('/dashboard')    
   }
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
+    let response = ''
+    try {
+      response = await login(email,password,remember);
 
-    let email = e.target.elements.email?.value;
-    let password = e.target.elements.password?.value;
-
-    console.log(email, password);
+      setSuccessMessage('Login successful!');
+      setError(null);
+      handleLoginClick()
+    } catch (error) {
+      setError('Login failed. Please try again later.');
+      setSuccessMessage(null);
+    }
+    if(!error) {
+      handleLoginClick()
+      Cookies.set('session_token', response.data.token, {
+        expires: response.data.expiresAt, // Set the cookie expiration time
+        secure: true, // Set to true if using HTTPS
+      });
+    }
   };
   return (
     <div className="flex min-h-screen flex-col items-center text-center justify-between p-24 pt-[139px] pr-0">
@@ -49,6 +70,8 @@ export default function Home() {
                 className="bg-white text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
                 id="email"
                 placeholder="Email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
               />
             </div>
             <div className="pb-5">
@@ -60,15 +83,18 @@ export default function Home() {
                 className="bg-white text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
                 id="password"
                 placeholder="Password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
               />
             </div>
             <div className="pb-5">
-                <input type="checkbox" id="rememberFor" name="rememberFor" value="true" className="w-[16px] h-[16px]"/>
+                <input type="checkbox" id="rememberFor" name="rememberFor" value={remember}
+                onChange={(event) => setRemember(event.target.value)} className="w-[16px] h-[16px]"/>
                 <label for="rememberFor" className="pl-[10px]">Remember for 30 days</label>
             </div>
 
             <div>
-              <button onClick={handleLoginClick} className="text-xl border border-slate-300 rounded-md p-2 w-full border-none" style={{ 'background-color': '#7F56D9' }}>
+              <button type="submit" className="text-xl border border-slate-300 rounded-md p-2 w-full border-none" style={{ 'background-color': '#7F56D9' }}>
                 Sign in
               </button>
             </div>

@@ -1,13 +1,16 @@
 import ReactModal from "react-modal";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import TabMenu from "./tabmenu";
-import { getCompany } from "../api/register";
+import TabMenu from "./components/tabmenu";
+import { getCompany } from "./api/register";
+import withAuth from "./components/withAuth";
 
 ReactModal.setAppElement("#__next");
 
 const CompanyName = ({ companyId }) => {
   const [companyName, setCompanyName] = useState("");
+  const [selectedRow, setSelectedRow] = useState("")
+  setSelectedRow(JSON.parse(localStorage.getItem("selectedRow")))
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,21 +23,18 @@ const CompanyName = ({ companyId }) => {
   return <p className="text-left text-xl">{companyName}</p>;
 };
 
-function Modal({ isOpen, onRequestClose, selectedRow }) {
-  const [name, setName] = useState("Tempp");
+function ContactDetail() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
   };
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    onRequestClose();
   };
 
   return (
     <ReactModal
-      isOpen={isOpen}
-      onRequestClose={onRequestClose}
+      isOpen={true}
       overlayClassName="p-0"
     >
       <div className="bg-[#000000] w-full h-full p-[20px]">
@@ -199,13 +199,6 @@ function Modal({ isOpen, onRequestClose, selectedRow }) {
                     </div>
                   </div>
                 </div>
-
-                <button
-                  onClick={onRequestClose}
-                  className="w-min fixed bottom-0 mb-8 mr-8 p-[6px] px-[12px] rounded-[8px] border border-white"
-                >
-                  Cancel
-                </button>
                 {/* <div>
                   <button
                     onClick={handleSubmit}
@@ -227,4 +220,4 @@ function Modal({ isOpen, onRequestClose, selectedRow }) {
   );
 }
 
-export default Modal;
+export default withAuth(ContactDetail);

@@ -1,9 +1,10 @@
 import ReactModal from "react-modal";
 import { useState } from "react";
+import { createComment } from "../api/register"
 
 ReactModal.setAppElement("#__next");
 
-function CreateComment({ isOpen, onRequestClose }) {
+function CreateComment({ isOpen, onRequestClose, selectedRow }) {
   const customStyles = {
     content: {
       maxWidth: "500px",
@@ -12,11 +13,23 @@ function CreateComment({ isOpen, onRequestClose }) {
     },
     overlay: {},
   };
-  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(`Submitted name: ${name}`);
+    let response = ''
+    try {
+      response = await createComment(selectedRow._id, {comment: description});
+
+      setSuccessMessage('Login successful!');
+      setError(null);
+      handleLoginClick()
+    } catch (error) {
+      setError('Create Comment failed. Please try again later.');
+      setSuccessMessage(null);
+    }
     onRequestClose();
   };
 
@@ -34,7 +47,8 @@ function CreateComment({ isOpen, onRequestClose }) {
           name="message"
           rows="13"
           placeholder="Description"
-          onChange={(event) => setName(event.target.value)}
+          onChange={(event) => setDescription(event.target.value)}
+          value={description}
         ></textarea>
         <button
           onClick={onRequestClose}

@@ -1,9 +1,10 @@
 import ReactModal from "react-modal";
 import { useState } from "react";
+import { createInteraction } from "../api/register"
 
 ReactModal.setAppElement("#__next");
 
-function CreateInteractions({ isOpen, onRequestClose }) {
+function CreateInteractions({ isOpen, onRequestClose, selectedRow }) {
   const customStyles = {
     content: {
       maxWidth: "600px",
@@ -12,11 +13,32 @@ function CreateInteractions({ isOpen, onRequestClose }) {
     },
     overlay: {},
   };
-  const [name, setName] = useState("");
+  const [eventName, setEvent] = useState("");
+  const [date, setDate] = useState("");
+  const [location, setLocation] = useState("");
+  const [description, setDescription] = useState("");
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(`Submitted name: ${name}`);
+    let response = ''
+    try {
+      response = await createInteraction(selectedRow._id, 
+        {
+          name: eventName,
+          date: date,
+          location: location,
+          description: description
+        });
+
+      setSuccessMessage('Login successful!');
+      setError(null);
+      handleLoginClick()
+    } catch (error) {
+      setError('Create Comment failed. Please try again later.');
+      setSuccessMessage(null);
+    }
     onRequestClose();
   };
 
@@ -34,6 +56,8 @@ function CreateInteractions({ isOpen, onRequestClose }) {
             className="w-full bg-black text-xl border border-slate-300 rounded-[16px] bg-black p-2 pl-5"
             id="name"
             placeholder="Name of the event"
+            onChange={(event) => setEvent(event.target.value)}
+            value={eventName}
           />
         </div>
         <div className="pb-[13px]">
@@ -41,10 +65,12 @@ function CreateInteractions({ isOpen, onRequestClose }) {
             <b>Date</b>
           </label>
           <input
-            type="name"
+            type="date"
             className="mr-[-30px] text-center w-[155px] bg-black text-xl border border-slate-300 rounded-[12px] bg-black p-2 pl-5"
             id="name"
             placeholder="date"
+          onChange={(event) => setDate(event.target.value)}
+          value={date}
           />
         </div>
         <div className="pb-[57px]">
@@ -56,6 +82,8 @@ function CreateInteractions({ isOpen, onRequestClose }) {
             className="text-center w-[155px] bg-black text-xl border border-slate-300 rounded-[12px] bg-black p-2 pl-5"
             id="name"
             placeholder="location"
+            onChange={(event) => setLocation(event.target.value)}
+            value={location}
           />
         </div>
         <textarea
@@ -64,7 +92,8 @@ function CreateInteractions({ isOpen, onRequestClose }) {
           name="message"
           rows="5"
           placeholder="Description"
-          onChange={(event) => setName(event.target.value)}
+          onChange={(event) => setDescription(event.target.value)}
+          value={description}
         ></textarea>
         <button
           onClick={onRequestClose}

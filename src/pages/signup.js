@@ -1,27 +1,41 @@
+import { useState } from "react";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import { useRouter } from 'next/router'
+import register from './api/register';
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Signup() {
   const router = useRouter()
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   const handleLoginClick = () => {
     router.push('/')
   }
 
-  const handleSignupClick = () => {
-    router.push('/')
-  }
-
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    let email = e.target.elements.email?.value;
-    let password = e.target.elements.password?.value;
+    setIsLoading(true);
 
-    console.log(email, password);
+    try {
+      const response = await register(email,password,name);
+
+      setSuccessMessage('Registration successful!');
+      setError(null);
+    } catch (error) {
+      setError('Registration failed. Please try again later.');
+      setSuccessMessage(null);
+    }
+
+    setIsLoading(false);
+    handleLoginClick()
   };
   return (
     <div className="flex min-h-screen flex-col items-center text-center justify-between bg-white">
@@ -39,6 +53,8 @@ export default function Signup() {
                 className="bg-white text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
                 id="name"
                 placeholder="Enter your name"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
               />
             </div>
             <div className="pb-5">
@@ -50,6 +66,8 @@ export default function Signup() {
                 className="bg-white text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
                 id="email"
                 placeholder="Enter your email"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
               />
             </div>
             <div className="pb-5">
@@ -61,13 +79,15 @@ export default function Signup() {
                 className="bg-white text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
                 id="password"
                 placeholder="Create a password"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
               />
               <p className="text-left pt-[12px] text-[#475467]">Must be at least 8 characters.</p>
             </div>
 
             <div>
-              <button onClick={handleSignupClick} className="text-xl border border-slate-300 rounded-md p-2 w-full border-none" style={{ 'background-color': '#7F56D9' }}>
-                Get Started
+              <button type="submit" disabled={isLoading} className="text-xl border border-slate-300 rounded-md p-2 w-full border-none" style={{ 'background-color': '#7F56D9' }}>
+                {isLoading ? 'Loading...' : 'Get Started'}
               </button>
             </div>
             <div className="text-center pt-[32px]  text-[#475467]">
