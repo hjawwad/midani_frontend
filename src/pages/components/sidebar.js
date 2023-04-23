@@ -1,25 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import CreateGroup from "./createGroup";
 import { getAllGroups } from '../api/register'
+import Cookies from 'js-cookie';
 
 const { API_ENDPOINT } = process.env || 'http://localhost:4001/'
-const Sidebar = ({ title, setSelectedGroup, selectedGroup }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Sidebar = ({ setSelectedGroup, selectedGroup }) => {
+  const [isOpen, setIsOpen] = useState(true);
   const [addGroup, setAddGroup] = useState(false);
   const [data, setData] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null);
+  const token = Cookies.get("session_token");
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
     getAllGroupNames()
   };
+
   const handleAddGroup = () => {
     setAddGroup(!addGroup)
     getAllGroupNames()
   }
+
   const isSelected = (current) => {
     if(selectedGroup._id === current._id) {
       return 'bg-[#1A1A1A] rounded'
@@ -33,15 +35,22 @@ const Sidebar = ({ title, setSelectedGroup, selectedGroup }) => {
       const response = await getAllGroups();
       await setData(response.data)
       await setSelectedGroup(response.data[0])
-      setSuccessMessage('Successful!');
       setError(null);
     } catch (error) {
-      setError('Failed. Please try again later.');
-      setSuccessMessage(null);
+      //
     }
 
     setIsLoading(false);
   };
+  useEffect(() => {
+    async function fetchData() {
+        await getAllGroupNames()
+    }
+    console.log("fetxh data", token)
+    if(token) {
+      fetchData();
+    }
+  }, []);
 
   return (
     <div className="w-[307px] min-w-[307px] p-[50px] pl-[40px] pr-[40px] border border-[#303030]">

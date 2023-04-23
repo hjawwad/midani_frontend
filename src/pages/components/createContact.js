@@ -1,6 +1,7 @@
 import ReactModal from "react-modal";
 import { useState, useRef } from "react";
 import { createContactCompany, createContactByGroup } from "../api/register";
+import { showErrorAlert, showSuccessAlert } from '../components/utility'
 
 ReactModal.setAppElement("#__next");
 
@@ -18,16 +19,25 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup }) {
   const [phone, setPhone] = useState("");
   const [job, setJob] = useState("");
   const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("");
   const [location, setLocation] = useState("");
+  const [university, setUniversity] = useState("");
   const [meet, setMeet] = useState("");
   const [dob, setDOB] = useState("");
   const [connections, setConnections] = useState([]);
   const [companies, setCompanies] = useState([{ name: "", logo: null }]);
+  const options = [
+    { value: 'To contact', label: 'To contact' },
+    { value: 'Phoned', label: 'Phoned' },
+    { value: 'Meet-up', label: 'Meet-up' },
+  ];
 
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null);
   const ref = useRef(null);
+
+  const handleChange = (event) => {
+    setStatus(event.target.value);
+  }
 
   const handleFileInputChange = (event) => {
     const file = event.target.files[0];
@@ -37,6 +47,7 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup }) {
       img.src = event.target.result;
       document.body.appendChild(img);
       setImage(img.src);
+      img.style.display = "none";
     };
     reader.readAsDataURL(file);
   };
@@ -48,6 +59,7 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup }) {
       const img = document.createElement("img");
       img.src = event.target.result;
       document.body.appendChild(img);
+      img.style.display = "none";
       const companiesCopy = [...companies];
 
       // Modify the copy at the specified index
@@ -61,6 +73,10 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup }) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    if(!name || !image  || !email || !status || !phone) {
+      showErrorAlert(`Name, Image, Email, Status and Phone is required.`);
+      return
+    }
 
     setIsLoading(true);
     try {
@@ -74,6 +90,10 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup }) {
           icon: company.logo,
         };
         response = await createContactCompany(data);
+        if(!response.status) {
+          showErrorAlert('Something Went Wrong!');
+          return
+        }
         companyIds.push(response.data.data._id);
       }
       const contactData = {
@@ -82,23 +102,29 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup }) {
         company_id: companyIds,
         email: email,
         location: location,
-        status: "Active",
+        status: status,
         job: job,
         phone: phone,
         connections: connections,
         dob: dob,
         meet: meet,
-        group_id: selectedGroup._id
+        group_id: selectedGroup._id,
+        university: university,
       };
-      responseContact = await createContactByGroup(
+      const responseContact = await createContactByGroup(
         selectedGroup._id,
         contactData
       );
-      setSuccessMessage("Group Creation successful!");
-      setError(null);
+      setIsLoading(false);
+      if(response.status) {
+        showSuccessAlert(responseContact.message)
+      } else {
+        showErrorAlert('Something went wrong!');
+        return
+      }
     } catch (error) {
-      setError("Group Creation failed. Please try again later.");
-      setSuccessMessage(null);
+      showErrorAlert(error);
+      return
     }
 
     setIsLoading(false);
@@ -190,16 +216,41 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup }) {
                       value={location}
                     />
                   </div>
+                  <div className="pb-[32px] mr-[5px]">
+                    <label
+                      className="pb-[6px] text-[#6A6A6A] mb-[8px]"
+                      htmlFor="email"
+                    >
+                      Status
+                    </label>{" "}
+                    <br />
+                    <select
+                      value={status}
+                      onChange={handleChange}
+                      className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
+                    >
+                      <option value="">-- Select a value --</option>
+                      {options.map((option) => (
+                        <option
+                          key={option.value}
+                          value={option.value}
+                          className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
+                        >
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
                 <div className=" border-none border-0 ">
                   <div className="pb-[32px] ml-[5px]">
-                    <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
+                    <label className="pb-[6px] text-[#6A6A6A]" for="myDate">
                       Birthday
                     </label>
                     <input
                       type="date"
                       className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                      id="name"
+                      id="myDate"
                       onChange={(e) => setDOB(e.target.value)}
                       value={dob}
                     />
@@ -214,6 +265,18 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup }) {
                       id="name"
                       onChange={(e) => setEmail(e.target.value)}
                       value={email}
+                    />
+                  </div>
+                  <div className="pb-[32px] ml-[5px]">
+                    <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
+                      University
+                    </label>
+                    <input
+                      type="text"
+                      className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
+                      id="university"
+                      onChange={(e) => setUniversity(e.target.value)}
+                      value={university}
                     />
                   </div>
                   {connections.map((connection, index) => (
@@ -279,7 +342,7 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup }) {
                     <input
                       type="file"
                       onChange={(e) => {
-                        handleCompanyLogoInputChange(index, e)
+                        handleCompanyLogoInputChange(index, e);
                       }}
                       className="w-full bg-black text-xl border border-slate-300 rounded-md bg-black p-2 pl-5"
                       accept="image/*"
@@ -297,37 +360,19 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup }) {
               >
                 Add Company
               </button>
-              {/* <div className="pb-[32px]">
-                <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
-                  Company Name
-                </label>
-                <input
-                  type="name"
-                  className="w-full bg-black text-xl border border-slate-300 rounded-md bg-black p-2 pl-5"
-                  id="name"
-                  placeholder="Name of the group"
-                  onChange={(e) => setCompanyName(e.target.value)}
-                  value={companyName}
-                />
-              </div>
-              <div className="pb-[32px]">
-                <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
-                  Company Logo
-                </label>
-                <input
-                  type="file"
-                  onChange={handleCompanyLogoInputChange}
-                  className="w-full bg-black text-xl border border-slate-300 rounded-md bg-black p-2 pl-5"
-                  accept="image/*"
-                />
-              </div> */}
               <div>
+                <button
+                  onClick={onRequestClose}
+                  className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
+                >
+                  Cancel
+                </button>
                 <button
                   type="submit"
                   className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
                   style={{ "background-color": "#7F56D9" }}
                 >
-                  Create
+                  {isLoading ? "Creating" : "Create"}
                 </button>
               </div>
             </form>

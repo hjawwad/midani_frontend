@@ -5,8 +5,9 @@ import CreateComment from "./createComment";
 import CreateInteractions from "./createInteractions"
 import { getAllComments, getAllInteractions } from "../api/register"
 
-function TabMenu({ selectedRow }) {
+function TabMenu() {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedRow, setSelectedRow] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isInteractionModalOpen, setIsInteractionModalOpen] = useState(false);
 
@@ -15,13 +16,20 @@ function TabMenu({ selectedRow }) {
 
   useEffect(() => {
     async function fetchData() {
-    const response = await getAllComments(selectedRow._id)
-    setData(response.data)
-    const interact = await getAllInteractions(selectedRow._id)
-    setInteractions(interact.data)
+      if (selectedRow._id) {
+        const response = await getAllComments(selectedRow._id);
+        setData(response.data);
+        const interact = await getAllInteractions(selectedRow._id);
+        setInteractions(interact.data);
+      }
     }
     fetchData();
-  }, []);
+  }, [selectedRow._id]);
+
+  useEffect(() => {
+    console.log("mee", JSON.parse(localStorage.getItem("selectedRow")))
+    setSelectedRow(JSON.parse(localStorage.getItem("selectedRow")))
+    }, [])
 
 
   const onCreateComment = () => {
@@ -52,9 +60,8 @@ function TabMenu({ selectedRow }) {
     setIsInteractionModalOpen(true);
   };
 
-  const handleCommentCloseModal = () => {
-    const response = getAllComments(selectedRow._id)
-    setData(response)
+  const handleCommentCloseModal = async () => {
+    window.location.reload()    
     setIsModalOpen(false);
   };
 

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import { useRouter } from 'next/router'
 import register from './api/register';
-
+import { showErrorAlert, showSuccessAlert } from './components/utility'
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Signup() {
@@ -12,8 +12,6 @@ export default function Signup() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null);
 
   const handleLoginClick = () => {
     router.push('/')
@@ -21,20 +19,45 @@ export default function Signup() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    if(!email && !password && !name) {
+      showErrorAlert('Email, Password and name is required.');
+      return
+    } else if(!email && !password) {
+      showErrorAlert('Email and Password is required.');
+      return
+    } else if(!email && !name) {
+      showErrorAlert('Email and name is required.');
+      return
+    } else if(!email) {
+      showErrorAlert('Email is required.');
+      return
+    } else if(!name) {
+      showErrorAlert('Name is required.');
+      return
+    } else if(!password) {
+      showErrorAlert('Password is required.');
+      return
+    } else if(password.length < 8) {
+      showErrorAlert('Password should be of 8 character length');
+      return
+    }
 
     setIsLoading(true);
 
     try {
       const response = await register(email,password,name);
-
-      setSuccessMessage('Registration successful!');
-      setError(null);
+      setIsLoading(false);
+      if(response.status) {
+        showSuccessAlert(response.message)
+      } else {
+        showErrorAlert('Something went wrong!');
+        return
+      }
     } catch (error) {
-      setError('Registration failed. Please try again later.');
-      setSuccessMessage(null);
+      setIsLoading(false);
+      showErrorAlert(error);
+      return
     }
-
-    setIsLoading(false);
     handleLoginClick()
   };
   return (
@@ -50,7 +73,7 @@ export default function Signup() {
               </label>
               <input
                 type="name"
-                className="bg-white text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
+                className="bg-white text-black text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
                 id="name"
                 placeholder="Enter your name"
                 onChange={(e) => setName(e.target.value)}
@@ -63,7 +86,7 @@ export default function Signup() {
               </label>
               <input
                 type="email"
-                className="bg-white text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
+                className="bg-white text-black text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
                 id="email"
                 placeholder="Enter your email"
                 onChange={(e) => setEmail(e.target.value)}
@@ -76,7 +99,7 @@ export default function Signup() {
               </label>
               <input
                 type="password"
-                className="bg-white text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
+                className="bg-white text-black text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
                 id="password"
                 placeholder="Create a password"
                 onChange={(e) => setPassword(e.target.value)}

@@ -4,13 +4,14 @@ import Image from "next/image";
 import TabMenu from "./components/tabmenu";
 import { getCompany } from "./api/register";
 import withAuth from "./components/withAuth";
+import { useRouter } from "next/router";
+import { showErrorAlert, showSuccessAlert } from './components/utility'
+import { updateContactByGroup } from './api/register'
 
 ReactModal.setAppElement("#__next");
 
 const CompanyName = ({ companyId }) => {
   const [companyName, setCompanyName] = useState("");
-  const [selectedRow, setSelectedRow] = useState("")
-  setSelectedRow(JSON.parse(localStorage.getItem("selectedRow")))
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,21 +25,60 @@ const CompanyName = ({ companyId }) => {
 };
 
 function ContactDetail() {
+  const router = useRouter();
+  const [selectedRow, setSelectedRow] = useState({});
+  const [fields, setFields] = useState([]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    try {
+      const responseContact = await updateContactByGroup(
+        "64411ecc7d8d3e96de54fceb",
+        fields,
+        selectedRow._id
+      );
+      if(responseContact.status) {
+        showSuccessAlert(responseContact.message)
+      } else {
+        showErrorAlert('Something went wrong!');
+        return
+      }
+      // Handle success
+    } catch (error) {
+      showErrorAlert(error);
+      return
+      // Handle error
+    }
   };
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
+
+  const handleInputChange = (event, index) => {
+    const { name, value } = event.target;
+    setFields((prevState) => {
+      const newState = [...prevState];
+      newState[index][name] = value;
+      return newState;
+    });
   };
+
+  const handleAddField = () => {
+    setFields((prevState) => [...prevState, { name: "", value: "" }]);
+  };
+
+  useEffect(() => {
+    setSelectedRow(JSON.parse(localStorage.getItem("selectedRow")));
+  }, []);
+
+  useEffect(() => {
+    const selectedRow = JSON.parse(localStorage.getItem("selectedRow"));
+    if (!selectedRow) {
+      router.push("/dashboard");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <ReactModal
-      isOpen={true}
-      overlayClassName="p-0"
-    >
-      <div className="bg-[#000000] w-full h-full p-[20px]">
-        <form onSubmit={handleSubmit}>
+    <div className="bg-[#000000] w-full h-full p-[20px]">
+      {selectedRow && (
           <div className="grid grid-cols-2 divide-x w-full">
             <div className="items-center justify-center mx-auto pt-[22px]">
               <div className="grid grid-cols-2 divide-x w-full">
@@ -54,15 +94,15 @@ function ContactDetail() {
               </div>
 
               <h1 className="text-3xl text-left pt-[11px]">
-                {selectedRow.name}
+                {selectedRow.name || ""}
               </h1>
               <p className="text-left">#stanford &nbsp; #stanford</p>
-              <form onSubmit={handleFormSubmit} className="text-left pt-[32px]">
+              <form className="text-left pt-[32px]">
                 <div className="pb-[32px]">
                   <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
                     How did we meet?
                   </label>
-                  <p className="text-left text-xl">{selectedRow.meet}</p>
+                  <p className="text-left text-xl">{selectedRow.meet || ""}</p>
                   {/* <input
                 type="name"
                 className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
@@ -79,7 +119,7 @@ function ContactDetail() {
                         Location
                       </label>
                       <p className="text-left text-xl">
-                        {selectedRow.location}
+                        {selectedRow.location || ""}
                       </p>
                       {/* <input
                 type="name"
@@ -94,7 +134,9 @@ function ContactDetail() {
                       >
                         Phone number
                       </label>
-                      <p className="text-left text-xl">{selectedRow.phone}</p>
+                      <p className="text-left text-xl">
+                        {selectedRow.phone || ""}
+                      </p>
                       {/* <input
                 type="name"
                 className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
@@ -108,7 +150,9 @@ function ContactDetail() {
                       >
                         Job
                       </label>
-                      <p className="text-left text-xl">{selectedRow.job}</p>
+                      <p className="text-left text-xl">
+                        {selectedRow.job || ""}
+                      </p>
                       {/* <input
                 type="name"
                 className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
@@ -143,7 +187,9 @@ function ContactDetail() {
                       >
                         Birthday
                       </label>
-                      <p className="text-left text-xl">{selectedRow.dob}</p>
+                      <p className="text-left text-xl">
+                        {selectedRow.dob || ""}
+                      </p>
                       {/* <input
                 type="name"
                 className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
@@ -157,7 +203,9 @@ function ContactDetail() {
                       >
                         Email
                       </label>
-                      <p className="text-left text-xl">{selectedRow.email}</p>
+                      <p className="text-left text-xl">
+                        {selectedRow.email || ""}
+                      </p>
                       {/* <input
                 type="name"
                 className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
@@ -199,24 +247,42 @@ function ContactDetail() {
                     </div>
                   </div>
                 </div>
-                {/* <div>
-                  <button
-                    onClick={handleSubmit}
-                    className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
-                    style={{ "background-color": "#7F56D9" }}
-                  >
-                    Get Started 1111
-                  </button>
-                </div> */}
+              </form>
+              <form onSubmit={handleSubmit}>
+                {fields.map((field, index) => (
+                  <div key={index}>
+                    <label htmlFor={`name-${index}`}>Name:</label>
+                    <input
+                      className="w-full bg-black text-xl text-white border border-slate-300 rounded-[16px] bg-black p-2 pl-5"
+                      type="text"
+                      id={`name-${index}`}
+                      name="name"
+                      value={field.name}
+                      onChange={(event) => handleInputChange(event, index)}
+                    />
+                    <label htmlFor={`value-${index}`}>Value:</label>
+                    <input
+                      type="text"
+                      className="w-full bg-black text-white text-xl border border-slate-300 rounded-[16px] bg-black p-2 pl-5"
+                      id={`value-${index}`}
+                      name="value"
+                      value={field.value}
+                      onChange={(event) => handleInputChange(event, index)}
+                    />
+                  </div>
+                ))}
+                <button className="text-xl border border-slate-300 rounded-md p-2 w-full border-none" type="button" onClick={handleAddField}>
+                  Add New field
+                </button>
+                <button className="text-xl border border-slate-300 rounded-md p-2 w-full border-none" type="submit">Save</button>
               </form>
             </div>
             <div className="pl-[48px]">
               <TabMenu selectedRow={selectedRow} />
             </div>
           </div>
-        </form>
-      </div>
-    </ReactModal>
+      )}
+    </div>
   );
 }
 

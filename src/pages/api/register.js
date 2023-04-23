@@ -88,7 +88,7 @@ export async function getAllComments(contact_id) {
     const response = await instance.get(`/api/contacts/${contact_id}/comments`);
     return response.data;
   } catch (error) {
-    throw new Error('Get Companies By Group failed. Please try again later.');
+    throw new Error(error);
   }
 }
 
@@ -126,4 +126,15 @@ export async function getCompany(id) {
     throw new Error('Get Companies By Id failed. Please try again later.');
   }
 }
+
+export async function updateContactByGroup(group_id, data, contact_id) {
+  console.log("updatee")
+  try {
+    const response = await instance.put(`/api/groups/${group_id}/contacts/${contact_id}`, data);
+    return response;
+  } catch (error) {
+    throw new Error('Create Company By Group failed. Please try again later.');
+  }
+}
+
 export default register;

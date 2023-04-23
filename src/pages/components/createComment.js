@@ -1,6 +1,7 @@
 import ReactModal from "react-modal";
 import { useState } from "react";
 import { createComment } from "../api/register"
+import { showErrorAlert, showSuccessAlert } from './utility'
 
 ReactModal.setAppElement("#__next");
 
@@ -13,24 +14,30 @@ function CreateComment({ isOpen, onRequestClose, selectedRow }) {
     },
     overlay: {},
   };
-  const [description, setDescription] = useState("");
-  const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null);
+  const [description, setDescription] = useState("")
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if(!description) {
+        showErrorAlert('Comment should not be null');
+        return
+    }
+    setIsLoading(true);
     let response = ''
     try {
       response = await createComment(selectedRow._id, {comment: description});
-
-      setSuccessMessage('Login successful!');
-      setError(null);
-      handleLoginClick()
+      setIsLoading(false);
+      if(response.status) {
+        showSuccessAlert(response.message)
+      } else {
+        showErrorAlert('Something went wrong!');
+        return
+      }
     } catch (error) {
-      setError('Create Comment failed. Please try again later.');
-      setSuccessMessage(null);
+      showErrorAlert('Create Comment failed. Please try again later.');
     }
-    onRequestClose();
+    onRequestClose()
   };
 
   return (

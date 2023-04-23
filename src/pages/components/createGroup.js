@@ -1,6 +1,7 @@
 import ReactModal from "react-modal";
 import { useState } from "react";
 import { createGroup } from "../api/register";
+import { showErrorAlert, showSuccessAlert } from './utility'
 
 ReactModal.setAppElement("#__next");
 
@@ -16,8 +17,6 @@ function CreateGroup({ isOpen, onRequestClose }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null);
 
   const handleFileInputChange = (event) => {
     const file = event.target.files[0];
@@ -26,6 +25,7 @@ function CreateGroup({ isOpen, onRequestClose }) {
       const img = document.createElement('img');
       img.src = event.target.result;
       document.body.appendChild(img);
+      img.style.display = "none";
       setSelectedFile(img.src)
     };
     reader.readAsDataURL(file);
@@ -33,20 +33,24 @@ function CreateGroup({ isOpen, onRequestClose }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    if(!name || !selectedFile) {
+      showErrorAlert('Group name and logo is required');
+      return
+    }
     setIsLoading(true);
 
     try {
       const response = await createGroup(name,selectedFile);
-
-      setSuccessMessage('Group Creation successful!');
-      setError(null);
+      setIsLoading(true); 
+      if(response.status) {
+        showSuccessAlert(response.message)
+      } else {
+        showErrorAlert('Something went wrong!');
+        return
+      }
     } catch (error) {
-      setError('Group Creation failed. Please try again later.');
-      setSuccessMessage(null);
+      showErrorAlert('Group Creation failed. Please try again later.');
     }
-
-    setIsLoading(false);
     onRequestClose()
   };
 
@@ -86,7 +90,7 @@ function CreateGroup({ isOpen, onRequestClose }) {
           type="submit"
           className="w-1/3 fixed bottom-0 right-0 mb-8 mr-8 p-4 text-white"
         >
-          Save
+          {isLoading ? 'Saving' : 'Save'}
         </button>
       </form>
     </ReactModal>

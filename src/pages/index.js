@@ -1,49 +1,62 @@
 import Image from "next/image";
-import { Inter } from "next/font/google";
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import { login } from './api/register'
 import { useState } from "react";
-
-const inter = Inter({ subsets: ["latin"] });
+import { showErrorAlert } from './components/utility'
 
 export default function Home() {
   const router = useRouter()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(false);
-  const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSignupClick = () => {
     router.push('/signup')
   }
 
-  const handleLoginClick = () => {
-    router.push('/dashboard')    
+  const handleLoginClick = async () => {
+    await router.push('/dashboard')
+    window.location.reload()    
   }
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    let response = ''
-    try {
-      response = await login(email,password,remember);
-
-      setSuccessMessage('Login successful!');
-      setError(null);
-      handleLoginClick()
-    } catch (error) {
-      setError('Login failed. Please try again later.');
-      setSuccessMessage(null);
+    if(!email && !password) {
+      showErrorAlert('Email and  Password is required.');
+      return
+    } else if(!email) {
+      showErrorAlert('Email is required.');
+      return
+    } else if(!password) {
+      showErrorAlert('Password is required.');
+      return
     }
-    if(!error) {
-      handleLoginClick()
+
+    setIsLoading(true);
+
+    try {
+      const response = await login(email,password,remember);
+      setIsLoading(false);
+
+      if(!response.status) {
+        showErrorAlert('Password is required.');
+        return
+      }
       Cookies.set('session_token', response.data.token, {
         expires: response.data.expiresAt, // Set the cookie expiration time
-        secure: true, // Set to true if using HTTPS
+        secure: false, // Set to true if using HTTPS
       });
+      handleLoginClick()
+
+    } catch (error) {
+      setIsLoading(false);
+      showErrorAlert(error);
+      return
     }
   };
+
   return (
     <div className="flex min-h-screen flex-col items-center text-center justify-between p-24 pt-[139px] pr-0">
       <div className="grid grid-cols-2 divide-x w-full">
@@ -67,7 +80,7 @@ export default function Home() {
               </label>
               <input
                 type="email"
-                className="bg-white text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
+                className="bg-white text-black text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
                 id="email"
                 placeholder="Email"
                 value={email}
@@ -80,7 +93,7 @@ export default function Home() {
               </label>
               <input
                 type="password"
-                className="bg-white text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
+                className="bg-white text-black text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
                 id="password"
                 placeholder="Password"
                 value={password}
@@ -95,7 +108,7 @@ export default function Home() {
 
             <div>
               <button type="submit" className="text-xl border border-slate-300 rounded-md p-2 w-full border-none" style={{ 'background-color': '#7F56D9' }}>
-                Sign in
+              {isLoading ? 'Loading...' : 'Sign in'}
               </button>
             </div>
             <div className="text-center pt-[32px]">

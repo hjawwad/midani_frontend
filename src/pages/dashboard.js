@@ -7,63 +7,7 @@ import { destroyCookie } from "nookies";
 import { useRouter } from 'next/router';
 import { useState, useEffect } from "react";
 import { getAllContactsByGroup } from "./api/register"
-
-const data = [
-  {
-    people: 1,
-    email: "john@example.com",
-    location: "New ziland",
-    status: "To contact",
-    job: "CEO",
-    company: "Google",
-    phone: "123-234-4567",
-  },
-  {
-    people: 1,
-    email: "john@example.com",
-    location: "New ziland",
-    status: "To contact",
-    job: "CEO",
-    company: "Google",
-    phone: "123-234-4567",
-  },
-  {
-    people: 1,
-    email: "john@example.com",
-    location: "New ziland",
-    status: "Phoned",
-    job: "CEO",
-    company: "Google",
-    phone: "123-234-4567",
-  },
-  {
-    people: 1,
-    email: "john@example.com",
-    location: "New ziland",
-    status: "To contact",
-    job: "CEO",
-    company: "Google",
-    phone: "123-234-4567",
-  },
-  {
-    people: 1,
-    email: "john@example.com",
-    location: "New ziland",
-    status: "Meet-up",
-    job: "CEO",
-    company: "Google",
-    phone: "123-234-4567",
-  },
-  {
-    people: 1,
-    email: "john@example.com",
-    location: "New ziland",
-    status: "To contact",
-    job: "CEO",
-    company: "Google",
-    phone: "123-234-4567",
-  },
-];
+import Cookies from 'js-cookie';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -82,6 +26,7 @@ function Dashboard() {
       // redirect to the login page
       router.push("/");
   };
+
   const getAllContacts = async () => {
     setIsLoading(true);
     try {
@@ -99,7 +44,8 @@ function Dashboard() {
 
   useEffect(() => {
     async function fetchData() {
-    await getAllContacts(selectedGroup._id)
+      if(selectedGroup && selectedGroup._id)
+        await getAllContacts(selectedGroup._id)
     }
     fetchData();
   }, [selectedGroup]);

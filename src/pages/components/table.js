@@ -27,16 +27,18 @@ const Table = ({ data, selectedGroup }) => {
 
   const handleOpenModal = (item) => {
     setSelectedRow(item)
-    // localStorage.setItem("selectedRow", JSON.stringify(item))
-    // router.push('/contactDetail')
-    setIsModalOpen(true);
+    localStorage.setItem("selectedRow", JSON.stringify(item))
+    router.push('/contactDetail')
+    // setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
   const handleAddOpenModal = () => {
-    setIsAddModal(true);
+    if(selectedGroup._id) {
+      setIsAddModal(true);
+    }
   };
 
   const handleAddCloseModal = () => {
@@ -124,27 +126,27 @@ const Table = ({ data, selectedGroup }) => {
                   height={20}
                   priority
                 />
-                {item.name}
+                {item.name ? item.name : ''}
               </td>
               <td className="p-[10px] pl-[40px] border border-[#303030] whitespace-nowrap overflow-hidden">
-                {item.email}
+                {item.email ? item.email : '-'}
               </td>
               <td className="p-[10px] pl-[40px] border border-[#303030]">
-                {item.location}
+                {item.location ? item.location : '-'}
               </td>
               <td className={`p-[10px] pl-[40px] border border-[#303030]`}>
                 <div className={`p-[5px] rounded-md w-min ${statusColor(item.status)}`}>
-                {item.status}
+                {item.status ? item.status : '-'}
                 </div>
               </td>
               <td className="p-[10px] pl-[40px] border border-[#303030]">
-                {item.job}
+                {item.job ? item.job : '-'}
               </td>
               <td className="p-[10px] pl-[40px] border border-[#303030]">
                 {<CompanyName companyId={item.company_id[0]} />}
               </td>
               <td className="p-[10px] pl-[40px] border border-[#303030]">
-                {item.phone}
+                {item.phone ? item.phone : '-'}
               </td>
             </tr>
           ))}
