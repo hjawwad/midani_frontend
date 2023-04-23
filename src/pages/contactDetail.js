@@ -83,6 +83,16 @@ function ContactDetail() {
             <div className="items-center justify-center mx-auto pt-[22px]">
               <div className="grid grid-cols-2 divide-x w-full">
                 <div className="flex items-center justify-center">
+                  {!selectedRow.image &&
+                  <Image
+                    src={`http://localhost:4001/${selectedRow.image}`}
+                    alt="Login Logo"
+                    width={100}
+                    height={100}
+                    priority
+                  />
+                  }
+                  {selectedRow.image &&
                   <Image
                     src="/contact_default.svg"
                     alt="Login Logo"
@@ -90,6 +100,7 @@ function ContactDetail() {
                     height={100}
                     priority
                   />
+                  }
                 </div>
               </div>
 
