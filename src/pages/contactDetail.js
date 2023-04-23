@@ -79,11 +79,11 @@ function ContactDetail() {
   return (
     <div className="bg-[#000000] w-full h-full p-[20px]">
       {selectedRow && (
-          <div className="grid grid-cols-2 divide-x w-full">
-            <div className="items-center justify-center mx-auto pt-[22px]">
-              <div className="grid grid-cols-2 divide-x w-full">
-                <div className="flex items-center justify-center">
-                  {!selectedRow.image &&
+        <div className="grid grid-cols-2 divide-x w-full">
+          <div className="items-center justify-center mx-auto pt-[22px]">
+            <div className="grid grid-cols-2 divide-x w-full">
+              <div className="flex items-center justify-center">
+                {!selectedRow.image && (
                   <Image
                     src={`http://localhost:4001/${selectedRow.image}`}
                     alt="Login Logo"
@@ -91,8 +91,8 @@ function ContactDetail() {
                     height={100}
                     priority
                   />
-                  }
-                  {selectedRow.image &&
+                )}
+                {selectedRow.image && (
                   <Image
                     src="/contact_default.svg"
                     alt="Login Logo"
@@ -100,198 +100,168 @@ function ContactDetail() {
                     height={100}
                     priority
                   />
-                  }
+                )}
+              </div>
+            </div>
+
+            <h1 className="text-3xl text-left pt-[11px]">
+              {selectedRow.name || ""}
+            </h1>
+            <p className="text-left">{selectedRow.tag ? tag : ""}</p>
+            <form className="text-left pt-[32px]">
+              <div className="pb-[32px]">
+                <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
+                  How did we meet?
+                </label>
+                <p className="text-left text-xl">{selectedRow.meet || ""}</p>
+                {/* <input
+                type="name"
+                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
+                id="name"
+              /> */}
+              </div>
+              <div className="grid grid-cols-2 divide-x w-full">
+                <div className=" border-none border-0 ">
+                  <div className="pb-[32px]">
+                    <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
+                      Location
+                    </label>
+                    <p className="text-left text-xl">
+                      {selectedRow.location || ""}
+                    </p>
+                    {/* <input
+                type="name"
+                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
+                id="name"
+              /> */}
+                  </div>
+                  <div className="pb-[32px]">
+                    <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
+                      Phone number
+                    </label>
+                    <p className="text-left text-xl">
+                      {selectedRow.phone || ""}
+                    </p>
+                    {/* <input
+                type="name"
+                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
+                id="name"
+              /> */}
+                  </div>
+                  <div className="pb-[32px]">
+                    <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
+                      Job
+                    </label>
+                    <p className="text-left text-xl">{selectedRow.job || ""}</p>
+                    {/* <input
+                type="name"
+                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
+                id="name"
+              /> */}
+                  </div>
+                  <div className="pb-[32px]">
+                    <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
+                      Connection
+                    </label>
+                    {connections.map((connection, index) => (
+                      <p className="text-left text-xl" key="index">
+                        <b>connection</b>
+                      </p>
+                    ))}
+
+                    {/* <input
+                type="name"
+                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
+                id="name"
+              /> */}
+                  </div>
+                </div>
+                <div className=" border-none border-0 ">
+                  <div className="pb-[32px]">
+                    <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
+                      Birthday
+                    </label>
+                    <p className="text-left text-xl">{selectedRow.dob || ""}</p>
+                    {/* <input
+                type="name"
+                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
+                id="name"
+              /> */}
+                  </div>
+                  <div className="pb-[32px]">
+                    <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
+                      Email
+                    </label>
+                    <p className="text-left text-xl">
+                      {selectedRow.email || ""}
+                    </p>
+                    {/* <input
+                type="name"
+                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
+                id="name"
+              /> */}
+                  </div>
+                  <div className="pb-[32px]">
+                    <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
+                      Company
+                    </label>
+                    {selectedRow.company_id &&
+                      selectedRow.company_id.length &&
+                      selectedRow.company_id.map((companyId) => (
+                        // eslint-disable-next-line react/jsx-key
+                        <CompanyName companyId={companyId} />
+                      ))}
+                    {/* <input
+                type="name"
+                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
+                id="name"
+              /> */}
+                  </div>
                 </div>
               </div>
-
-              <h1 className="text-3xl text-left pt-[11px]">
-                {selectedRow.name || ""}
-              </h1>
-              <p className="text-left">#stanford &nbsp; #stanford</p>
-              <form className="text-left pt-[32px]">
-                <div className="pb-[32px]">
-                  <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
-                    How did we meet?
-                  </label>
-                  <p className="text-left text-xl">{selectedRow.meet || ""}</p>
-                  {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
+            </form>
+            <form onSubmit={handleSubmit}>
+              {fields.map((field, index) => (
+                <div key={index}>
+                  <label htmlFor={`name-${index}`}>Name:</label>
+                  <input
+                    className="w-full bg-black text-xl text-white border border-slate-300 rounded-[16px] bg-black p-2 pl-5"
+                    type="text"
+                    id={`name-${index}`}
+                    name="name"
+                    value={field.name}
+                    onChange={(event) => handleInputChange(event, index)}
+                  />
+                  <label htmlFor={`value-${index}`}>Value:</label>
+                  <input
+                    type="text"
+                    className="w-full bg-black text-white text-xl border border-slate-300 rounded-[16px] bg-black p-2 pl-5"
+                    id={`value-${index}`}
+                    name="value"
+                    value={field.value}
+                    onChange={(event) => handleInputChange(event, index)}
+                  />
                 </div>
-                <div className="grid grid-cols-2 divide-x w-full">
-                  <div className=" border-none border-0 ">
-                    <div className="pb-[32px]">
-                      <label
-                        className="pb-[6px] text-[#6A6A6A]"
-                        htmlFor="email"
-                      >
-                        Location
-                      </label>
-                      <p className="text-left text-xl">
-                        {selectedRow.location || ""}
-                      </p>
-                      {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
-                    </div>
-                    <div className="pb-[32px]">
-                      <label
-                        className="pb-[6px] text-[#6A6A6A]"
-                        htmlFor="email"
-                      >
-                        Phone number
-                      </label>
-                      <p className="text-left text-xl">
-                        {selectedRow.phone || ""}
-                      </p>
-                      {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
-                    </div>
-                    <div className="pb-[32px]">
-                      <label
-                        className="pb-[6px] text-[#6A6A6A]"
-                        htmlFor="email"
-                      >
-                        Job
-                      </label>
-                      <p className="text-left text-xl">
-                        {selectedRow.job || ""}
-                      </p>
-                      {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
-                    </div>
-                    <div className="pb-[32px]">
-                      <label
-                        className="pb-[6px] text-[#6A6A6A]"
-                        htmlFor="email"
-                      >
-                        Connection
-                      </label>
-                      <p className="text-left text-xl">
-                        <b>IE University</b>&nbsp; MBA-2022
-                      </p>
-                      <p className="text-left text-xl">
-                        <b>Stanford University</b>&nbsp; BBA-2020
-                      </p>
-                      {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
-                    </div>
-                  </div>
-                  <div className=" border-none border-0 ">
-                    <div className="pb-[32px]">
-                      <label
-                        className="pb-[6px] text-[#6A6A6A]"
-                        htmlFor="email"
-                      >
-                        Birthday
-                      </label>
-                      <p className="text-left text-xl">
-                        {selectedRow.dob || ""}
-                      </p>
-                      {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
-                    </div>
-                    <div className="pb-[32px]">
-                      <label
-                        className="pb-[6px] text-[#6A6A6A]"
-                        htmlFor="email"
-                      >
-                        Email
-                      </label>
-                      <p className="text-left text-xl">
-                        {selectedRow.email || ""}
-                      </p>
-                      {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
-                    </div>
-                    <div className="pb-[32px]">
-                      <label
-                        className="pb-[6px] text-[#6A6A6A]"
-                        htmlFor="email"
-                      >
-                        Connection
-                      </label>
-                      <p className="text-left text-xl">@nico_rose</p>
-                      {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
-                    </div>
-                    <div className="pb-[32px]">
-                      <label
-                        className="pb-[6px] text-[#6A6A6A]"
-                        htmlFor="email"
-                      >
-                        Company
-                      </label>
-                      {selectedRow.company_id &&
-                        selectedRow.company_id.length &&
-                        selectedRow.company_id.map((companyId) => (
-                          // eslint-disable-next-line react/jsx-key
-                          <CompanyName companyId={companyId} />
-                        ))}
-                      {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
-                    </div>
-                  </div>
-                </div>
-              </form>
-              <form onSubmit={handleSubmit}>
-                {fields.map((field, index) => (
-                  <div key={index}>
-                    <label htmlFor={`name-${index}`}>Name:</label>
-                    <input
-                      className="w-full bg-black text-xl text-white border border-slate-300 rounded-[16px] bg-black p-2 pl-5"
-                      type="text"
-                      id={`name-${index}`}
-                      name="name"
-                      value={field.name}
-                      onChange={(event) => handleInputChange(event, index)}
-                    />
-                    <label htmlFor={`value-${index}`}>Value:</label>
-                    <input
-                      type="text"
-                      className="w-full bg-black text-white text-xl border border-slate-300 rounded-[16px] bg-black p-2 pl-5"
-                      id={`value-${index}`}
-                      name="value"
-                      value={field.value}
-                      onChange={(event) => handleInputChange(event, index)}
-                    />
-                  </div>
-                ))}
-                <button className="text-xl border border-slate-300 rounded-md p-2 w-full border-none" type="button" onClick={handleAddField}>
-                  Add New field
-                </button>
-                <button className="text-xl border border-slate-300 rounded-md p-2 w-full border-none" type="submit">Save</button>
-              </form>
-            </div>
-            <div className="pl-[48px]">
-              <TabMenu selectedRow={selectedRow} />
-            </div>
+              ))}
+              <button
+                className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
+                type="button"
+                onClick={handleAddField}
+              >
+                Add New field
+              </button>
+              <button
+                className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
+                type="submit"
+              >
+                Save
+              </button>
+            </form>
           </div>
+          <div className="pl-[48px]">
+            <TabMenu selectedRow={selectedRow} />
+          </div>
+        </div>
       )}
     </div>
   );
