@@ -7,16 +7,27 @@ import { useRouter } from 'next/router';
 
 const CompanyName = ({ companyId }) => {
   const [companyName, setCompanyName] = useState('');
+  const [companyLogo, setCompanyLogo] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       const company = await getCompany(companyId);
       setCompanyName(company.name);
+      setCompanyLogo(company.icon);
     };
     fetchData();
   }, [companyId]);
 
-  return <span>{companyName}</span>;
+  return <>
+  <Image
+  src={`http://localhost:4001/${companyLogo}`}
+  alt="Sidebar Logo"
+  className="inline-flex rounded-full w-[20px] h-[20px] mr-[5px]"
+  width={20}
+  height={20}
+  priority
+/>
+{companyName ? companyName : ''}</>;
 };
 
 const Table = ({ data, selectedGroup }) => {
