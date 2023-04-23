@@ -39,6 +39,7 @@ function ContactDetail() {
       );
       if(responseContact.status) {
         showSuccessAlert(responseContact.message)
+        router.push("/dashboard")
       } else {
         showErrorAlert('Something went wrong!');
         return
@@ -220,6 +221,17 @@ function ContactDetail() {
                 </div>
               </div>
             </form>
+            {selectedRow.newField 
+            && selectedRow.newField.map((field, index) => (
+                <div key={index}>
+                  {index=== 0 && 
+                  <h1 className="text-3xl text-left pt-[11px]">
+              New Fields
+            </h1>}
+                  <label htmlFor={`name-${index}`} className="pb-[6px] text-[#6A6A6A]">{Object.keys(field)[0]}</label>
+                  <p className="text-left text-xl">{field[Object.keys(field)[0]]}</p>
+                </div>
+              ))}
             <form onSubmit={handleSubmit}>
               {fields.map((field, index) => (
                 <div key={index}>
@@ -243,13 +255,13 @@ function ContactDetail() {
                   />
                 </div>
               ))}
-              <button
+              {!fields.length && <button
                 className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
                 type="button"
                 onClick={handleAddField}
               >
                 Add New field
-              </button>
+              </button>}
               <button
                 className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
                 type="submit"
