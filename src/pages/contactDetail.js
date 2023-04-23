@@ -163,7 +163,7 @@ function ContactDetail() {
                     <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
                       Connection
                     </label>
-                    {selectedRow.connections.map((connection, index) => (
+                    {selectedRow.connections  && selectedRow.connections.map((connection, index) => (
                       <p className="text-left text-xl" key="index">
                         <b>connection</b>
                       </p>
