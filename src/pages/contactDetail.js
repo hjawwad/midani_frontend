@@ -5,8 +5,8 @@ import TabMenu from "./components/tabmenu";
 import { getCompany } from "./api/register";
 import withAuth from "./components/withAuth";
 import { useRouter } from "next/router";
-import { showErrorAlert, showSuccessAlert } from './components/utility'
-import { updateContactByGroup } from './api/register'
+import { showErrorAlert, showSuccessAlert } from "./components/utility";
+import { updateContactByGroup } from "./api/register";
 
 ReactModal.setAppElement("#__next");
 
@@ -37,17 +37,17 @@ function ContactDetail() {
         fields,
         selectedRow._id
       );
-      if(responseContact.status) {
-        showSuccessAlert(responseContact.message)
-        router.push("/dashboard")
+      if (responseContact.status) {
+        showSuccessAlert(responseContact.message);
+        router.push("/dashboard");
       } else {
-        showErrorAlert('Something went wrong!');
-        return
+        showErrorAlert("Something went wrong!");
+        return;
       }
       // Handle success
     } catch (error) {
       showErrorAlert(error);
-      return
+      return;
       // Handle error
     }
   };
@@ -115,11 +115,6 @@ function ContactDetail() {
                   How did we meet?
                 </label>
                 <p className="text-left text-xl">{selectedRow.meet || ""}</p>
-                {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
               </div>
               <div className="grid grid-cols-2 divide-x w-full">
                 <div className=" border-none border-0 ">
@@ -130,11 +125,6 @@ function ContactDetail() {
                     <p className="text-left text-xl">
                       {selectedRow.location || ""}
                     </p>
-                    {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
                   </div>
                   <div className="pb-[32px]">
                     <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
@@ -143,38 +133,23 @@ function ContactDetail() {
                     <p className="text-left text-xl">
                       {selectedRow.phone || ""}
                     </p>
-                    {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
                   </div>
                   <div className="pb-[32px]">
                     <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
                       Job
                     </label>
                     <p className="text-left text-xl">{selectedRow.job || ""}</p>
-                    {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
                   </div>
                   <div className="pb-[32px]">
                     <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
                       Connection
                     </label>
-                    {selectedRow.connections  && selectedRow.connections.map((connection, index) => (
-                      <p className="text-left text-xl" key="index">
-                        <b>connection</b>
-                      </p>
-                    ))}
-
-                    {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
+                    {selectedRow.connections &&
+                      selectedRow.connections.map((connection, index) => (
+                        <p className="text-left text-xl" key="index">
+                          <b>connection</b>
+                        </p>
+                      ))}
                   </div>
                 </div>
                 <div className=" border-none border-0 ">
@@ -183,11 +158,6 @@ function ContactDetail() {
                       Birthday
                     </label>
                     <p className="text-left text-xl">{selectedRow.dob || ""}</p>
-                    {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
                   </div>
                   <div className="pb-[32px]">
                     <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
@@ -196,11 +166,6 @@ function ContactDetail() {
                     <p className="text-left text-xl">
                       {selectedRow.email || ""}
                     </p>
-                    {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
                   </div>
                   <div className="pb-[32px]">
                     <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
@@ -212,24 +177,25 @@ function ContactDetail() {
                         // eslint-disable-next-line react/jsx-key
                         <CompanyName companyId={companyId} />
                       ))}
-                    {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
                   </div>
                 </div>
               </div>
             </form>
-            {selectedRow.newField 
-            && selectedRow.newField.map((field, index) => (
+            {selectedRow.newField &&
+              selectedRow.newField.map((field, index) => (
                 <div key={index}>
-                  {index=== 0 && 
-                  <h1 className="text-3xl text-left pt-[11px]">
-              New Fields
-            </h1>}
-                  <label htmlFor={`name-${index}`} className="pb-[6px] text-[#6A6A6A]">{Object.keys(field)[0]}</label>
-                  <p className="text-left text-xl">{field[Object.keys(field)[0]]}</p>
+                  {index === 0 && (
+                    <h1 className="text-3xl text-left pt-[11px]">New Fields</h1>
+                  )}
+                  <label
+                    htmlFor={`name-${index}`}
+                    className="pb-[6px] text-[#6A6A6A]"
+                  >
+                    {Object.keys(field)[0]}
+                  </label>
+                  <p className="text-left text-xl">
+                    {field[Object.keys(field)[0]]}
+                  </p>
                 </div>
               ))}
             <form onSubmit={handleSubmit}>
@@ -255,13 +221,15 @@ function ContactDetail() {
                   />
                 </div>
               ))}
-              {!fields.length && <button
-                className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
-                type="button"
-                onClick={handleAddField}
-              >
-                Add New field
-              </button>}
+              {!fields.length && (
+                <button
+                  className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
+                  type="button"
+                  onClick={handleAddField}
+                >
+                  Add New field
+                </button>
+              )}
               <button
                 className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
                 type="submit"
