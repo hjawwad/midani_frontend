@@ -12,7 +12,7 @@ const CompanyName = ({ companyId }) => {
   useEffect(() => {
     const fetchData = async () => {
       const company = await getCompany(companyId);
-      setCompanyName(company.name);
+      setCompanyName(company?.name);
     };
     fetchData();
   }, [companyId]);
@@ -185,9 +185,9 @@ function Modal({ isOpen, onRequestClose, selectedRow }) {
                       >
                         Company
                       </label>
-                      {selectedRow.company_id &&
-                        selectedRow.company_id.length &&
-                        selectedRow.company_id.map((companyId) => (
+                      {selectedRow?.company_id &&
+                        selectedRow?.company_id?.length &&
+                        selectedRow?.company_id?.map((companyId) => (
                           // eslint-disable-next-line react/jsx-key
                           <CompanyName companyId={companyId} />
                         ))}

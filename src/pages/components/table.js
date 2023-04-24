@@ -12,8 +12,8 @@ const CompanyName = ({ companyId }) => {
   useEffect(() => {
     const fetchData = async () => {
       const company = await getCompany(companyId);
-      setCompanyName(company.name);
-      setCompanyLogo(company.icon);
+      setCompanyName(company?.name);
+      setCompanyLogo(company?.icon);
     };
     fetchData();
   }, [companyId]);
@@ -85,7 +85,7 @@ const Table = ({ data, selectedGroup }) => {
             <div className="m-auto">&nbsp; List</div>
           </div>
           <nav className="ml-6 flex space-x-4 bg-[#292929] rounded-[8px] p-[4px]">
-            <div className="font-medium">{`${data.length} PEOPLE`}</div>
+            <div className="font-medium">{`${data?.length} PEOPLE`}</div>
           </nav>
         </div>
         <div className="ml-auto flex items-center">
@@ -113,7 +113,7 @@ const Table = ({ data, selectedGroup }) => {
         onRequestClose={handleAddCloseModal}
         selectedGroup={selectedGroup}
       />
-      {data.length ? (
+      {data?.length ? (
         <table className="table-fixed w-full border-collapse border border-[#303030]">
           <thead>
             <tr>
