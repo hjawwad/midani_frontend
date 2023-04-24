@@ -86,7 +86,7 @@ function ContactDetail() {
               <div className="flex items-center justify-center">
                 {!selectedRow.image && (
                   <Image
-                    src={`http://localhost:4001/${selectedRow.image}`}
+                    src={`https://crypto-experts-backend.herokuapp.com/${selectedRow.image}`}
                     alt="Login Logo"
                     width={100}
                     height={100}
@@ -95,7 +95,7 @@ function ContactDetail() {
                 )}
                 {selectedRow.image && (
                   <Image
-                    src="/contact_default.svg"
+                    src={`https://crypto-experts-backend.herokuapp.com/${selectedRow.image}`}
                     alt="Login Logo"
                     width={100}
                     height={100}
@@ -184,9 +184,6 @@ function ContactDetail() {
             {selectedRow.newField &&
               selectedRow.newField.map((field, index) => (
                 <div key={index}>
-                  {index === 0 && (
-                    <h1 className="text-3xl text-left pt-[11px]">New Fields</h1>
-                  )}
                   <label
                     htmlFor={`name-${index}`}
                     className="pb-[6px] text-[#6A6A6A]"

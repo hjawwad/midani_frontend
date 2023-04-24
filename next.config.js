@@ -9,6 +9,6 @@
 // module.exports = nextConfig
 module.exports = {
   images: {
-    domains: ['localhost'],
+    domains: ["localhost", "crypto-experts-backend.herokuapp.com"],
   },
-}
+};

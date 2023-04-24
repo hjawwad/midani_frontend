@@ -1,40 +1,41 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import CreateGroup from "./createGroup";
-import { getAllGroups } from '../api/register'
-import Cookies from 'js-cookie';
+import { getAllGroups } from "../api/register";
+import Cookies from "js-cookie";
 
-const { API_ENDPOINT } = process.env || 'http://localhost:4001/'
+const { API_ENDPOINT } =
+  process.env || "https://crypto-experts-backend.herokuapp.com/";
 const Sidebar = ({ setSelectedGroup, selectedGroup }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [addGroup, setAddGroup] = useState(false);
-  const [data, setData] = useState('');
+  const [data, setData] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const token = Cookies.get("session_token");
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
-    getAllGroupNames()
+    getAllGroupNames();
   };
 
   const handleAddGroup = () => {
-    setAddGroup(!addGroup)
-    getAllGroupNames()
-  }
+    setAddGroup(!addGroup);
+    getAllGroupNames();
+  };
 
   const isSelected = (current) => {
-    if(selectedGroup._id === current._id) {
-      return 'bg-[#1A1A1A] rounded'
+    if (selectedGroup._id === current._id) {
+      return "bg-[#1A1A1A] rounded";
     }
-    return ''
-  }
+    return "";
+  };
   const getAllGroupNames = async () => {
     setIsLoading(true);
 
     try {
       const response = await getAllGroups();
-      await setData(response.data)
-      await setSelectedGroup(response.data[0])
+      await setData(response.data);
+      await setSelectedGroup(response.data[0]);
       setError(null);
     } catch (error) {
       //
@@ -44,10 +45,10 @@ const Sidebar = ({ setSelectedGroup, selectedGroup }) => {
   };
   useEffect(() => {
     async function fetchData() {
-        await getAllGroupNames()
+      await getAllGroupNames();
     }
-    console.log("fetxh data", token)
-    if(token) {
+    console.log("fetxh data", token);
+    if (token) {
       fetchData();
     }
   }, []);
@@ -58,34 +59,48 @@ const Sidebar = ({ setSelectedGroup, selectedGroup }) => {
         <div className="text-xl flex-1 cursor-pointer" onClick={toggleDropdown}>
           &#9660;&nbsp; <span>Contact</span>
         </div>
-        <div className="text-xl text-right flex-1 cursor-pointer" onClick={handleAddGroup}>&#43;</div>
+        <div
+          className="text-xl text-right flex-1 cursor-pointer"
+          onClick={handleAddGroup}
+        >
+          &#43;
+        </div>
       </div>
       {isOpen && (
         <div>
-          {data && data.length && data.map((item) => (
-          <div className={`p-[10px] mt-[20px] mb-[20px] cursor-pointer ${isSelected(item.data)}`} key={item.data.name}> 
-            <div className="flex w-full"  onClick={() => setSelectedGroup(item.data)}>
-              <div className="text-base ">
-                <Image
-                  src={`http://localhost:4001/${item.data.icon}`}
-                  alt="Sidebar Logo"
-                  className="inline-flex rounded-full"
-                  width={20}
-                  height={20}
-                  priority
-                />
-                &nbsp; <span>{item.data.name}</span>
+          {data &&
+            data.length &&
+            data.map((item) => (
+              <div
+                className={`p-[10px] mt-[20px] mb-[20px] cursor-pointer ${isSelected(
+                  item.data
+                )}`}
+                key={item.data.name}
+              >
+                <div
+                  className="flex w-full"
+                  onClick={() => setSelectedGroup(item.data)}
+                >
+                  <div className="text-base ">
+                    <Image
+                      src={`https://crypto-experts-backend.herokuapp.com/${item.data.icon}`}
+                      alt="Sidebar Logo"
+                      className="inline-flex rounded-full"
+                      width={20}
+                      height={20}
+                      priority
+                    />
+                    &nbsp; <span>{item.data.name}</span>
+                  </div>
+                  <div className="text-base text-right text-[#808080] flex-1">
+                    {item.count}
+                  </div>
+                </div>
               </div>
-              <div className="text-base text-right text-[#808080] flex-1">{item.count}</div>
-            </div>
-          </div>
-          ))}
+            ))}
         </div>
       )}
-      <CreateGroup
-          isOpen={addGroup}
-          onRequestClose={handleAddGroup}
-        />
+      <CreateGroup isOpen={addGroup} onRequestClose={handleAddGroup} />
     </div>
   );
 };
