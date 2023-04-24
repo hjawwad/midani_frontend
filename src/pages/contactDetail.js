@@ -5,7 +5,8 @@ import TabMenu from "./components/tabmenu";
 import { getCompany } from "./api/register";
 import withAuth from "./components/withAuth";
 import { useRouter } from "next/router";
-import { showErrorAlert, showSuccessAlert } from "./components/utility";
+import showSuccessAlert from "./components/utility/showSuccessAlert";
+import showErrorAlert from "./components/utility/showErrorAlert";
 import { updateContactByGroup } from "./api/register";
 
 ReactModal.setAppElement("#__next");

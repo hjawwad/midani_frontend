@@ -1,7 +1,8 @@
 import ReactModal from "react-modal";
 import { useState } from "react";
-import { createComment } from "../api/register"
-import { showErrorAlert, showSuccessAlert } from './utility'
+import { createComment } from "../api/register";
+import showSuccessAlert from "./utility/showSuccessAlert";
+import showErrorAlert from "./utility/showErrorAlert";
 
 ReactModal.setAppElement("#__next");
 
@@ -14,30 +15,30 @@ function CreateComment({ isOpen, onRequestClose, selectedRow }) {
     },
     overlay: {},
   };
-  const [description, setDescription] = useState("")
+  const [description, setDescription] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if(!description) {
-        showErrorAlert('Comment should not be null');
-        return
+    if (!description) {
+      showErrorAlert("Comment should not be null");
+      return;
     }
     setIsLoading(true);
-    let response = ''
+    let response = "";
     try {
-      response = await createComment(selectedRow._id, {comment: description});
+      response = await createComment(selectedRow._id, { comment: description });
       setIsLoading(false);
-      if(response.status) {
-        showSuccessAlert(response.message)
+      if (response.status) {
+        showSuccessAlert(response.message);
       } else {
-        showErrorAlert('Something went wrong!');
-        return
+        showErrorAlert("Something went wrong!");
+        return;
       }
     } catch (error) {
-      showErrorAlert('Create Comment failed. Please try again later.');
+      showErrorAlert("Create Comment failed. Please try again later.");
     }
-    onRequestClose()
+    onRequestClose();
   };
 
   return (

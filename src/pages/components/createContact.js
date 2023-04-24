@@ -1,7 +1,8 @@
 import ReactModal from "react-modal";
 import { useState, useRef } from "react";
 import { createContactCompany, createContactByGroup } from "../api/register";
-import { showErrorAlert, showSuccessAlert } from '../components/utility'
+import showErrorAlert from "./utility/showErrorAlert";
+import showSuccessAlert from "./utility/showSuccessAlert";
 
 ReactModal.setAppElement("#__next");
 
@@ -27,9 +28,9 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup }) {
   const [connections, setConnections] = useState([]);
   const [companies, setCompanies] = useState([{ name: "", logo: null }]);
   const options = [
-    { value: 'To contact', label: 'To contact' },
-    { value: 'Phoned', label: 'Phoned' },
-    { value: 'Meet-up', label: 'Meet-up' },
+    { value: "To contact", label: "To contact" },
+    { value: "Phoned", label: "Phoned" },
+    { value: "Meet-up", label: "Meet-up" },
   ];
 
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +38,7 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup }) {
 
   const handleChange = (event) => {
     setStatus(event.target.value);
-  }
+  };
 
   const handleFileInputChange = (event) => {
     const file = event.target.files[0];
@@ -73,9 +74,9 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup }) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    if(!name || !image  || !email || !status || !phone) {
+    if (!name || !image || !email || !status || !phone) {
       showErrorAlert(`Name, Image, Email, Status and Phone is required.`);
-      return
+      return;
     }
 
     setIsLoading(true);
@@ -90,9 +91,9 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup }) {
           icon: company.logo,
         };
         response = await createContactCompany(data);
-        if(!response.status) {
-          showErrorAlert('Something Went Wrong!');
-          return
+        if (!response.status) {
+          showErrorAlert("Something Went Wrong!");
+          return;
         }
         companyIds.push(response.data.data._id);
       }
@@ -116,15 +117,15 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup }) {
         contactData
       );
       setIsLoading(false);
-      if(response.status) {
-        showSuccessAlert(responseContact.message)
+      if (response.status) {
+        showSuccessAlert(responseContact.message);
       } else {
-        showErrorAlert('Something went wrong!');
-        return
+        showErrorAlert("Something went wrong!");
+        return;
       }
     } catch (error) {
       showErrorAlert(error);
-      return
+      return;
     }
 
     setIsLoading(false);

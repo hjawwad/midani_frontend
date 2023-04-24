@@ -1,7 +1,8 @@
 import ReactModal from "react-modal";
 import { useState } from "react";
 import { createGroup } from "../api/register";
-import { showErrorAlert, showSuccessAlert } from './utility'
+import showErrorAlert from "./utility/showErrorAlert";
+import showSuccessAlert from "./utility/showSuccessAlert";
 
 ReactModal.setAppElement("#__next");
 
@@ -15,43 +16,43 @@ function CreateGroup({ isOpen, onRequestClose }) {
     overlay: {},
   };
   const [selectedFile, setSelectedFile] = useState(null);
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleFileInputChange = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.onload = function (event) {
-      const img = document.createElement('img');
+      const img = document.createElement("img");
       img.src = event.target.result;
       document.body.appendChild(img);
       img.style.display = "none";
-      setSelectedFile(img.src)
+      setSelectedFile(img.src);
     };
     reader.readAsDataURL(file);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if(!name || !selectedFile) {
-      showErrorAlert('Group name and logo is required');
-      return
+    if (!name || !selectedFile) {
+      showErrorAlert("Group name and logo is required");
+      return;
     }
     setIsLoading(true);
 
     try {
-      const response = await createGroup(name,selectedFile);
-      setIsLoading(true); 
-      if(response.status) {
-        showSuccessAlert(response.message)
+      const response = await createGroup(name, selectedFile);
+      setIsLoading(true);
+      if (response.status) {
+        showSuccessAlert(response.message);
       } else {
-        showErrorAlert('Something went wrong!');
-        return
+        showErrorAlert("Something went wrong!");
+        return;
       }
     } catch (error) {
-      showErrorAlert('Group Creation failed. Please try again later.');
+      showErrorAlert("Group Creation failed. Please try again later.");
     }
-    onRequestClose()
+    onRequestClose();
   };
 
   return (
@@ -90,7 +91,7 @@ function CreateGroup({ isOpen, onRequestClose }) {
           type="submit"
           className="w-1/3 fixed bottom-0 right-0 mb-8 mr-8 p-4 text-white"
         >
-          {isLoading ? 'Saving' : 'Save'}
+          {isLoading ? "Saving" : "Save"}
         </button>
       </form>
     </ReactModal>
