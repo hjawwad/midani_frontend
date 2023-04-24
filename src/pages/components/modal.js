@@ -21,8 +21,6 @@ const CompanyName = ({ companyId }) => {
 };
 
 function Modal({ isOpen, onRequestClose, selectedRow }) {
-  const [name, setName] = useState("Tempp");
-
   const handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -54,7 +52,7 @@ function Modal({ isOpen, onRequestClose, selectedRow }) {
               </div>
 
               <h1 className="text-3xl text-left pt-[11px]">
-                {selectedRow.name}
+                {selectedRow?.name}
               </h1>
               <p className="text-left">#stanford &nbsp; #stanford</p>
               <form onSubmit={handleFormSubmit} className="text-left pt-[32px]">
@@ -62,7 +60,7 @@ function Modal({ isOpen, onRequestClose, selectedRow }) {
                   <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
                     How did we meet?
                   </label>
-                  <p className="text-left text-xl">{selectedRow.meet}</p>
+                  <p className="text-left text-xl">{selectedRow?.meet}</p>
                   {/* <input
                 type="name"
                 className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
@@ -79,7 +77,7 @@ function Modal({ isOpen, onRequestClose, selectedRow }) {
                         Location
                       </label>
                       <p className="text-left text-xl">
-                        {selectedRow.location}
+                        {selectedRow?.location}
                       </p>
                       {/* <input
                 type="name"
@@ -94,7 +92,7 @@ function Modal({ isOpen, onRequestClose, selectedRow }) {
                       >
                         Phone number
                       </label>
-                      <p className="text-left text-xl">{selectedRow.phone}</p>
+                      <p className="text-left text-xl">{selectedRow?.phone}</p>
                       {/* <input
                 type="name"
                 className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
@@ -108,7 +106,7 @@ function Modal({ isOpen, onRequestClose, selectedRow }) {
                       >
                         Job
                       </label>
-                      <p className="text-left text-xl">{selectedRow.job}</p>
+                      <p className="text-left text-xl">{selectedRow?.job}</p>
                       {/* <input
                 type="name"
                 className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
@@ -143,7 +141,7 @@ function Modal({ isOpen, onRequestClose, selectedRow }) {
                       >
                         Birthday
                       </label>
-                      <p className="text-left text-xl">{selectedRow.dob}</p>
+                      <p className="text-left text-xl">{selectedRow?.dob}</p>
                       {/* <input
                 type="name"
                 className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
@@ -157,7 +155,7 @@ function Modal({ isOpen, onRequestClose, selectedRow }) {
                       >
                         Email
                       </label>
-                      <p className="text-left text-xl">{selectedRow.email}</p>
+                      <p className="text-left text-xl">{selectedRow?.email}</p>
                       {/* <input
                 type="name"
                 className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
