@@ -6,7 +6,7 @@ import showSuccessAlert from "./utility/showSuccessAlert";
 
 ReactModal.setAppElement("#__next");
 
-function CreateContact({ isOpen, onRequestClose, selectedGroup }) {
+function CreateContact({ isOpen, onRequestClose, selectedGroup, setAdded }) {
   const customStyles = {
     content: {
       maxWidth: "700px",
@@ -74,8 +74,10 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup }) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    if (!name || !image || !email || !status || !phone) {
-      showErrorAlert(`Name, Image, Email, Status and Phone is required.`);
+    if (!name && !image && !email && !status && !phone) {
+      showErrorAlert(
+        `Please fill any one field from Name, Image, Email, Status and Phone to create contact`
+      );
       return;
     }
 
@@ -118,6 +120,7 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup }) {
       );
       setIsLoading(false);
       if (response.status) {
+        setAdded(true);
         showSuccessAlert(responseContact.message);
       } else {
         showErrorAlert("Something went wrong!");

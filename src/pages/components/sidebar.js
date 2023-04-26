@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 
 const { API_ENDPOINT } =
   process.env || "https://crypto-experts-backend.herokuapp.com/";
-const Sidebar = ({ setSelectedGroup, selectedGroup }) => {
+const Sidebar = ({ setSelectedGroup, selectedGroup, added }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [addGroup, setAddGroup] = useState(false);
   const [data, setData] = useState("");
@@ -35,7 +35,7 @@ const Sidebar = ({ setSelectedGroup, selectedGroup }) => {
     try {
       const response = await getAllGroups();
       await setData(response.data);
-      await setSelectedGroup(response.data[0]);
+      await setSelectedGroup(response.data[0].data);
       setError(null);
     } catch (error) {
       //
@@ -51,7 +51,7 @@ const Sidebar = ({ setSelectedGroup, selectedGroup }) => {
     if (token) {
       fetchData();
     }
-  }, []);
+  }, [added]);
 
   return (
     <div className="w-[307px] min-w-[307px] p-[50px] pl-[40px] pr-[40px] border border-[#303030]">
@@ -82,18 +82,22 @@ const Sidebar = ({ setSelectedGroup, selectedGroup }) => {
                   onClick={() => setSelectedGroup(item.data)}
                 >
                   <div className="text-base ">
-                    <Image
-                      src={`https://crypto-experts-backend.herokuapp.com/${item.data.icon}`}
-                      alt="Sidebar Logo"
-                      className="inline-flex rounded-full"
-                      width={20}
-                      height={20}
-                      priority
-                    />
+                    {item.data.icon === "" ? (
+                      <></>
+                    ) : (
+                      <Image
+                        src={`https://crypto-experts-backend.herokuapp.com/${item.data.icon}`}
+                        alt="Sidebar Logo"
+                        className="inline-flex rounded-full"
+                        width={20}
+                        height={20}
+                        priority
+                      />
+                    )}
                     &nbsp; <span>{item.data.name}</span>
                   </div>
                   <div className="text-base text-right text-[#808080] flex-1">
-                    {item.count}
+                    {item?.count}
                   </div>
                 </div>
               </div>

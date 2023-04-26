@@ -20,24 +20,32 @@ const CompanyName = ({ companyId }) => {
 
   return (
     <>
-      <Image
-        src={`https://crypto-experts-backend.herokuapp.com/${companyLogo}`}
-        alt="Sidebar Logo"
-        className="inline-flex rounded-full w-[20px] h-[20px] mr-[5px]"
-        width={20}
-        height={20}
-        priority
-      />
+      {companyLogo === "" ? (
+        <></>
+      ) : (
+        <Image
+          src={`https://crypto-experts-backend.herokuapp.com/${companyLogo}`}
+          alt="Sidebar Logo"
+          className="inline-flex rounded-full w-[20px] h-[20px] mr-[5px]"
+          width={20}
+          height={20}
+          priority
+        />
+      )}
       {companyName ? companyName : ""}
     </>
   );
 };
 
-const Table = ({ data, selectedGroup }) => {
+const Table = ({ data, selectedGroup, setAdded }) => {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddModal, setIsAddModal] = useState(false);
   const [selectedRow, setSelectedRow] = useState("");
+
+  if (selectedGroup?.count > 1) {
+    selectedGroup = selectedGroup.data;
+  }
 
   const handleOpenModal = (item) => {
     setSelectedRow(item);
@@ -112,6 +120,7 @@ const Table = ({ data, selectedGroup }) => {
         isOpen={isAddModal}
         onRequestClose={handleAddCloseModal}
         selectedGroup={selectedGroup}
+        setAdded={setAdded}
       />
       {data?.length ? (
         <table className="table-fixed w-full border-collapse border border-[#303030]">
@@ -148,14 +157,18 @@ const Table = ({ data, selectedGroup }) => {
                 onClick={() => handleOpenModal(item)}
               >
                 <td className="p-[10px] pl-[40px] border border-[#303030]">
-                  <Image
-                    src={`https://crypto-experts-backend.herokuapp.com/${item.image}`}
-                    alt="Sidebar Logo"
-                    className="inline-flex rounded-full w-[20px] h-[20px] mr-[5px]"
-                    width={20}
-                    height={20}
-                    priority
-                  />
+                  {item.image === "" ? (
+                    <></>
+                  ) : (
+                    <Image
+                      src={`https://crypto-experts-backend.herokuapp.com/${item.image}`}
+                      alt="Sidebar Logo"
+                      className="inline-flex rounded-full w-[20px] h-[20px] mr-[5px]"
+                      width={20}
+                      height={20}
+                      priority
+                    />
+                  )}
                   {item.name ? item.name : ""}
                 </td>
                 <td className="p-[10px] pl-[40px] border border-[#303030] whitespace-nowrap overflow-hidden">

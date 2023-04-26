@@ -28,6 +28,7 @@ const CompanyName = ({ companyId }) => {
 function ContactDetail() {
   const router = useRouter();
   const [selectedRow, setSelectedRow] = useState({});
+  const [added, setAdded] = useState(false);
   const [fields, setFields] = useState([]);
 
   const handleSubmit = async (event) => {
@@ -40,16 +41,20 @@ function ContactDetail() {
       );
       if (responseContact.status) {
         showSuccessAlert(responseContact.message);
-        router.push("/dashboard");
+        setAdded(true);
+
+        // Save updated fields to local storage
+        localStorage.setItem(
+          "selectedRow",
+          JSON.stringify(responseContact.data.data)
+        );
       } else {
         showErrorAlert("Something went wrong!");
         return;
       }
-      // Handle success
     } catch (error) {
       showErrorAlert(error);
       return;
-      // Handle error
     }
   };
 
@@ -71,12 +76,11 @@ function ContactDetail() {
   }, []);
 
   useEffect(() => {
-    const selectedRow = JSON.parse(localStorage.getItem("selectedRow"));
-    if (!selectedRow) {
-      router.push("/dashboard");
+    if (added) {
+      setSelectedRow(JSON.parse(localStorage.getItem("selectedRow")));
+      setAdded(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [added]);
 
   return (
     <div className="bg-[#000000] w-full h-full p-[20px]">
@@ -85,16 +89,9 @@ function ContactDetail() {
           <div className="items-center justify-center mx-auto pt-[22px]">
             <div className="grid grid-cols-2 divide-x w-full">
               <div className="flex items-center justify-center">
-                {!selectedRow.image && (
-                  <Image
-                    src={`https://crypto-experts-backend.herokuapp.com/${selectedRow.image}`}
-                    alt="Login Logo"
-                    width={100}
-                    height={100}
-                    priority
-                  />
-                )}
-                {selectedRow.image && (
+                {selectedRow.image === "" ? (
+                  <></>
+                ) : (
                   <Image
                     src={`https://crypto-experts-backend.herokuapp.com/${selectedRow.image}`}
                     alt="Login Logo"

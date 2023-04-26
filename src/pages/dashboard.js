@@ -4,38 +4,39 @@ import Sidebar from "./components/sidebar";
 import Image from "next/image";
 import withAuth from "./components/withAuth";
 import { destroyCookie } from "nookies";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { getAllContactsByGroup } from "./api/register"
-import Cookies from 'js-cookie';
+import { getAllContactsByGroup } from "./api/register";
+import Cookies from "js-cookie";
 
 const inter = Inter({ subsets: ["latin"] });
 
 function Dashboard() {
-  const router = useRouter()
-  const [selectedGroup, setSelectedGroup] = useState('')
-  const [contactData, setContactData] = useState('')
+  const router = useRouter();
+  const [selectedGroup, setSelectedGroup] = useState("");
+  const [contactData, setContactData] = useState("");
+  const [added, setAdded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
 
   const handleLogout = (e) => {
-      e.preventDefault();
-      // clear the token from cookies
-      destroyCookie(null, "session_token");
-      // redirect to the login page
-      router.push("/");
+    e.preventDefault();
+    // clear the token from cookies
+    destroyCookie(null, "session_token");
+    // redirect to the login page
+    router.push("/");
   };
 
   const getAllContacts = async () => {
     setIsLoading(true);
     try {
       const response = await getAllContactsByGroup(selectedGroup._id);
-      await setContactData(response.data)
-      setSuccessMessage('Successful!');
+      await setContactData(response.data);
+      setSuccessMessage("Successful!");
       setError(null);
     } catch (error) {
-      setError('Failed. Please try again later.');
+      setError("Failed. Please try again later.");
       setSuccessMessage(null);
     }
 
@@ -44,19 +45,20 @@ function Dashboard() {
 
   useEffect(() => {
     async function fetchData() {
-      if(selectedGroup && selectedGroup._id)
-        await getAllContacts(selectedGroup._id)
+      if (selectedGroup && selectedGroup._id)
+        await getAllContacts(selectedGroup._id);
     }
     fetchData();
   }, [selectedGroup]);
 
   return (
     <div className="flex min-h-screen flex-row">
-      <Sidebar 
-        title="Click me" 
-        setSelectedGroup={setSelectedGroup} 
+      <Sidebar
+        title="Click me"
+        setSelectedGroup={setSelectedGroup}
         selectedGroup={selectedGroup}
-        />
+        added={added}
+      />
       <div className="w-full">
         <header className="flex justify-between items-center p-4 pl-[50px]">
           <div className="flex-shrink-0">
@@ -69,19 +71,21 @@ function Dashboard() {
             />
           </div>
           <nav className="ml-6 flex space-x-4">
-            <div
-              className="font-medium text-[24px]"
-            >
-              Crypto experts
-            </div>
+            <div className="font-medium text-[24px]">Crypto experts</div>
           </nav>
           <div className="ml-auto flex items-center pr-[15px] cursor-pointer">
-            <span className="ml-2 text-gray-800 font-medium pr-[15px] text-white">Share</span>
+            <span className="ml-2 text-gray-800 font-medium pr-[15px] text-white">
+              Share
+            </span>
             <div onClick={handleLogout}>...</div>
           </div>
         </header>
-        <Table data={contactData} 
-        selectedGroup={selectedGroup}/>
+        <Table
+          data={contactData === "" ? selectedGroup?.data : contactData}
+          selectedGroup={selectedGroup}
+          added={added}
+          setAdded={setAdded}
+        />
       </div>
     </div>
   );
