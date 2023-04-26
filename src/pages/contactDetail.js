@@ -7,7 +7,7 @@ import withAuth from "./components/withAuth";
 import { useRouter } from "next/router";
 import showSuccessAlert from "./components/utility/showSuccessAlert";
 import showErrorAlert from "./components/utility/showErrorAlert";
-import { updateContactByGroup } from "./api/register";
+import { updateContactByGroup, deleteContactsById } from "./api/register";
 
 ReactModal.setAppElement("#__next");
 
@@ -48,6 +48,26 @@ function ContactDetail() {
           "selectedRow",
           JSON.stringify(responseContact.data.data)
         );
+      } else {
+        showErrorAlert("Something went wrong!");
+        return;
+      }
+    } catch (error) {
+      showErrorAlert(error);
+      return;
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      const responseContact = await deleteContactsById(
+        selectedRow.group_id,
+        selectedRow._id
+      );
+      if (responseContact.status) {
+        showSuccessAlert(responseContact.message);
+        localStorage.removeItem("selectedRow");
+        router.push("/dashboard");
       } else {
         showErrorAlert("Something went wrong!");
         return;
@@ -232,6 +252,12 @@ function ContactDetail() {
                 Save
               </button>
             </form>
+            <button
+              className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
+              onClick={handleDelete}
+            >
+              Delete
+            </button>
           </div>
           <div className="pl-[48px]">
             <TabMenu selectedRow={selectedRow} />

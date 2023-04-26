@@ -68,6 +68,17 @@ export async function getAllContactsByGroup(group_id) {
   }
 }
 
+export async function deleteContactsById(group_id, id) {
+  try {
+    const response = await instance.delete(
+      `/api/groups/${group_id}/contacts/${id}`
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error("Contact deleted successfully");
+  }
+}
+
 export async function createContactByGroup(group_id, data) {
   try {
     const response = await instance.post(
