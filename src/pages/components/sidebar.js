@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 
 const { API_ENDPOINT } =
   process.env || "https://crypto-experts-backend.herokuapp.com/";
-const Sidebar = ({ setSelectedGroup, selectedGroup, added }) => {
+const Sidebar = ({ setSelectedGroup, selectedGroup, added, setTitle }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [addGroup, setAddGroup] = useState(false);
   const [data, setData] = useState("");
@@ -25,6 +25,7 @@ const Sidebar = ({ setSelectedGroup, selectedGroup, added }) => {
 
   const isSelected = (current) => {
     if (selectedGroup._id === current._id) {
+      setTitle(selectedGroup?.name);
       return "bg-[#1A1A1A] rounded";
     }
     return "";

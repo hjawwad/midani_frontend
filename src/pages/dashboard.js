@@ -16,6 +16,7 @@ function Dashboard() {
   const [selectedGroup, setSelectedGroup] = useState("");
   const [contactData, setContactData] = useState("");
   const [added, setAdded] = useState(false);
+  const [title, setTitle] = useState("Crypto experts");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
@@ -58,6 +59,7 @@ function Dashboard() {
         setSelectedGroup={setSelectedGroup}
         selectedGroup={selectedGroup}
         added={added}
+        setTitle={setTitle}
       />
       <div className="w-full">
         <header className="flex justify-between items-center p-4 pl-[50px]">
@@ -71,7 +73,7 @@ function Dashboard() {
             />
           </div>
           <nav className="ml-6 flex space-x-4">
-            <div className="font-medium text-[24px]">Crypto experts</div>
+            <div className="font-medium text-[24px]">{title}</div>
           </nav>
           <div className="ml-auto flex items-center pr-[15px] cursor-pointer">
             <span className="ml-2 text-gray-800 font-medium pr-[15px] text-white">
