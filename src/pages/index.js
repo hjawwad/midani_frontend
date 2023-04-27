@@ -112,7 +112,7 @@ export default function Home() {
                 onChange={(event) => setRemember(event.target.value)}
                 className="w-[16px] h-[16px]"
               />
-              <label for="rememberFor" className="pl-[10px]">
+              <label htmlFor="rememberFor" className="pl-[10px]">
                 Remember for 30 days
               </label>
             </div>
@@ -121,7 +121,7 @@ export default function Home() {
               <button
                 type="submit"
                 className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
-                style={{ "background-color": "#7F56D9" }}
+                style={{ backgroundColor: "#7F56D9" }}
               >
                 {isLoading ? "Loading..." : "Sign in"}
               </button>

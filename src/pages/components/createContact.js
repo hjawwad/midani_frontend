@@ -1,12 +1,19 @@
 import ReactModal from "react-modal";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { createContactCompany, createContactByGroup } from "../api/register";
 import showErrorAlert from "./utility/showErrorAlert";
 import showSuccessAlert from "./utility/showSuccessAlert";
 
 ReactModal.setAppElement("#__next");
 
-function CreateContact({ isOpen, onRequestClose, selectedGroup, setAdded }) {
+function CreateContact({
+  isOpen,
+  onRequestClose,
+  selectedGroup,
+  selectedRow,
+  setAdded,
+  buttonText,
+}) {
   const customStyles = {
     content: {
       maxWidth: "700px",
@@ -32,6 +39,23 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup, setAdded }) {
     { value: "Phoned", label: "Phoned" },
     { value: "Meet-up", label: "Meet-up" },
   ];
+
+  useEffect(() => {
+    if (buttonText === "Update" && selectedRow) {
+      setName(selectedRow.name || "");
+      setImage(selectedRow.image || "");
+      setPhone(selectedRow.phone || "");
+      setJob(selectedRow.job || "");
+      setEmail(selectedRow.email || "");
+      setStatus(selectedRow.status || "");
+      setLocation(selectedRow.location || "");
+      setUniversity(selectedRow.university || "");
+      setMeet(selectedRow.meet || "");
+      setDOB(selectedRow.dob || "");
+      setConnections(selectedRow.connections || []);
+      setCompanies(selectedRow.companies || [{ name: "", logo: null }]);
+    }
+  }, []);
 
   const [isLoading, setIsLoading] = useState(false);
   const ref = useRef(null);
@@ -163,7 +187,7 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup, setAdded }) {
                   How did we meet?
                 </label>
                 <input
-                  type="name"
+                  type="text"
                   className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
                   id="name"
                   onChange={(e) => setMeet(e.target.value)}
@@ -189,9 +213,9 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup, setAdded }) {
                       Phone number
                     </label>
                     <input
-                      type="name"
+                      type="text"
                       className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                      id="name"
+                      id="phone"
                       onChange={(e) => setPhone(e.target.value)}
                       value={phone}
                     />
@@ -201,9 +225,9 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup, setAdded }) {
                       Job
                     </label>
                     <input
-                      type="name"
+                      type="text"
                       className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                      id="name"
+                      id="job"
                       onChange={(e) => setJob(e.target.value)}
                       value={job}
                     />
@@ -213,9 +237,9 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup, setAdded }) {
                       Location
                     </label>
                     <input
-                      type="name"
+                      type="text"
                       className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                      id="name"
+                      id="location"
                       onChange={(e) => setLocation(e.target.value)}
                       value={location}
                     />
@@ -248,7 +272,7 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup, setAdded }) {
                 </div>
                 <div className=" border-none border-0 ">
                   <div className="pb-[32px] ml-[5px]">
-                    <label className="pb-[6px] text-[#6A6A6A]" for="myDate">
+                    <label className="pb-[6px] text-[#6A6A6A]" htmlFor="myDate">
                       Birthday
                     </label>
                     <input
@@ -308,7 +332,7 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup, setAdded }) {
                     type="button"
                     onClick={() => setConnections([...connections, ""])}
                     className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
-                    style={{ "background-color": "#7F56D9" }}
+                    style={{ backgroundColor: "#7F56D9" }}
                   >
                     Add Connection
                   </button>
@@ -374,9 +398,9 @@ function CreateContact({ isOpen, onRequestClose, selectedGroup, setAdded }) {
                 <button
                   type="submit"
                   className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
-                  style={{ "background-color": "#7F56D9" }}
+                  style={{ backgroundColor: "#7F56D9" }}
                 >
-                  {isLoading ? "Creating" : "Create"}
+                  {isLoading ? "Creating" : buttonText}
                 </button>
               </div>
             </form>

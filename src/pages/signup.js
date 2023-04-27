@@ -121,7 +121,7 @@ export default function Signup() {
                 type="submit"
                 disabled={isLoading}
                 className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
-                style={{ "background-color": "#7F56D9" }}
+                style={{ backgroundColor: "#7F56D9" }}
               >
                 {isLoading ? "Loading..." : "Get Started"}
               </button>

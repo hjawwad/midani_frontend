@@ -61,11 +61,6 @@ function Modal({ isOpen, onRequestClose, selectedRow }) {
                     How did we meet?
                   </label>
                   <p className="text-left text-xl">{selectedRow?.meet}</p>
-                  {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
                 </div>
                 <div className="grid grid-cols-2 divide-x w-full">
                   <div className=" border-none border-0 ">
@@ -79,11 +74,6 @@ function Modal({ isOpen, onRequestClose, selectedRow }) {
                       <p className="text-left text-xl">
                         {selectedRow?.location}
                       </p>
-                      {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
                     </div>
                     <div className="pb-[32px]">
                       <label
@@ -93,11 +83,6 @@ function Modal({ isOpen, onRequestClose, selectedRow }) {
                         Phone number
                       </label>
                       <p className="text-left text-xl">{selectedRow?.phone}</p>
-                      {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
                     </div>
                     <div className="pb-[32px]">
                       <label
@@ -107,11 +92,6 @@ function Modal({ isOpen, onRequestClose, selectedRow }) {
                         Job
                       </label>
                       <p className="text-left text-xl">{selectedRow?.job}</p>
-                      {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
                     </div>
                     <div className="pb-[32px]">
                       <label
@@ -126,11 +106,6 @@ function Modal({ isOpen, onRequestClose, selectedRow }) {
                       <p className="text-left text-xl">
                         <b>Stanford University</b>&nbsp; BBA-2020
                       </p>
-                      {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
                     </div>
                   </div>
                   <div className=" border-none border-0 ">
@@ -142,11 +117,6 @@ function Modal({ isOpen, onRequestClose, selectedRow }) {
                         Birthday
                       </label>
                       <p className="text-left text-xl">{selectedRow?.dob}</p>
-                      {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
                     </div>
                     <div className="pb-[32px]">
                       <label
@@ -156,11 +126,6 @@ function Modal({ isOpen, onRequestClose, selectedRow }) {
                         Email
                       </label>
                       <p className="text-left text-xl">{selectedRow?.email}</p>
-                      {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
                     </div>
                     <div className="pb-[32px]">
                       <label
@@ -170,11 +135,6 @@ function Modal({ isOpen, onRequestClose, selectedRow }) {
                         Connection
                       </label>
                       <p className="text-left text-xl">@nico_rose</p>
-                      {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
                     </div>
                     <div className="pb-[32px]">
                       <label
@@ -189,11 +149,6 @@ function Modal({ isOpen, onRequestClose, selectedRow }) {
                           // eslint-disable-next-line react/jsx-key
                           <CompanyName companyId={companyId} />
                         ))}
-                      {/* <input
-                type="name"
-                className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-              /> */}
                     </div>
                   </div>
                 </div>
@@ -204,15 +159,6 @@ function Modal({ isOpen, onRequestClose, selectedRow }) {
                 >
                   Cancel
                 </button>
-                {/* <div>
-                  <button
-                    onClick={handleSubmit}
-                    className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
-                    style={{ "background-color": "#7F56D9" }}
-                  >
-                    Get Started 1111
-                  </button>
-                </div> */}
               </form>
             </div>
             <div className="pl-[48px]">

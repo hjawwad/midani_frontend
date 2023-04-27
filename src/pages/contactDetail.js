@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import showSuccessAlert from "./components/utility/showSuccessAlert";
 import showErrorAlert from "./components/utility/showErrorAlert";
 import { updateContactByGroup, deleteContactsById } from "./api/register";
+import CreateContact from "./components/createContact";
 
 ReactModal.setAppElement("#__next");
 
@@ -28,7 +29,9 @@ const CompanyName = ({ companyId }) => {
 function ContactDetail() {
   const router = useRouter();
   const [selectedRow, setSelectedRow] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [added, setAdded] = useState(false);
+  const [isAddModal, setIsAddModal] = useState(false);
   const [fields, setFields] = useState([]);
 
   const handleSubmit = async (event) => {
@@ -101,6 +104,21 @@ function ContactDetail() {
       setAdded(false);
     }
   }, [added]);
+
+  const handleOpenModal = (item) => {
+    setSelectedRow(item);
+    localStorage.setItem("selectedRow", JSON.stringify(item));
+    //  router.push("/contactDetail");
+    // setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleAddOpenModal = () => setIsAddModal(true);
+
+  const handleAddCloseModal = () => setIsAddModal(false);
 
   return (
     <div className="bg-[#000000] w-full h-full p-[20px]">
@@ -258,6 +276,14 @@ function ContactDetail() {
             >
               Delete
             </button>
+            <button onClick={handleAddOpenModal}>Edit</button>
+            <CreateContact
+              isOpen={isAddModal}
+              onRequestClose={handleAddCloseModal}
+              selectedRow={selectedRow}
+              setAdded={setAdded}
+              buttonText="Update"
+            />
           </div>
           <div className="pl-[48px]">
             <TabMenu selectedRow={selectedRow} />

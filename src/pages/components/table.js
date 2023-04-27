@@ -121,6 +121,7 @@ const Table = ({ data, selectedGroup, setAdded }) => {
         onRequestClose={handleAddCloseModal}
         selectedGroup={selectedGroup}
         setAdded={setAdded}
+        buttonText="Create"
       />
       {data?.length ? (
         <table className="table-fixed w-full border-collapse border border-[#303030]">
