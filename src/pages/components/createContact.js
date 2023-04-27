@@ -3,6 +3,8 @@ import { useState, useRef, useEffect } from "react";
 import { createContactCompany, createContactByGroup } from "../api/register";
 import showErrorAlert from "./utility/showErrorAlert";
 import showSuccessAlert from "./utility/showSuccessAlert";
+import Cross from "./../../../public/cross.svg";
+import Image from "next/image";
 
 ReactModal.setAppElement("#__next");
 
@@ -98,12 +100,6 @@ function CreateContact({
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    if (!name && !image && !email && !status && !phone) {
-      showErrorAlert(
-        `Please fill any one field from Name, Image, Email, Status and Phone to create contact`
-      );
-      return;
-    }
 
     setIsLoading(true);
     try {
@@ -172,7 +168,24 @@ function CreateContact({
       <div className="bg-[#000000] w-full h-full p-[20px]">
         <div className="w-full">
           <div className="items-center justify-center mx-auto pt-[22px] pb-[22px]">
-            <h1 className="text-3xl text-left pt-[11px]">Create Contact</h1>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <h1 className="text-3xl text-left pt-[11px]">Create Contact</h1>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 cursor-pointer"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                onClick={onRequestClose}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </div>
             <form onSubmit={handleFormSubmit} className="text-left pt-[32px]">
               <div className="pb-[32px]">
                 <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
