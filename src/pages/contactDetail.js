@@ -53,6 +53,7 @@ function ContactDetail() {
           "selectedRow",
           JSON.stringify(responseContact.data.data)
         );
+        setFields([]);
       } else {
         showErrorAlert("Something went wrong!");
         return;
