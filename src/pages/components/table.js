@@ -11,9 +11,11 @@ const CompanyName = ({ companyId }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const company = await getCompany(companyId);
-      setCompanyName(company?.name);
-      setCompanyLogo(company?.icon);
+      if (companyId) {
+        const company = await getCompany(companyId);
+        setCompanyName(company?.name);
+        setCompanyLogo(company?.icon);
+      }
     };
     fetchData();
   }, [companyId]);

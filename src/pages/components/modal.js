@@ -10,11 +10,13 @@ const CompanyName = ({ companyId }) => {
   const [companyName, setCompanyName] = useState("");
 
   useEffect(() => {
-    const fetchData = async () => {
-      const company = await getCompany(companyId);
-      setCompanyName(company?.name);
-    };
-    fetchData();
+    if (companyId) {
+      const fetchData = async () => {
+        const company = await getCompany(companyId);
+        setCompanyName(company?.name);
+      };
+      fetchData();
+    }
   }, [companyId]);
 
   return <p className="text-left text-xl">{companyName}</p>;

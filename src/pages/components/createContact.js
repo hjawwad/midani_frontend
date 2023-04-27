@@ -112,16 +112,18 @@ function CreateContact({
       let response = "";
 
       for (const company of companies) {
-        data = {
-          name: company.name,
-          icon: company.logo,
-        };
-        response = await createContactCompany(data);
-        if (!response.status) {
-          showErrorAlert("Something Went Wrong!");
-          return;
+        if (company.name !== "" || company.icon) {
+          data = {
+            name: company.name,
+            icon: company.logo,
+          };
+          response = await createContactCompany(data);
+          if (!response.status) {
+            showErrorAlert("Something Went Wrong!");
+            return;
+          }
+          companyIds.push(response.data.data._id);
         }
-        companyIds.push(response.data.data._id);
       }
       const contactData = {
         name: name,
@@ -143,10 +145,11 @@ function CreateContact({
         contactData
       );
       setIsLoading(false);
-      if (response.status) {
+      if (responseContact.status) {
         setAdded(true);
         showSuccessAlert(responseContact.message);
       } else {
+        debugger;
         showErrorAlert("Something went wrong!");
         return;
       }

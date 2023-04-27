@@ -85,6 +85,7 @@ export async function createContactByGroup(group_id, data) {
       `/api/groups/${group_id}/contacts`,
       data
     );
+    debugger;
     return response;
   } catch (error) {
     throw new Error("Create Company By Group failed. Please try again later.");
