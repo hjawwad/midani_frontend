@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import CreateComment from "./createComment";
-import CreateInteractions from "./createInteractions"
-import { getAllComments, getAllInteractions } from "../api/register"
+import CreateInteractions from "./createInteractions";
+import { getAllComments, getAllInteractions } from "../api/register";
 
 function TabMenu() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -27,10 +27,8 @@ function TabMenu() {
   }, [selectedRow._id]);
 
   useEffect(() => {
-    console.log("mee", JSON.parse(localStorage.getItem("selectedRow")))
-    setSelectedRow(JSON.parse(localStorage.getItem("selectedRow")))
-    }, [])
-
+    setSelectedRow(JSON.parse(localStorage.getItem("selectedRow")));
+  }, []);
 
   const onCreateComment = () => {
     setIsModalOpen(true);
@@ -48,26 +46,26 @@ function TabMenu() {
 
   const getInteractionMonth = (currentDate) => {
     const date = new Date(currentDate);
-    return date.toLocaleString('default', { month: 'short' });
-  }
+    return date.toLocaleString("default", { month: "short" });
+  };
 
   const getInteractionDate = (currentDate) => {
     const date = new Date(currentDate);
-    return date.getDate().toString().padStart(2, '0');
-  }
+    return date.getDate().toString().padStart(2, "0");
+  };
 
   const onCreateInteractions = () => {
     setIsInteractionModalOpen(true);
   };
 
   const handleCommentCloseModal = async () => {
-    window.location.reload()    
+    window.location.reload();
     setIsModalOpen(false);
   };
 
   const handleInteractionCloseModal = async () => {
-    const interact = await getAllInteractions(selectedRow._id)
-    setInteractions(interact.data)
+    const interact = await getAllInteractions(selectedRow._id);
+    setInteractions(interact.data);
     setIsInteractionModalOpen(false);
   };
 
@@ -88,18 +86,23 @@ function TabMenu() {
       </TabPanel>
 
       <TabPanel>
-          {data && data.length && data.map((item) => (
-            <div key={item._id} className="border border-[#303030] rounded-[8px] p-[13px] pl-[46px] pr-[26px] mb-[20px]">
+        {data &&
+          data.length &&
+          data.map((item) => (
+            <div
+              key={item._id}
+              className="border border-[#303030] rounded-[8px] p-[13px] pl-[46px] pr-[26px] mb-[20px]"
+            >
               <p className="text-[#303030]">{getCommentDate(item.created)}</p>
               <p className="pt-[10px] pb-[13px]">{item.comment}</p>
             </div>
           ))}
         <button
-            onClick={onCreateComment}
-            className="fixed bottom-0 right-0 mb-8 mr-8 p-4 rounded-full text-white"
-          >
-            Create new
-          </button>
+          onClick={onCreateComment}
+          className="fixed bottom-0 right-0 mb-8 mr-8 p-4 rounded-full text-white"
+        >
+          Create new
+        </button>
         <CreateComment
           isOpen={isModalOpen}
           onRequestClose={handleCommentCloseModal}
@@ -108,20 +111,21 @@ function TabMenu() {
       </TabPanel>
 
       <TabPanel>
-        {interactions && interactions.length && 
-        interactions.map((item) => (
-          <div key={item._id} className="flex items-center">
-          <div className="mr-[19px] text-center rounded-[8px] border border-[#313131] pl-[20px] pr-[20px]">
-            <p className="text-[#F66363] text-[28px]">{getInteractionMonth(item.date)}</p>
-            <p className="text-[28px]">{getInteractionDate(item.date)}</p>
-          </div>
-          <div className="pb-[20px]">
-            <p className="text-xl pt-[20px]">{item.name}</p>
-            <span>
-              {item.description}.{" "}
-            </span>
-          </div>
-        </div>
+        {interactions &&
+          interactions.length &&
+          interactions.map((item) => (
+            <div key={item._id} className="flex items-center">
+              <div className="mr-[19px] text-center rounded-[8px] border border-[#313131] pl-[20px] pr-[20px]">
+                <p className="text-[#F66363] text-[28px]">
+                  {getInteractionMonth(item.date)}
+                </p>
+                <p className="text-[28px]">{getInteractionDate(item.date)}</p>
+              </div>
+              <div className="pb-[20px]">
+                <p className="text-xl pt-[20px]">{item.name}</p>
+                <span>{item.description}. </span>
+              </div>
+            </div>
           ))}
         <button
           onClick={onCreateInteractions}

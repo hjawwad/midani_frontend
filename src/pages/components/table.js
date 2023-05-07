@@ -48,11 +48,14 @@ const Table = ({ data, selectedGroup, setAdded }) => {
   if (selectedGroup?.count > 1) {
     selectedGroup = selectedGroup.data;
   }
-
+  console.log("selectedGroup", selectedGroup);
   const handleOpenModal = (item) => {
     setSelectedRow(item);
     localStorage.setItem("selectedRow", JSON.stringify(item));
-    router.push("/contactDetail");
+    router.push({
+      pathname: "/contactDetail",
+      query: { selectedGroup: selectedGroup._id },
+    });
     // setIsModalOpen(true);
   };
 
@@ -136,11 +139,14 @@ const Table = ({ data, selectedGroup, setAdded }) => {
                 EMAIL
               </th>
               <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
-                LOCATION
+                CITY
               </th>
               <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
-                STATUS LAST 3 MONTHS
+                COUNTRY
               </th>
+              {/* <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+                STATUS LAST 3 MONTHS
+              </th> */}
               <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
                 JOB
               </th>
@@ -149,6 +155,12 @@ const Table = ({ data, selectedGroup, setAdded }) => {
               </th>
               <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
                 PHONE
+              </th>
+              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+                TWITTER
+              </th>
+              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+                LINKEDIN
               </th>
             </tr>
           </thead>
@@ -160,43 +172,31 @@ const Table = ({ data, selectedGroup, setAdded }) => {
                 onClick={() => handleOpenModal(item)}
               >
                 <td className="p-[10px] pl-[40px] border border-[#303030]">
-                  {item.image === "" ? (
-                    <></>
-                  ) : (
-                    <Image
-                      src={`https://crypto-experts-backend.herokuapp.com/${item.image}`}
-                      alt="Sidebar Logo"
-                      className="inline-flex rounded-full w-[20px] h-[20px] mr-[5px]"
-                      width={20}
-                      height={20}
-                      priority
-                    />
-                  )}
                   {item.name ? item.name : ""}
                 </td>
                 <td className="p-[10px] pl-[40px] border border-[#303030] whitespace-nowrap overflow-hidden">
                   {item.email ? item.email : "-"}
                 </td>
                 <td className="p-[10px] pl-[40px] border border-[#303030]">
-                  {item.location ? item.location : "-"}
+                  {item.city ? item.city : "-"}
                 </td>
-                <td className={`p-[10px] pl-[40px] border border-[#303030]`}>
-                  <div
-                    className={`p-[5px] rounded-md w-min ${statusColor(
-                      item.status
-                    )}`}
-                  >
-                    {item.status ? item.status : "-"}
-                  </div>
+                <td className="p-[10px] pl-[40px] border border-[#303030]">
+                  {item.country ? item.country : "-"}
                 </td>
                 <td className="p-[10px] pl-[40px] border border-[#303030]">
                   {item.job ? item.job : "-"}
                 </td>
                 <td className="p-[10px] pl-[40px] border border-[#303030]">
-                  {<CompanyName companyId={item.company_id[0]} />}
+                  {item.company_name ? item.company_name : "-"}
                 </td>
                 <td className="p-[10px] pl-[40px] border border-[#303030]">
                   {item.phone ? item.phone : "-"}
+                </td>
+                <td className="p-[10px] pl-[40px] border border-[#303030]">
+                  {item.twitter ? item.twitter : "-"}
+                </td>
+                <td className="p-[10px] pl-[40px] border border-[#303030]">
+                  {item.linkedin ? item.linkedin : "-"}
                 </td>
               </tr>
             ))}

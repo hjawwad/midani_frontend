@@ -3,15 +3,20 @@ import Image from "next/image";
 import CreateGroup from "./createGroup";
 import { getAllGroups } from "../api/register";
 import Cookies from "js-cookie";
+import SearchBar from "./searchBar";
+import GroupIcon from "./svg-icons/group-icon";
+import ProfileIcon from "./svg-icons/profile-icon";
 
 const { API_ENDPOINT } =
   process.env || "https://crypto-experts-backend.herokuapp.com/";
+
 const Sidebar = ({ setSelectedGroup, selectedGroup, added, setTitle }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [addGroup, setAddGroup] = useState(false);
-  const [data, setData] = useState("");
+  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const token = Cookies.get("session_token");
+  const [selected, setSelected] = useState(false);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -55,57 +60,84 @@ const Sidebar = ({ setSelectedGroup, selectedGroup, added, setTitle }) => {
   }, [added]);
 
   return (
-    <div className="w-[307px] min-w-[307px] p-[50px] pl-[40px] pr-[40px] border border-[#303030]">
-      <div className="flex w-full pb-[30px]">
-        <div className="text-xl flex-1 cursor-pointer" onClick={toggleDropdown}>
-          &#9660;&nbsp; <span>Contact</span>
-        </div>
-        <div
-          className="text-xl text-right flex-1 cursor-pointer"
-          onClick={handleAddGroup}
-        >
-          &#43;
-        </div>
-      </div>
-      {isOpen && (
+    <div className="w-[320px] min-w-[320px] bg-[#1f1f1f] border border-[#303030]">
+      <div
+        className="text-[20px] pl-2 pt-2 text-[#808080] ml-[22px] mt-[30px] cursor-pointer bg-[#292929] rounded-md border border-[#303030] w-[280px] h-[45px] "
+        style={{
+          display: "inline-flex",
+        }}
+      >
         <div>
-          {data &&
-            data.length &&
-            data.map((item) => (
-              <div
-                className={`p-[10px] mt-[20px] mb-[20px] cursor-pointer ${isSelected(
-                  item.data
-                )}`}
-                key={item.data.name}
-              >
+          <ProfileIcon />
+        </div>
+        <div>Gabriele M.</div>
+      </div>
+      <div className="mt-[10px] ">
+        <SearchBar />
+      </div>
+      <div>
+        <div
+          className="text-[#808080] ml-[30px]"
+          style={{
+            fontFamily: "Inter",
+            fontWeight: "500px",
+            fontSize: "16px",
+            marginBottom: "20px",
+          }}
+        >
+          CRM
+        </div>
+        <div className="ml-[25px]">
+          <div className="flex w-full pb-[10px]">
+            <div>
+              <GroupIcon />
+            </div>
+            <div
+              className="text-[14px] text-[#808080] pl-2 flex-1 cursor-pointer"
+              onClick={toggleDropdown}
+            >
+              <span>Groups</span>
+            </div>
+          </div>
+
+          {isOpen && (
+            <div className="pl-5">
+              {data?.map((item) => (
                 <div
-                  className="flex w-full"
-                  onClick={() => setSelectedGroup(item.data)}
+                  className={`p-[8px] mt-[10px] mb-[10px] cursor-pointer  ${isSelected(
+                    item.data
+                  )}`}
+                  key={item.data.name}
                 >
-                  <div className="text-base ">
-                    {item.data.icon === "" ? (
-                      <></>
-                    ) : (
-                      <Image
-                        src={`https://crypto-experts-backend.herokuapp.com/${item.data.icon}`}
-                        alt="Sidebar Logo"
-                        className="inline-flex rounded-full"
-                        width={20}
-                        height={20}
-                        priority
-                      />
-                    )}
-                    &nbsp; <span>{item.data.name}</span>
-                  </div>
-                  <div className="text-base text-right text-[#808080] flex-1">
-                    {item?.count}
+                  <div
+                    className="flex w-full "
+                    onClick={() => setSelectedGroup(item.data)}
+                  >
+                    <div className="text-base text-[#808080]">
+                      &nbsp; <span>{item.data.name}</span>
+                    </div>
+                    <div className="text-base text-right text-[#808080] flex-1">
+                      {item?.count}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+          )}
+          <div className=" flex">
+            <div className="text-xl  flex-[0.2] cursor-pointer text-[#808080] ">
+              &#43;
+            </div>
+            <div
+              className=" text-[#808080] pt-1 pr-5 "
+              onClick={handleAddGroup}
+            >
+              New Group
+            </div>
+          </div>
+          <CreateGroup isOpen={addGroup} onRequestClose={handleAddGroup} />
         </div>
-      )}
-      <CreateGroup isOpen={addGroup} onRequestClose={handleAddGroup} />
+      </div>
     </div>
   );
 };

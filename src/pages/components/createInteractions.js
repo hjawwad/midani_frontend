@@ -1,6 +1,6 @@
 import ReactModal from "react-modal";
 import { useState } from "react";
-import { createInteraction } from "../api/register"
+import { createInteraction } from "../api/register";
 
 ReactModal.setAppElement("#__next");
 
@@ -22,21 +22,20 @@ function CreateInteractions({ isOpen, onRequestClose, selectedRow }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let response = ''
+    let response = "";
     try {
-      response = await createInteraction(selectedRow._id, 
-        {
-          name: eventName,
-          date: date,
-          location: location,
-          description: description
-        });
+      response = await createInteraction(selectedRow._id, {
+        name: eventName,
+        date: date,
+        location: location,
+        description: description,
+      });
 
-      setSuccessMessage('Login successful!');
+      setSuccessMessage("Login successful!");
       setError(null);
-      handleLoginClick()
+      handleLoginClick();
     } catch (error) {
-      setError('Create Comment failed. Please try again later.');
+      setError("Create Comment failed. Please try again later.");
       setSuccessMessage(null);
     }
     onRequestClose();
@@ -49,7 +48,10 @@ function CreateInteractions({ isOpen, onRequestClose, selectedRow }) {
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <form onSubmit={handleSubmit} className="p-[16px] pl-[55px] pr-[55px] text-center">
+      <form
+        onSubmit={handleSubmit}
+        className="p-[16px] pl-[55px] pr-[55px] text-center"
+      >
         <div className="pb-[47px]">
           <input
             type="name"
@@ -61,7 +63,10 @@ function CreateInteractions({ isOpen, onRequestClose, selectedRow }) {
           />
         </div>
         <div className="pb-[13px]">
-          <label className="pb-[6px] text-[#999999] text-xl mr-[17px]" htmlFor="email">
+          <label
+            className="pb-[6px] text-[#999999] text-xl mr-[17px]"
+            htmlFor="email"
+          >
             <b>Date</b>
           </label>
           <input
@@ -69,12 +74,15 @@ function CreateInteractions({ isOpen, onRequestClose, selectedRow }) {
             className="mr-[-30px] text-center w-[155px] bg-black text-xl border border-slate-300 rounded-[12px] bg-black p-2 pl-5"
             id="name"
             placeholder="date"
-          onChange={(event) => setDate(event.target.value)}
-          value={date}
+            onChange={(event) => setDate(event.target.value)}
+            value={date}
           />
         </div>
         <div className="pb-[57px]">
-          <label className="pb-[6px] text-[#999999] text-xl mr-[17px]" htmlFor="email">
+          <label
+            className="pb-[6px] text-[#999999] text-xl mr-[17px]"
+            htmlFor="email"
+          >
             <b>Location</b>
           </label>
           <input

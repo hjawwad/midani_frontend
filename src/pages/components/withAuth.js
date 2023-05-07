@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
+import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 function withAuth(Component) {
   function AuthenticatedComponent(props) {
@@ -7,12 +7,12 @@ function withAuth(Component) {
 
     useEffect(() => {
       // Get the session token from the cookie
-      const cookieSessionToken = Cookies.get('session_token');
+      const cookieSessionToken = Cookies.get("session_token");
       if (cookieSessionToken) {
         setSessionToken(cookieSessionToken);
       } else {
         // Redirect the user to the login page
-        window.location.href = '/';
+        window.location.href = "/";
       }
     }, []);
 

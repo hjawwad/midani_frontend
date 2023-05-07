@@ -1,4 +1,3 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import axios from "axios";
 import Cookies from "js-cookie";
 
@@ -85,7 +84,6 @@ export async function createContactByGroup(group_id, data) {
       `/api/groups/${group_id}/contacts`,
       data
     );
-    debugger;
     return response;
   } catch (error) {
     throw new Error("Create Company By Group failed. Please try again later.");
@@ -152,7 +150,6 @@ export async function getCompany(id) {
 }
 
 export async function updateContactByGroup(group_id, data, contact_id) {
-  console.log("updatee");
   try {
     const response = await instance.put(
       `/api/groups/${group_id}/contacts/${contact_id}`,
@@ -160,7 +157,19 @@ export async function updateContactByGroup(group_id, data, contact_id) {
     );
     return response;
   } catch (error) {
-    throw new Error("Create Company By Group failed. Please try again later.");
+    throw new Error("Update Company By Group failed. Please try again later.");
+  }
+}
+
+export async function getContactById(group_id, contact_id) {
+  try {
+    const response = await instance.get(
+      `/api/groups/${group_id}/contacts/${contact_id}`,
+      data
+    );
+    return response;
+  } catch (error) {
+    throw new Error(error);
   }
 }
 

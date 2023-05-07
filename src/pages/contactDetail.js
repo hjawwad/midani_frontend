@@ -30,9 +30,15 @@ const CompanyName = ({ companyId }) => {
 
 function ContactDetail() {
   const router = useRouter();
+  useEffect(() => {
+    console.log("ROUTER", router.query.selectedRow); // Alerts 'Someone'
+  }, [router.query]);
+
   const [selectedRow, setSelectedRow] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [added, setAdded] = useState(false);
+  const [updated, setUpdated] = useState(false);
+
   const [isAddModal, setIsAddModal] = useState(false);
   const [fields, setFields] = useState([]);
 
@@ -40,7 +46,7 @@ function ContactDetail() {
     event.preventDefault();
     try {
       const responseContact = await updateContactByGroup(
-        "64411ecc7d8d3e96de54fceb",
+        selectedRow.group_id,
         fields,
         selectedRow._id
       );
@@ -108,11 +114,16 @@ function ContactDetail() {
     }
   }, [added]);
 
+  useEffect(() => {
+    if (updated) {
+      setSelectedRow(JSON.parse(localStorage.getItem("selectedRow")));
+      setUpdated(false);
+    }
+  }, [updated]);
+
   const handleOpenModal = (item) => {
     setSelectedRow(item);
     localStorage.setItem("selectedRow", JSON.stringify(item));
-    //  router.push("/contactDetail");
-    // setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
@@ -134,7 +145,7 @@ function ContactDetail() {
                   <></>
                 ) : (
                   <Image
-                    src={`https://crypto-experts-backend.herokuapp.com/${selectedRow.image}`}
+                    src={`http://localhost:4000/${selectedRow.image}`}
                     alt="Login Logo"
                     width={100}
                     height={100}
@@ -147,7 +158,9 @@ function ContactDetail() {
             <h1 className="text-3xl text-left pt-[11px]">
               {selectedRow.name || ""}
             </h1>
-            <p className="text-left">{selectedRow.tag ? tag : ""}</p>
+            <p className="text-left">
+              {selectedRow?.tag ? selectedRow?.tag : ""}
+            </p>
             <form className="text-left pt-[32px]">
               <div className="pb-[32px]">
                 <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
@@ -279,14 +292,18 @@ function ContactDetail() {
             >
               Delete
             </button>
-            <button onClick={handleAddOpenModal}>Edit</button>
-            <CreateContact
-              isOpen={isAddModal}
-              onRequestClose={handleAddCloseModal}
-              selectedRow={selectedRow}
-              setAdded={setAdded}
-              buttonText="Update"
-            />
+            <button onClick={() => handleAddOpenModal()}>Edit</button>
+            {isAddModal && (
+              <CreateContact
+                isOpen={isAddModal}
+                onRequestClose={handleAddCloseModal}
+                selectedRow={selectedRow}
+                setAdded={setAdded}
+                setUpdated={setUpdated}
+                buttonText="Update"
+                setSelectedRow={setSelectedRow}
+              />
+            )}
           </div>
           <div className="pl-[48px]">
             <TabMenu selectedRow={selectedRow} />

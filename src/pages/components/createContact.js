@@ -1,8 +1,22 @@
 import ReactModal from "react-modal";
 import { useState, useRef, useEffect } from "react";
-import { createContactCompany, createContactByGroup } from "../api/register";
+import { createContactByGroup, updateContactByGroup } from "../api/register";
 import showErrorAlert from "./utility/showErrorAlert";
 import showSuccessAlert from "./utility/showSuccessAlert";
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import PersonIcon from "@mui/icons-material/Person";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import GroupsIcon from "@mui/icons-material/Groups";
+import CakeIcon from "@mui/icons-material/Cake";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import PlaceIcon from "@mui/icons-material/Place";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
+import BusinessIcon from "@mui/icons-material/Business";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
 import Cross from "./../../../public/cross.svg";
 import Image from "next/image";
 
@@ -14,13 +28,13 @@ function CreateContact({
   selectedGroup,
   selectedRow,
   setAdded,
+  setUpdated,
   buttonText,
 }) {
   const customStyles = {
     content: {
-      maxWidth: "700px",
+      maxWidth: "495px",
       width: "700px",
-      minHeight: "700px",
     },
     overlay: {},
   };
@@ -29,13 +43,19 @@ function CreateContact({
   const [phone, setPhone] = useState("");
   const [job, setJob] = useState("");
   const [email, setEmail] = useState("");
+  const [tag, setTag] = useState("");
   const [status, setStatus] = useState("");
-  const [location, setLocation] = useState("");
+  // const [location, setLocation] = useState("");
+  const [location, setLocation] = useState({ city: "", country: "" });
   const [university, setUniversity] = useState("");
   const [meet, setMeet] = useState("");
   const [dob, setDOB] = useState("");
   const [connections, setConnections] = useState([]);
+  const [linkedin, setLinkedIn] = useState("");
+  const [twitter, setTwitter] = useState("");
+  const [company, setCompany] = useState("");
   const [companies, setCompanies] = useState([{ name: "", logo: null }]);
+  const [bday, setBday] = useState("Birthday");
   const options = [
     { value: "To contact", label: "To contact" },
     { value: "Phoned", label: "Phoned" },
@@ -47,10 +67,11 @@ function CreateContact({
       setName(selectedRow.name || "");
       setImage(selectedRow.image || "");
       setPhone(selectedRow.phone || "");
+      setPhone(selectedRow.tag || "");
       setJob(selectedRow.job || "");
       setEmail(selectedRow.email || "");
       setStatus(selectedRow.status || "");
-      setLocation(selectedRow.location || "");
+      setLocation(selectedRow.location || { city: "", country: "" });
       setUniversity(selectedRow.university || "");
       setMeet(selectedRow.meet || "");
       setDOB(selectedRow.dob || "");
@@ -107,45 +128,48 @@ function CreateContact({
       let data = {};
       let response = "";
 
-      for (const company of companies) {
-        if (company.name !== "" || company.icon) {
-          data = {
-            name: company.name,
-            icon: company.logo,
-          };
-          response = await createContactCompany(data);
-          if (!response.status) {
-            showErrorAlert("Something Went Wrong!");
-            return;
-          }
-          companyIds.push(response.data.data._id);
-        }
-      }
       const contactData = {
         name: name,
-        image: image,
-        company_id: companyIds,
+        company_name: company,
         email: email,
-        location: location,
-        status: status,
+        tag: tag,
+        city: location.city,
+        country: location.country,
         job: job,
         phone: phone,
-        connections: connections,
+        linkedin: linkedin,
+        twitter: twitter,
         dob: dob,
         meet: meet,
-        group_id: selectedGroup._id,
-        university: university,
+        group_id: selectedGroup?._id,
       };
-      const responseContact = await createContactByGroup(
-        selectedGroup._id,
-        contactData
-      );
+
+      let responseContact;
+      if (buttonText != "Update") {
+        responseContact = await createContactByGroup(
+          selectedGroup?._id,
+          contactData
+        );
+      } else {
+        responseContact = await updateContactByGroup(
+          selectedRow?.group_id,
+          contactData,
+          selectedRow._id
+        );
+      }
+
       setIsLoading(false);
       if (responseContact.status) {
-        setAdded(true);
+        if (buttonText !== "Update") setAdded(true);
+        else {
+          localStorage.setItem(
+            "selectedRow",
+            JSON.stringify(responseContact.data.data)
+          );
+          setUpdated(true);
+        }
         showSuccessAlert(responseContact.message);
       } else {
-        debugger;
         showErrorAlert("Something went wrong!");
         return;
       }
@@ -158,6 +182,10 @@ function CreateContact({
     onRequestClose();
   };
 
+  const handleBOD = (dateStr) => {
+    setDOB(dateStr);
+  };
+
   return (
     <ReactModal
       isOpen={isOpen}
@@ -165,259 +193,234 @@ function CreateContact({
       style={customStyles}
       overlayClassName="p-0"
     >
-      <div className="bg-[#000000] w-full h-full p-[20px]">
-        <div className="w-full">
-          <div className="items-center justify-center mx-auto pt-[22px] pb-[22px]">
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <h1 className="text-3xl text-left pt-[11px]">Create Contact</h1>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 cursor-pointer"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                onClick={onRequestClose}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </div>
-            <form onSubmit={handleFormSubmit} className="text-left pt-[32px]">
-              <div className="pb-[32px]">
-                <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
-                  Profile Image
-                </label>
-                <input
-                  type="file"
-                  onChange={handleFileInputChange}
-                  className="w-full bg-black text-xl border border-slate-300 rounded-md bg-black p-2 pl-5"
-                  accept="image/*"
-                />
-              </div>
-              <div className="pb-[32px]">
-                <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
-                  How did we meet?
-                </label>
-                <input
-                  type="text"
-                  className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                  id="name"
-                  onChange={(e) => setMeet(e.target.value)}
-                  value={meet}
-                />
-              </div>
-              <div className="grid grid-cols-2 divide-x w-full">
+      <div
+        className="bg-[#000000] w-full pt-1 pl-2 "
+        style={{ overflow: "hidden" }}
+      >
+        <h1
+          style={{ fontFamily: "Inter", fontSize: "18px", fontWeight: "700" }}
+        >
+          Create persona
+        </h1>
+        <div className="w-full p-[20px] pb-[5px]">
+          <div className="items-center justify-center  pb-[22px]">
+            <form onSubmit={handleFormSubmit} className="text-left pt-5">
+              <div>
                 <div className=" border-none border-0 ">
-                  <div className="pb-[32px] mr-[5px]">
-                    <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
-                      Name
-                    </label>
+                  <div
+                    className="pb-[25px] mr-[5px]"
+                    style={{ display: "flex" }}
+                  >
+                    <div className="pb-[6px] text-[#6A6A6A]">
+                      <PersonIcon />
+                    </div>
                     <input
                       type="text"
-                      className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
                       id="name"
                       onChange={(e) => setName(e.target.value)}
                       value={name}
+                      placeholder="Name & Surname"
                     />
                   </div>
-                  <div className="pb-[32px] mr-[5px]">
-                    <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
-                      Phone number
-                    </label>
-                    <input
-                      type="text"
-                      className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                      id="phone"
-                      onChange={(e) => setPhone(e.target.value)}
-                      value={phone}
-                    />
-                  </div>
-                  <div className="pb-[32px] mr-[5px]">
-                    <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
-                      Job
-                    </label>
-                    <input
-                      type="text"
-                      className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                      id="job"
-                      onChange={(e) => setJob(e.target.value)}
-                      value={job}
-                    />
-                  </div>
-                  <div className="pb-[32px] mr-[5px]">
-                    <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
-                      Location
-                    </label>
-                    <input
-                      type="text"
-                      className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                      id="location"
-                      onChange={(e) => setLocation(e.target.value)}
-                      value={location}
-                    />
-                  </div>
-                  <div className="pb-[32px] mr-[5px]">
-                    <label
-                      className="pb-[6px] text-[#6A6A6A] mb-[8px]"
-                      htmlFor="email"
-                    >
-                      Status
-                    </label>{" "}
-                    <br />
-                    <select
-                      value={status}
-                      onChange={handleChange}
-                      className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                    >
-                      <option value="">-- Select a value --</option>
-                      {options.map((option) => (
-                        <option
-                          key={option.value}
-                          value={option.value}
-                          className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                        >
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                <div className=" border-none border-0 ">
-                  <div className="pb-[32px] ml-[5px]">
-                    <label className="pb-[6px] text-[#6A6A6A]" htmlFor="myDate">
-                      Birthday
-                    </label>
-                    <input
-                      type="date"
-                      className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                      id="myDate"
-                      onChange={(e) => setDOB(e.target.value)}
-                      value={dob}
-                    />
-                  </div>
-                  <div className="pb-[32px] ml-[5px]">
-                    <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
-                      Email
-                    </label>
+                  <div
+                    className="pb-[25px] mr-[5px]"
+                    style={{ display: "flex" }}
+                  >
+                    <div className="pb-[6px] text-[#6A6A6A]">
+                      <AlternateEmailIcon />
+                    </div>
                     <input
                       type="email"
-                      className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5 "
                       id="name"
                       onChange={(e) => setEmail(e.target.value)}
                       value={email}
+                      placeholder="Email"
                     />
                   </div>
-                  <div className="pb-[32px] ml-[5px]">
-                    <label className="pb-[6px] text-[#6A6A6A]" htmlFor="email">
-                      University
-                    </label>
+                  <div
+                    className="pb-[25px] mr-[5px]"
+                    style={{ display: "flex" }}
+                  >
+                    <div className="pb-[6px] text-[#6A6A6A]">
+                      <LocalOfferIcon />
+                    </div>
+
                     <input
                       type="text"
-                      className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                      id="university"
-                      onChange={(e) => setUniversity(e.target.value)}
-                      value={university}
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                      id="name"
+                      onChange={(e) => setTag(e.target.value)}
+                      value={tag}
+                      placeholder="Tags"
                     />
                   </div>
-                  {connections.map((connection, index) => (
-                    <div key={index} className="pb-[32px] ml-[5px]">
-                      <label
-                        className="pb-[6px] text-[#6A6A6A]"
-                        htmlFor={`connection-${index}`}
-                      >
-                        Connection {index + 1}
-                      </label>
-                      <input
-                        type="name"
-                        className="text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                        id={`connection-${index}`}
-                        onChange={(e) => {
-                          const newConnections = [...connections];
-                          newConnections[index] = e.target.value;
-                          setConnections(newConnections);
-                        }}
-                        value={connection}
-                      />
-                    </div>
-                  ))}
-                  <button
-                    type="button"
-                    onClick={() => setConnections([...connections, ""])}
-                    className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
-                    style={{ backgroundColor: "#7F56D9" }}
+                  <div
+                    className="pb-[25px] mr-[5px]"
+                    style={{ display: "flex" }}
                   >
-                    Add Connection
-                  </button>
-                </div>
-              </div>
-              {companies.map((company, index) => (
-                <div key={index}>
-                  <div className="pb-[32px]">
-                    <label
-                      className="pb-[6px] text-[#6A6A6A]"
-                      htmlFor={`company-name-${index}`}
-                    >
-                      Company Name {index + 1}
-                    </label>
+                    <div className="pb-[6px] text-[#6A6A6A]">
+                      <GroupsIcon />
+                    </div>
                     <input
-                      type="name"
-                      className="w-full bg-black text-xl border border-slate-300 rounded-md bg-black p-2 pl-5"
-                      id={`company-name-${index}`}
-                      placeholder="Name of the group"
-                      onChange={(e) => {
-                        const newCompanies = [...companies];
-                        newCompanies[index].name = e.target.value;
-                        setCompanies(newCompanies);
-                      }}
-                      value={company.name}
+                      type="text"
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                      id="name"
+                      onChange={(e) => setMeet(e.target.value)}
+                      value={meet}
+                      placeholder="Where did we meet?"
                     />
                   </div>
-                  <div className="pb-[32px]">
-                    <label
-                      className="pb-[6px] text-[#6A6A6A]"
-                      htmlFor={`company-logo-${index}`}
-                    >
-                      Company Logo {index + 1}
-                    </label>
-                    <input
-                      type="file"
-                      onChange={(e) => {
-                        handleCompanyLogoInputChange(index, e);
-                      }}
-                      className="w-full bg-black text-xl border border-slate-300 rounded-md bg-black p-2 pl-5"
-                      accept="image/*"
-                      id={`company-logo-${index}`}
+                  <div
+                    className="pb-[25px] mr-[5px]"
+                    style={{ display: "flex" }}
+                  >
+                    <div className="pb-[6px] text-[#6A6A6A]">
+                      <CakeIcon />
+                    </div>
+                    <DatePicker
+                      // dateFormat="dd-MM-yyyy"
+                      selected={dob}
+                      value={dob === "" ? "Birthday" : dob}
+                      onChange={(date) => handleBOD(date)}
+                      className="pb-[6px] pt-[5px] pl-2 text-xl text-[#ABABAB] border-slate-300 rounded-md bg-black ml-5"
+                      // useWeekdaysShort={true}
                     />
                   </div>
+                  <div
+                    className="pb-[25px] mr-[5px]"
+                    style={{ display: "flex" }}
+                  >
+                    <div className="pb-[6px] text-[#6A6A6A]">
+                      <LocalPhoneIcon />
+                    </div>
+                    <input
+                      type="text"
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                      id="phone"
+                      onChange={(e) => setPhone(e.target.value)}
+                      value={phone}
+                      placeholder="Phone"
+                    />
+                  </div>
+                  <div
+                    className="pb-[25px] mr-[5px]"
+                    style={{ display: "flex" }}
+                  >
+                    <div className="pb-[6px] text-[#6A6A6A]">
+                      <PlaceIcon />
+                    </div>
+                    <input
+                      type="text"
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                      id="city"
+                      onChange={(e) =>
+                        setLocation({ ...location, city: e.target.value })
+                      }
+                      value={location.city}
+                      placeholder="City"
+                    />
+                  </div>
+                  <div
+                    className="pb-[25px] mr-[5px]"
+                    style={{ display: "flex" }}
+                  >
+                    <div className="pb-[6px] text-[#6A6A6A]">
+                      <PlaceIcon />
+                    </div>
+                    <input
+                      type="text"
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                      id="country"
+                      onChange={(e) =>
+                        setLocation({ ...location, country: e.target.value })
+                      }
+                      value={location.country}
+                      placeholder="Country"
+                    />
+                  </div>
+                  <div
+                    className="pb-[25px] mr-[5px]"
+                    style={{ display: "flex" }}
+                  >
+                    <div className="pb-[6px] text-[#6A6A6A]">
+                      <LinkedInIcon />
+                    </div>
+                    <input
+                      type="text"
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                      id="linkedin"
+                      onChange={(e) => setLinkedIn(e.target.value)}
+                      value={linkedin}
+                      placeholder="LinkedIn"
+                    />
+                  </div>
+                  <div
+                    className="pb-[25px] mr-[5px]"
+                    style={{ display: "flex" }}
+                  >
+                    <div className="pb-[6px] text-[#6A6A6A]">
+                      <TwitterIcon />
+                    </div>
+                    <input
+                      type="text"
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                      id="twitter"
+                      onChange={(e) => setTwitter(e.target.value)}
+                      value={twitter}
+                      placeholder="Twitter"
+                    />
+                  </div>
+                  <div
+                    className="pb-[25px] mr-[5px]"
+                    style={{ display: "flex" }}
+                  >
+                    <div className="pb-[6px] text-[#6A6A6A]">
+                      <WorkOutlineIcon />
+                    </div>
+                    <input
+                      type="text"
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                      id="job"
+                      onChange={(e) => setJob(e.target.value)}
+                      value={job}
+                      placeholder="Job"
+                    />
+                  </div>
+                  <div
+                    className="pb-[25px] mr-[5px]"
+                    style={{ display: "flex" }}
+                  >
+                    <div className="pb-[6px] text-[#6A6A6A]">
+                      <BusinessIcon />
+                    </div>
+                    <input
+                      type="text"
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                      id="company"
+                      onChange={(e) => setCompany(e.target.value)}
+                      value={company}
+                      placeholder="Company"
+                    />
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "end" }}>
+                    <button
+                      type="submit"
+                      className="text-xl border border-slate-300 rounded-md p-2  border-none"
+                      style={{ backgroundColor: "#0353CC" }}
+                    >
+                      {isLoading ? "Creating" : buttonText}
+                    </button>
+                    <button
+                      onClick={onRequestClose}
+                      className="text-xl  border border-slate-300 rounded-md p-2 border-none"
+                      style={{ backgroundColor: "#43464C", marginLeft: "2vh" }}
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </div>
-              ))}
-              <button
-                type="button"
-                onClick={() =>
-                  setCompanies([...companies, { name: "", logo: null }])
-                }
-                className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
-              >
-                Add Company
-              </button>
-              <div>
-                <button
-                  onClick={onRequestClose}
-                  className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
-                  style={{ backgroundColor: "#7F56D9" }}
-                >
-                  {isLoading ? "Creating" : buttonText}
-                </button>
               </div>
             </form>
           </div>
