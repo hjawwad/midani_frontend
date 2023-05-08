@@ -4,6 +4,7 @@ import CreateContact from "./createContact";
 import { useState, useEffect } from "react";
 import { getCompany } from "../api/register";
 import { useRouter } from "next/router";
+var moment = require("moment");
 
 const CompanyName = ({ companyId }) => {
   const [companyName, setCompanyName] = useState("");
@@ -50,6 +51,7 @@ const Table = ({ data, selectedGroup, setAdded }) => {
   }
   console.log("selectedGroup", selectedGroup);
   const handleOpenModal = (item) => {
+
     setSelectedRow(item);
     localStorage.setItem("selectedRow", JSON.stringify(item));
     router.push({
@@ -105,7 +107,7 @@ const Table = ({ data, selectedGroup, setAdded }) => {
           <span className="ml-2 text-gray-800 font-medium pr-[10px] inline-flex text-white">
             <div className="m-auto text-[#808080]">Filter by &nbsp;</div>
             <div className="border border-10 border-[#303030] rounded-[8px] p-[4px] pl-[8px] pr-[8px] text-white">
-              Email all{" "}
+              Email all
             </div>
           </span>
           <div
@@ -139,14 +141,14 @@ const Table = ({ data, selectedGroup, setAdded }) => {
                 EMAIL
               </th>
               <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+                DOB
+              </th>
+              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
                 CITY
               </th>
               <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
                 COUNTRY
               </th>
-              {/* <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
-                STATUS LAST 3 MONTHS
-              </th> */}
               <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
                 JOB
               </th>
@@ -176,6 +178,9 @@ const Table = ({ data, selectedGroup, setAdded }) => {
                 </td>
                 <td className="p-[10px] pl-[40px] border border-[#303030] whitespace-nowrap overflow-hidden">
                   {item.email ? item.email : "-"}
+                </td>
+                <td className="p-[10px] pl-[40px] border border-[#303030] whitespace-nowrap overflow-hidden">
+                  {item.dob ? moment(item.dob).format('DD-MM-YYYY') : "-"}
                 </td>
                 <td className="p-[10px] pl-[40px] border border-[#303030]">
                   {item.city ? item.city : "-"}

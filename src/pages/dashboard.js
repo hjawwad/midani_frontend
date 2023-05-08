@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { getAllContactsByGroup } from "./api/register";
 import Cookies from "js-cookie";
+import ContactDetail from "./contactDetail";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -88,7 +89,9 @@ function Dashboard() {
           added={added}
           setAdded={setAdded}
         />
+
       </div>
+      {/* <ContactDetail/> */}
     </div>
   );
 }

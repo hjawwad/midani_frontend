@@ -80,26 +80,27 @@ function TabMenu() {
         <Tab>Comments</Tab>
         <Tab>Interactions</Tab>
       </TabList>
-
-      <TabPanel>
+      <h1 className="border border-[#3A3A3A]"></h1>
+      {/* <TabPanel>
         <h2></h2>
-      </TabPanel>
+      </TabPanel> */}
 
       <TabPanel>
-        {data &&
+        {/* {data &&
           data.length &&
           data.map((item) => (
             <div
               key={item._id}
               className="border border-[#303030] rounded-[8px] p-[13px] pl-[46px] pr-[26px] mb-[20px]"
             >
+              {console.log('dataaaa: ',item)}
               <p className="text-[#303030]">{getCommentDate(item.created)}</p>
               <p className="pt-[10px] pb-[13px]">{item.comment}</p>
             </div>
-          ))}
+          ))} */}
         <button
           onClick={onCreateComment}
-          className="fixed bottom-0 right-0 mb-8 mr-8 p-4 rounded-full text-white"
+          className="pt-5 pl-5" //fixed bottom-0 right-0 mb-8 mr-8 p-4 rounded-full text-white
         >
           Create new
         </button>
@@ -111,7 +112,7 @@ function TabMenu() {
       </TabPanel>
 
       <TabPanel>
-        {interactions &&
+        {/* {interactions &&
           interactions.length &&
           interactions.map((item) => (
             <div key={item._id} className="flex items-center">
@@ -126,10 +127,10 @@ function TabMenu() {
                 <span>{item.description}. </span>
               </div>
             </div>
-          ))}
+          ))} */}
         <button
           onClick={onCreateInteractions}
-          className="fixed bottom-0 right-0 mb-8 mr-8 p-4 rounded-full text-white"
+          className="" //</TabPanel>fixed bottom-0 right-0 mb-8 mr-8 p-4 rounded-full text-white"
         >
           Create new
         </button>

@@ -16,7 +16,7 @@ import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import BusinessIcon from "@mui/icons-material/Business";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import moment from "moment";
+var moment = require("moment");
 import Cross from "./../../../public/cross.svg";
 import Image from "next/image";
 
@@ -124,9 +124,6 @@ function CreateContact({
 
     setIsLoading(true);
     try {
-      let companyIds = [];
-      let data = {};
-      let response = "";
 
       const contactData = {
         name: name,
@@ -139,7 +136,7 @@ function CreateContact({
         phone: phone,
         linkedin: linkedin,
         twitter: twitter,
-        dob: dob,
+        dob: moment(dob).format("DD-MM-YYYY"),
         meet: meet,
         group_id: selectedGroup?._id,
       };
@@ -280,7 +277,7 @@ function CreateContact({
                       <CakeIcon />
                     </div>
                     <DatePicker
-                      // dateFormat="dd-MM-yyyy"
+                      dateFormat="dd-MM-yyyy"
                       selected={dob}
                       value={dob === "" ? "Birthday" : dob}
                       onChange={(date) => handleBOD(date)}

@@ -46,5 +46,14 @@ body {
 }
 
 .react-tabs__tab-panel {
-  padding-top: 39px !important;
+  padding-top: 0 !important;
+}
+.react-tabs {
+  width: 100% !important;
+}
+
+.react-tabs__tab-list {
+  height: 140px !important;
+  margin: 0 !important;
+  align-items: end !important;
 }
