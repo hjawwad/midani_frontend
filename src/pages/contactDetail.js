@@ -43,7 +43,7 @@ const CompanyName = ({ companyId }) => {
   return <p className="text-left text-xl">{companyName}</p>;
 };
 
-function ContactDetail() {
+function ContactDetail({ setTableShow, setShowDetail }) {
   const router = useRouter();
   useEffect(() => {
     console.log("ROUTER", router.query.selectedRow); // Alerts 'Someone'
@@ -56,7 +56,8 @@ function ContactDetail() {
 
   const [isAddModal, setIsAddModal] = useState(false);
   const [fields, setFields] = useState([]);
-  const [dropdown, setDropDown] = useState(true)
+  const [addField, setAddField] = useState(false)
+  const [dropdown, setDropDown] = useState(true);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -151,7 +152,7 @@ function ContactDetail() {
   const handleAddCloseModal = () => setIsAddModal(false);
 
   return (
-    <div className="bg-[#000000] w-full h-full">
+    <div className="bg-[#000000] w-full">
       {selectedRow && (
         <>
           <div className="flex w-full">
@@ -186,12 +187,10 @@ function ContactDetail() {
               <div
                 className="grid grid-cols-2 divide-x w-full"
                 style={{
-
                   borderRight: "2px solid #3A3A3A",
                 }}
               >
                 <div className="items-center justify-center mx-auto pt-[22px]">
-
                   <div className="flex text-[25px] ml-5">
                     <div>
                       <KeyboardArrowDownIcon style={{ fontSize: 40 }} />
@@ -260,9 +259,13 @@ function ContactDetail() {
                                   </div>
                                   <input
                                     disabled="true"
-                                    value={moment(selectedRow?.dob).format(
-                                      "DD-MM-YYYY"
-                                    )}
+                                    value={
+                                      selectedRow?.dob
+                                        ? moment(selectedRow?.dob).format(
+                                            "DD-MM-YYYY"
+                                          )
+                                        : ""
+                                    }
                                     className="pb-[6px] pt-[5px] pl-2 text-xl text-[#ABABAB] border-slate-300 rounded-md bg-black ml-5"
                                     placeholder="Birthday"
                                   />
@@ -376,7 +379,7 @@ function ContactDetail() {
                                   className="pb-[25px] mr-[5px]"
                                   style={{ display: "flex" }}
                                 >
-                                  <div className="pb-[6px] text-[#6A6A6A]">
+                                  <div className=" text-[#6A6A6A]">
                                     <BusinessIcon />
                                   </div>
                                   <input
@@ -387,37 +390,41 @@ function ContactDetail() {
                                     placeholder="Company"
                                   />
                                 </div>
-                                {/* <div style={{ display: "flex", justifyContent: "end" }}>
-                            <button
-                              type="submit"
-                              className="text-xl border border-slate-300 rounded-md p-2  border-none"
-                              style={{ backgroundColor: "#0353CC" }}
-                            >
-                              {isLoading ? "Creating" : buttonText}
-                            </button>
-                            <button
-                              onClick={onRequestClose}
-                              className="text-xl  border border-slate-300 rounded-md p-2 border-none"
-                              style={{
-                                backgroundColor: "#43464C",
-                                marginLeft: "2vh",
-                              }}
-                            >
-                              Cancel
-                            </button>
-                          </div> */}
                               </div>
                             </div>
                           </form>
                         </div>
                       </div>
+                      {/* {selectedRow.newField &&
+                        selectedRow.newField.map((field, index) => (
+                          <div key={index}>
+                            <label
+                              htmlFor={`name-${index}`}
+                              className="pb-[6px] text-[#6A6A6A]"
+                            >
+                              {Object.keys(field)[0]}
+                            </label>
+                            <p className="text-left text-xl">
+                              {field[Object.keys(field)[0]]}
+                            </p>
+                          </div>
+                        ))} */}
                       {/* </MenuItem>
             </Select> */}
                       {/* ........................................................... */}
 
+                      {/* <div className="ml-[70px]">
+                        <button
+                          className="text-[15px] border border-slate-300 bg-[#0353CC] rounded-[15px] p-2 w-full border-none"
+                          onClick={() => setAddField(true)}
+                        >
+                          NewField
+                        </button>
+                      </div> */}
+
                       <form onSubmit={handleSubmit}>
                         {fields.map((field, index) => (
-                          <div key={index}>
+                          <div key={index} className="ml-[70px] ">
                             <label htmlFor={`name-${index}`}>Name:</label>
                             <input
                               className="w-full bg-black text-xl text-white border border-slate-300 rounded-[16px] bg-black p-2 pl-5"
@@ -440,24 +447,27 @@ function ContactDetail() {
                                 handleInputChange(event, index)
                               }
                             />
+
+                            <button
+                              className="text-xl border border-slate-300  ml-[70px] rounded-md p-2 w-full border-none"
+                              type="submit"
+                            >
+                              Save
+                            </button>
                           </div>
                         ))}
                         {!fields.length && (
                           <button
-                            className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
+                            className="text-[15px] ml-[70px] border border-slate-300 bg-[#0353CC] rounded-[15px] p-2 w-full border-none"
                             type="button"
+                            style={{ width: "100px" }}
                             onClick={handleAddField}
                           >
-                            Add New field
+                            New Field
                           </button>
                         )}
-                        <button
-                          className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
-                          type="submit"
-                        >
-                          Save
-                        </button>
                       </form>
+
                       <div style={{ display: "inline-flex" }}>
                         <button
                           className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
@@ -493,7 +503,6 @@ function ContactDetail() {
               <TabMenu selectedRow={selectedRow} />
             </div>
           </div>
-          {/* ........................................................... */}
         </>
       )}
     </div>

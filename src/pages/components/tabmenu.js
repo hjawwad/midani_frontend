@@ -100,7 +100,7 @@ function TabMenu() {
           ))} */}
         <button
           onClick={onCreateComment}
-          className="pt-5 pl-5" //fixed bottom-0 right-0 mb-8 mr-8 p-4 rounded-full text-white
+          className="fixed bottom-0 right-0 mb-8 mr-8 p-4 rounded-full text-white" //
         >
           Create new
         </button>
@@ -130,7 +130,7 @@ function TabMenu() {
           ))} */}
         <button
           onClick={onCreateInteractions}
-          className="" //</TabPanel>fixed bottom-0 right-0 mb-8 mr-8 p-4 rounded-full text-white"
+          className="fixed bottom-0 right-0 mb-8 mr-8 p-4 rounded-full text-white" //</TabPanel>"
         >
           Create new
         </button>

@@ -40,7 +40,13 @@ const CompanyName = ({ companyId }) => {
   );
 };
 
-const Table = ({ data, selectedGroup, setAdded }) => {
+const Table = ({
+  data,
+  selectedGroup,
+  setAdded,
+  setTableShow,
+  setShowDetail,
+}) => {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddModal, setIsAddModal] = useState(false);
@@ -51,15 +57,17 @@ const Table = ({ data, selectedGroup, setAdded }) => {
   }
   console.log("selectedGroup", selectedGroup);
   const handleOpenModal = (item) => {
-
     setSelectedRow(item);
+    setTableShow(false);
+    setShowDetail(true);
     localStorage.setItem("selectedRow", JSON.stringify(item));
-    router.push({
-      pathname: "/contactDetail",
-      query: { selectedGroup: selectedGroup._id },
-    });
+    // router.push({
+    //   pathname: "/contactDetail",
+    //   query: { selectedGroup: selectedGroup._id },
+    // });
     // setIsModalOpen(true);
   };
+
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -180,7 +188,7 @@ const Table = ({ data, selectedGroup, setAdded }) => {
                   {item.email ? item.email : "-"}
                 </td>
                 <td className="p-[10px] pl-[40px] border border-[#303030] whitespace-nowrap overflow-hidden">
-                  {item.dob ? moment(item.dob).format('DD-MM-YYYY') : "-"}
+                  {item.dob ? moment(item.dob).format("DD-MM-YYYY") : "-"}
                 </td>
                 <td className="p-[10px] pl-[40px] border border-[#303030]">
                   {item.city ? item.city : "-"}

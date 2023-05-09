@@ -74,7 +74,7 @@ function CreateContact({
       setLocation(selectedRow.location || { city: "", country: "" });
       setUniversity(selectedRow.university || "");
       setMeet(selectedRow.meet || "");
-      setDOB(selectedRow.dob || "");
+      setDOB((selectedRow.dob  ? "" :new Date(selectedRow.dob)  || ""));
       setConnections(selectedRow.connections || []);
       setCompanies(selectedRow.companies || [{ name: "", logo: null }]);
     }
@@ -136,7 +136,7 @@ function CreateContact({
         phone: phone,
         linkedin: linkedin,
         twitter: twitter,
-        dob: moment(dob).format("DD-MM-YYYY"),
+        dob:( dob? moment(dob).format("DD-MM-YYYY"): ""),
         meet: meet,
         group_id: selectedGroup?._id,
       };
@@ -147,6 +147,21 @@ function CreateContact({
           selectedGroup?._id,
           contactData
         );
+        setName("")
+        setImage("")
+        setPhone("")
+        setPhone("")
+        setJob("")
+        setEmail("")
+        setStatus("")
+        setLocation("")
+        setUniversity("")
+        setMeet("")
+        setDOB("")
+        setConnections("")
+        setCompanies("")
+
+
       } else {
         responseContact = await updateContactByGroup(
           selectedRow?.group_id,
