@@ -67,14 +67,15 @@ function CreateContact({
       setName(selectedRow.name || "");
       setImage(selectedRow.image || "");
       setPhone(selectedRow.phone || "");
-      setPhone(selectedRow.tag || "");
+      setTag(selectedRow.tag || "");
       setJob(selectedRow.job || "");
       setEmail(selectedRow.email || "");
       setStatus(selectedRow.status || "");
       setLocation(selectedRow.location || { city: "", country: "" });
       setUniversity(selectedRow.university || "");
       setMeet(selectedRow.meet || "");
-      setDOB((selectedRow.dob  ? "" :new Date(selectedRow.dob)  || ""));
+      debugger
+      setDOB((selectedRow.dob  ? "" : moment(selectedRow.dob).format('DD-MM-YYYY') || ""));
       setConnections(selectedRow.connections || []);
       setCompanies(selectedRow.companies || [{ name: "", logo: null }]);
     }
@@ -149,7 +150,7 @@ function CreateContact({
         );
         setName("")
         setImage("")
-        setPhone("")
+        setTag("")
         setPhone("")
         setJob("")
         setEmail("")
@@ -231,7 +232,7 @@ function CreateContact({
                       className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
                       id="name"
                       onChange={(e) => setName(e.target.value)}
-                      value={name}
+                      value={selectedRow?.name || name}
                       placeholder="Name & Surname"
                     />
                   </div>
@@ -247,7 +248,7 @@ function CreateContact({
                       className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5 "
                       id="name"
                       onChange={(e) => setEmail(e.target.value)}
-                      value={email}
+                      value={selectedRow?.email || email}
                       placeholder="Email"
                     />
                   </div>
@@ -264,7 +265,7 @@ function CreateContact({
                       className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
                       id="name"
                       onChange={(e) => setTag(e.target.value)}
-                      value={tag}
+                      value={selectedRow?.tag || tag}
                       placeholder="Tags"
                     />
                   </div>
@@ -280,7 +281,7 @@ function CreateContact({
                       className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
                       id="name"
                       onChange={(e) => setMeet(e.target.value)}
-                      value={meet}
+                      value={selectedRow?.meet || meet}
                       placeholder="Where did we meet?"
                     />
                   </div>
@@ -294,7 +295,9 @@ function CreateContact({
                     <DatePicker
                       dateFormat="dd-MM-yyyy"
                       selected={dob}
-                      value={dob === "" ? "Birthday" : dob}
+                      value={
+                        moment(selectedRow?.dob).format('DD-MM-YYYY') || (dob === "" ? "Birthday" : dob)
+                      }
                       onChange={(date) => handleBOD(date)}
                       className="pb-[6px] pt-[5px] pl-2 text-xl text-[#ABABAB] border-slate-300 rounded-md bg-black ml-5"
                       // useWeekdaysShort={true}
@@ -312,7 +315,7 @@ function CreateContact({
                       className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
                       id="phone"
                       onChange={(e) => setPhone(e.target.value)}
-                      value={phone}
+                      value={selectedRow?.phone || phone}
                       placeholder="Phone"
                     />
                   </div>
@@ -330,7 +333,7 @@ function CreateContact({
                       onChange={(e) =>
                         setLocation({ ...location, city: e.target.value })
                       }
-                      value={location.city}
+                      value={selectedRow?.city || location.city}
                       placeholder="City"
                     />
                   </div>
@@ -348,7 +351,7 @@ function CreateContact({
                       onChange={(e) =>
                         setLocation({ ...location, country: e.target.value })
                       }
-                      value={location.country}
+                      value={selectedRow?.country || location.country}
                       placeholder="Country"
                     />
                   </div>
@@ -364,7 +367,7 @@ function CreateContact({
                       className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
                       id="linkedin"
                       onChange={(e) => setLinkedIn(e.target.value)}
-                      value={linkedin}
+                      value={selectedRow?.linkedin || linkedin}
                       placeholder="LinkedIn"
                     />
                   </div>
@@ -380,7 +383,7 @@ function CreateContact({
                       className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
                       id="twitter"
                       onChange={(e) => setTwitter(e.target.value)}
-                      value={twitter}
+                      value={selectedRow?.twitter || twitter}
                       placeholder="Twitter"
                     />
                   </div>
@@ -396,7 +399,7 @@ function CreateContact({
                       className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
                       id="job"
                       onChange={(e) => setJob(e.target.value)}
-                      value={job}
+                      value={selectedRow?.job || job}
                       placeholder="Job"
                     />
                   </div>
@@ -412,7 +415,7 @@ function CreateContact({
                       className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
                       id="company"
                       onChange={(e) => setCompany(e.target.value)}
-                      value={company}
+                      value={selectedRow?.company || company}
                       placeholder="Company"
                     />
                   </div>

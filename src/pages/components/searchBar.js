@@ -41,13 +41,13 @@ const SearchBar = () => {
         />
         <div
           className="absolute border-slate-300 rounded-md bg-black ml-5"
-          style={{ right: 1, top: 7 }}
+          style={{ right: 5, top: 7 }}
         >
           <KIcon/>
         </div>
         <div
           className="absolute border-slate-300 rounded-md bg-black ml-5"
-          style={{ right: 30, top: 7 }}
+          style={{ right: 35, top: 7 }}
         >
           <CommandIcon />
         </div>

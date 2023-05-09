@@ -81,7 +81,7 @@ const Sidebar = ({
 
   return (
     <div
-      className="w-[320px] min-w-[320px] bg-[#1f1f1f] border border-[#303030]"
+      className="w-[300px] min-w-[280px] bg-[#1f1f1f] border border-[#303030]"
       style={{
         display: "flex",
         flexDirection: "column",
@@ -90,7 +90,7 @@ const Sidebar = ({
     >
       <div style={{ justifyContent: "flex-start" }}>
         <div
-          className="text-[20px] pl-2 pt-2 text-[#808080] ml-[22px] mt-[30px] cursor-pointer bg-[#292929] rounded-md border border-[#303030] w-[280px] h-[45px] "
+          className="text-[20px] pl-2 pt-2 text-[#808080] ml-[22px] mt-[30px] cursor-pointer bg-[#292929] rounded-md border border-[#303030] w-[240px] h-[45px] "
           style={{
             display: "inline-flex",
           }}
@@ -100,7 +100,7 @@ const Sidebar = ({
           </div>
           <div>Gabriele M.</div>
         </div>
-        <div className="mt-[10px] ">
+        <div className="mt-[10px] ml-[2px] " style={{fontSize: '13.5px'}}>
           <SearchBar />
         </div>
         <div>
@@ -132,7 +132,7 @@ const Sidebar = ({
               <div className="pl-5">
                 {data?.map((item) => (
                   <div
-                    className={`p-[8px] mt-[10px] mb-[10px] cursor-pointer  ${isSelected(
+                    className={`p-[8px] w-[24vh] mb-[10px] cursor-pointer  ${isSelected(
                       item.data
                     )}`}
                     key={item.data.name}
