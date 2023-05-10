@@ -53,6 +53,8 @@ function ContactDetail({ setTableShow, setShowDetail }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [added, setAdded] = useState(false);
   const [updated, setUpdated] = useState(false);
+  const [fieldName, setFieldName] = useState("");
+  const [value, setValue] = useState("");
 
   const [isAddModal, setIsAddModal] = useState(false);
   const [fields, setFields] = useState([]);
@@ -64,7 +66,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
     try {
       const responseContact = await updateContactByGroup(
         selectedRow.group_id,
-        fields,
+        { newField: [...selectedRow.newField, ...fields] },
         selectedRow._id
       );
       if (responseContact.status) {
@@ -386,7 +388,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                     disabled="true"
                                     type="text"
                                     className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
-                                    value={selectedRow?.company}
+                                    value={selectedRow?.company_name}
                                     placeholder="Company"
                                   />
                                 </div>
@@ -395,32 +397,20 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                           </form>
                         </div>
                       </div>
-                      {/* {selectedRow.newField &&
+                      {selectedRow.newField &&
                         selectedRow.newField.map((field, index) => (
                           <div key={index}>
                             <label
                               htmlFor={`name-${index}`}
-                              className="pb-[6px] text-[#6A6A6A]"
+                              className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                             >
-                              {Object.keys(field)[0]}
-                            </label>
-                            <p className="text-left text-xl">
                               {field[Object.keys(field)[0]]}
+                            </label>
+                            <p className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5">
+                              {field[Object.keys(field)[1]]}
                             </p>
                           </div>
-                        ))} */}
-                      {/* </MenuItem>
-            </Select> */}
-                      {/* ........................................................... */}
-
-                      {/* <div className="ml-[70px]">
-                        <button
-                          className="text-[15px] border border-slate-300 bg-[#0353CC] rounded-[15px] p-2 w-full border-none"
-                          onClick={() => setAddField(true)}
-                        >
-                          NewField
-                        </button>
-                      </div> */}
+                        ))}
 
                       <form onSubmit={handleSubmit}>
                         {fields.map((field, index) => (

@@ -45,8 +45,8 @@ function CreateContact({
   const [email, setEmail] = useState("");
   const [tag, setTag] = useState("");
   const [status, setStatus] = useState("");
-  // const [location, setLocation] = useState("");
-  const [location, setLocation] = useState({ city: "", country: "" });
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
   const [university, setUniversity] = useState("");
   const [meet, setMeet] = useState("");
   const [dob, setDOB] = useState("");
@@ -54,7 +54,7 @@ function CreateContact({
   const [linkedin, setLinkedIn] = useState("");
   const [twitter, setTwitter] = useState("");
   const [company, setCompany] = useState("");
-  const [companies, setCompanies] = useState([{ name: "", logo: null }]);
+  // const [companies, setCompanies] = useState([{ name: "", logo: null }]);
   const [bday, setBday] = useState("Birthday");
   const options = [
     { value: "To contact", label: "To contact" },
@@ -71,12 +71,16 @@ function CreateContact({
       setJob(selectedRow.job || "");
       setEmail(selectedRow.email || "");
       setStatus(selectedRow.status || "");
-      setLocation(selectedRow.location || { city: "", country: "" });
+      setCountry(selectedRow.country || "");
+      setCity(selectedRow.city || "");
       setUniversity(selectedRow.university || "");
       setMeet(selectedRow.meet || "");
+      setTwitter(selectedRow.twitter || "");
+      setLinkedIn(selectedRow.linkedin || "");
+      setCompany(selectedRow.company_name || "");
       setDOB(selectedRow.dob === "" ? "" : new Date(selectedRow.dob) || "");
       setConnections(selectedRow.connections || []);
-      setCompanies(selectedRow.companies || [{ name: "", logo: null }]);
+      // setCompanies(selectedRow.companies || [{ name: "", logo: null }]);
     }
   }, []);
 
@@ -129,8 +133,8 @@ function CreateContact({
         company_name: company,
         email: email,
         tag: tag,
-        city: location.city,
-        country: location.country,
+        city: city,
+        country: country,
         job: job,
         phone: phone,
         linkedin: linkedin,
@@ -153,12 +157,10 @@ function CreateContact({
         setJob("");
         setEmail("");
         setStatus("");
-        setLocation("");
         setUniversity("");
         setMeet("");
         setDOB("");
         setConnections("");
-        setCompanies("");
       } else {
         responseContact = await updateContactByGroup(
           selectedRow?.group_id,
@@ -224,7 +226,7 @@ function CreateContact({
                       className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                       id="name"
                       onChange={(e) => setName(e.target.value)}
-                      value={selectedRow?.name || name}
+                      value={name}
                       placeholder="Name & Surname"
                     />
                   </div>
@@ -240,7 +242,7 @@ function CreateContact({
                       className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5 "
                       id="name"
                       onChange={(e) => setEmail(e.target.value)}
-                      value={selectedRow?.email || email}
+                      value={email}
                       placeholder="Email"
                     />
                   </div>
@@ -257,7 +259,7 @@ function CreateContact({
                       className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                       id="name"
                       onChange={(e) => setTag(e.target.value)}
-                      value={selectedRow?.tag || tag}
+                      value={tag}
                       placeholder="Tags"
                     />
                   </div>
@@ -273,7 +275,7 @@ function CreateContact({
                       className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                       id="name"
                       onChange={(e) => setMeet(e.target.value)}
-                      value={selectedRow?.meet || meet}
+                      value={meet}
                       placeholder="Where did we meet?"
                     />
                   </div>
@@ -309,7 +311,7 @@ function CreateContact({
                       className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                       id="phone"
                       onChange={(e) => setPhone(e.target.value)}
-                      value={selectedRow?.phone || phone}
+                      value={phone}
                       placeholder="Phone"
                     />
                   </div>
@@ -324,10 +326,8 @@ function CreateContact({
                       type="text"
                       className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                       id="city"
-                      onChange={(e) =>
-                        setLocation({ ...location, city: e.target.value })
-                      }
-                      value={selectedRow?.city || location.city}
+                      onChange={(e) => setCity(e.target.value)}
+                      value={city}
                       placeholder="City"
                     />
                   </div>
@@ -342,10 +342,8 @@ function CreateContact({
                       type="text"
                       className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                       id="country"
-                      onChange={(e) =>
-                        setLocation({ ...location, country: e.target.value })
-                      }
-                      value={selectedRow?.country || location.country}
+                      onChange={(e) => setCountry(e.target.value)}
+                      value={country}
                       placeholder="Country"
                     />
                   </div>
@@ -361,7 +359,7 @@ function CreateContact({
                       className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                       id="linkedin"
                       onChange={(e) => setLinkedIn(e.target.value)}
-                      value={selectedRow?.linkedin || linkedin}
+                      value={linkedin}
                       placeholder="LinkedIn"
                     />
                   </div>
@@ -377,7 +375,7 @@ function CreateContact({
                       className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                       id="twitter"
                       onChange={(e) => setTwitter(e.target.value)}
-                      value={selectedRow?.twitter || twitter}
+                      value={twitter}
                       placeholder="Twitter"
                     />
                   </div>
@@ -393,7 +391,7 @@ function CreateContact({
                       className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                       id="job"
                       onChange={(e) => setJob(e.target.value)}
-                      value={selectedRow?.job || job}
+                      value={job}
                       placeholder="Job"
                     />
                   </div>
@@ -409,7 +407,7 @@ function CreateContact({
                       className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                       id="company"
                       onChange={(e) => setCompany(e.target.value)}
-                      value={selectedRow?.company || company}
+                      value={company}
                       placeholder="Company"
                     />
                   </div>

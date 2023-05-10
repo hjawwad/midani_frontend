@@ -2,10 +2,11 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const token = Cookies.get("session_token");
-const { API_ENDPOINT } = "https://crypto-experts-backend.herokuapp.com/";
+const API_ENDPOINT = process.env.NEXT_PUBLIC_API_URL;
+console.log(" process.env.API_URL", process.env.NEXT_PUBLIC_API_URL);
 
 const instance = axios.create({
-  baseURL: "https://crypto-experts-backend.herokuapp.com/",
+  baseURL: API_ENDPOINT,
   headers: {
     "X-Access-Token": `${token}`,
   },

@@ -11,7 +11,8 @@ function CreateComment({ isOpen, onRequestClose, selectedRow }) {
     content: {
       maxWidth: "500px",
       width: "500px",
-      minHeight: "500px",
+      minHeight: "200px",
+      height: "400px",
     },
     overlay: {},
   };
@@ -50,10 +51,10 @@ function CreateComment({ isOpen, onRequestClose, selectedRow }) {
     >
       <form onSubmit={handleSubmit}>
         <textarea
-          className="w-full bg-black p-[13px] pl-[34px] pr-[34px] border border-slate-300"
+          className="w-full bg-black  pl-[34px] pr-[34px] border border-slate-300"
           id="message"
           name="message"
-          rows="13"
+          rows="10"
           placeholder="Description"
           onChange={(event) => setDescription(event.target.value)}
           value={description}

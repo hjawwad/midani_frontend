@@ -95,8 +95,8 @@ const Table = ({
   return (
     <>
       <header className="flex justify-between items-center p-4  pl-[50px] mt-[25px]">
-        <div className="border border-10 border-[#303030] p-[8px] inline-flex rounded-[8px]">
-          <div className="flex-shrink-0 inline-flex">
+        {/* <div className="border border-10 border-[#303030] p-[8px] inline-flex rounded-[8px]"> */}
+        {/* <div className="flex-shrink-0 inline-flex">
             <Image
               src="/list-icon.svg"
               alt="List Icon"
@@ -105,18 +105,18 @@ const Table = ({
               priority
             />
             <div className="m-auto">&nbsp; List</div>
-          </div>
-          <nav className="ml-6 flex space-x-4 bg-[#292929] rounded-[8px] p-[4px]">
+          </div> */}
+        {/* <nav className="ml-6 flex space-x-4 bg-[#292929] rounded-[8px] p-[4px]">
             <div className="font-medium">{`${data?.length} PEOPLE`}</div>
-          </nav>
-        </div>
+          </nav> */}
+        {/* </div> */}
         <div className="ml-auto flex items-center">
-          <span className="ml-2 text-gray-800 font-medium pr-[10px] inline-flex text-white">
+          {/* <span className="ml-2 text-gray-800 font-medium pr-[10px] inline-flex text-white">
             <div className="m-auto text-[#808080]">Filter by &nbsp;</div>
             <div className="border border-10 border-[#303030] rounded-[8px] p-[4px] pl-[8px] pr-[8px] text-white">
               Email all
             </div>
-          </span>
+          </span> */}
           <div
             onClick={handleAddOpenModal}
             className="cursor-pointer text-xl text-right flex-1 border border-10 border-[#303030] rounded-[8px] p-[4px] pl-[8px] pr-[8px]"
@@ -180,34 +180,34 @@ const Table = ({
                 className="cursor-pointer"
                 onClick={() => handleOpenModal(item)}
               >
-                <td className="p-[10px] border border-[#303030]">
+                <td className="fontSize p-[10px] border border-[#303030]">
                   {item.name ? item.name : ""}
                 </td>
-                <td className="p-[10px] border border-[#303030] whitespace-nowrap overflow-hidden">
+                <td className="fontSize p-[10px] border border-[#303030] whitespace-nowrap overflow-hidden">
                   {item.email ? item.email : "-"}
                 </td>
-                <td className="p-[10px] border border-[#303030] whitespace-nowrap overflow-hidden">
+                <td className="fontSize p-[10px] border border-[#303030] whitespace-nowrap overflow-hidden">
                   {item.dob ? moment(item.dob).format("DD-MM-YYYY") : "-"}
                 </td>
-                <td className="p-[10px] border border-[#303030]">
+                <td className="fontSize p-[10px] border border-[#303030]">
                   {item.city ? item.city : "-"}
                 </td>
-                <td className="p-[10px] border border-[#303030]">
+                <td className="fontSize p-[10px] border border-[#303030]">
                   {item.country ? item.country : "-"}
                 </td>
-                <td className="p-[10px] border border-[#303030]">
+                <td className="fontSize p-[10px] border border-[#303030]">
                   {item.job ? item.job : "-"}
                 </td>
-                <td className="p-[10px] border border-[#303030]">
+                <td className="fontSize p-[10px] border border-[#303030]">
                   {item.company_name ? item.company_name : "-"}
                 </td>
-                <td className="p-[10px] border border-[#303030]">
+                <td className="fontSize p-[10px] border border-[#303030]">
                   {item.phone ? item.phone : "-"}
                 </td>
-                <td className="p-[10px] border border-[#303030]">
+                <td className="fontSize p-[10px] border border-[#303030]">
                   {item.twitter ? item.twitter : "-"}
                 </td>
-                <td className="p-[10px] border border-[#303030]">
+                <td className="fontSize p-[10px] border border-[#303030]">
                   {item.linkedin ? item.linkedin : "-"}
                 </td>
               </tr>

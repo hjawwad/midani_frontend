@@ -10,9 +10,6 @@ import { destroyCookie } from "nookies";
 import { useRouter } from "next/router";
 import LogoutCard from "./svg-icons/logout-card";
 
-const { API_ENDPOINT } =
-  process.env || "https://crypto-experts-backend.herokuapp.com/";
-
 const Sidebar = ({
   setSelectedGroup,
   selectedGroup,
