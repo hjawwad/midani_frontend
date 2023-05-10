@@ -59,7 +59,9 @@ function TabMenu() {
   };
 
   const handleCommentCloseModal = async () => {
-    window.location.reload();
+    // window.location.reload();getAllComments
+    const interact = await getAllComments(selectedRow._id);
+    setData(interact.data);
     setIsModalOpen(false);
   };
 
