@@ -74,8 +74,7 @@ function CreateContact({
       setLocation(selectedRow.location || { city: "", country: "" });
       setUniversity(selectedRow.university || "");
       setMeet(selectedRow.meet || "");
-      debugger
-      setDOB((selectedRow.dob  ? "" : moment(selectedRow.dob).format('DD-MM-YYYY') || ""));
+      setDOB(selectedRow.dob === "" ? "" : new Date(selectedRow.dob) || "");
       setConnections(selectedRow.connections || []);
       setCompanies(selectedRow.companies || [{ name: "", logo: null }]);
     }
@@ -125,7 +124,6 @@ function CreateContact({
 
     setIsLoading(true);
     try {
-
       const contactData = {
         name: name,
         company_name: company,
@@ -137,7 +135,7 @@ function CreateContact({
         phone: phone,
         linkedin: linkedin,
         twitter: twitter,
-        dob:( dob? moment(dob).format("DD-MM-YYYY"): ""),
+        dob: dob != "" ? moment(dob).format("DD-MM-YYYY") : "",
         meet: meet,
         group_id: selectedGroup?._id,
       };
@@ -148,21 +146,19 @@ function CreateContact({
           selectedGroup?._id,
           contactData
         );
-        setName("")
-        setImage("")
-        setTag("")
-        setPhone("")
-        setJob("")
-        setEmail("")
-        setStatus("")
-        setLocation("")
-        setUniversity("")
-        setMeet("")
-        setDOB("")
-        setConnections("")
-        setCompanies("")
-
-
+        setName("");
+        setImage("");
+        setTag("");
+        setPhone("");
+        setJob("");
+        setEmail("");
+        setStatus("");
+        setLocation("");
+        setUniversity("");
+        setMeet("");
+        setDOB("");
+        setConnections("");
+        setCompanies("");
       } else {
         responseContact = await updateContactByGroup(
           selectedRow?.group_id,
@@ -207,14 +203,10 @@ function CreateContact({
       overlayClassName="p-0"
     >
       <div
-        className="bg-[#000000] w-full pt-1 pl-2 "
+        className="bg-[#1f1f1f] w-full pt-1 pl-2 "
         style={{ overflow: "hidden" }}
       >
-        <h1
-          style={{ fontFamily: "Inter", fontSize: "18px", fontWeight: "700" }}
-        >
-          Create persona
-        </h1>
+        <h1 style={{ fontSize: "18px", fontWeight: "700" }}>Create persona</h1>
         <div className="w-full p-[20px] pb-[5px]">
           <div className="items-center justify-center  pb-[22px]">
             <form onSubmit={handleFormSubmit} className="text-left pt-5">
@@ -229,7 +221,7 @@ function CreateContact({
                     </div>
                     <input
                       type="text"
-                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                       id="name"
                       onChange={(e) => setName(e.target.value)}
                       value={selectedRow?.name || name}
@@ -245,7 +237,7 @@ function CreateContact({
                     </div>
                     <input
                       type="email"
-                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5 "
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5 "
                       id="name"
                       onChange={(e) => setEmail(e.target.value)}
                       value={selectedRow?.email || email}
@@ -262,7 +254,7 @@ function CreateContact({
 
                     <input
                       type="text"
-                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                       id="name"
                       onChange={(e) => setTag(e.target.value)}
                       value={selectedRow?.tag || tag}
@@ -278,7 +270,7 @@ function CreateContact({
                     </div>
                     <input
                       type="text"
-                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                       id="name"
                       onChange={(e) => setMeet(e.target.value)}
                       value={selectedRow?.meet || meet}
@@ -296,10 +288,12 @@ function CreateContact({
                       dateFormat="dd-MM-yyyy"
                       selected={dob}
                       value={
-                        moment(selectedRow?.dob).format('DD-MM-YYYY') || (dob === "" ? "Birthday" : dob)
+                        dob !== ""
+                          ? moment(dob).format("DD-MM-YYYY")
+                          : "Birthday"
                       }
                       onChange={(date) => handleBOD(date)}
-                      className="pb-[6px] pt-[5px] pl-2 text-xl text-[#ABABAB] border-slate-300 rounded-md bg-black ml-5"
+                      className="pb-[6px] pt-[5px] pl-2 text-xl text-[#ABABAB] border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                       // useWeekdaysShort={true}
                     />
                   </div>
@@ -312,7 +306,7 @@ function CreateContact({
                     </div>
                     <input
                       type="text"
-                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                       id="phone"
                       onChange={(e) => setPhone(e.target.value)}
                       value={selectedRow?.phone || phone}
@@ -328,7 +322,7 @@ function CreateContact({
                     </div>
                     <input
                       type="text"
-                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                       id="city"
                       onChange={(e) =>
                         setLocation({ ...location, city: e.target.value })
@@ -346,7 +340,7 @@ function CreateContact({
                     </div>
                     <input
                       type="text"
-                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                       id="country"
                       onChange={(e) =>
                         setLocation({ ...location, country: e.target.value })
@@ -364,7 +358,7 @@ function CreateContact({
                     </div>
                     <input
                       type="text"
-                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                       id="linkedin"
                       onChange={(e) => setLinkedIn(e.target.value)}
                       value={selectedRow?.linkedin || linkedin}
@@ -380,7 +374,7 @@ function CreateContact({
                     </div>
                     <input
                       type="text"
-                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                       id="twitter"
                       onChange={(e) => setTwitter(e.target.value)}
                       value={selectedRow?.twitter || twitter}
@@ -396,7 +390,7 @@ function CreateContact({
                     </div>
                     <input
                       type="text"
-                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                       id="job"
                       onChange={(e) => setJob(e.target.value)}
                       value={selectedRow?.job || job}
@@ -412,7 +406,7 @@ function CreateContact({
                     </div>
                     <input
                       type="text"
-                      className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                      className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                       id="company"
                       onChange={(e) => setCompany(e.target.value)}
                       value={selectedRow?.company || company}

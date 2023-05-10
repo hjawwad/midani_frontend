@@ -100,14 +100,13 @@ const Sidebar = ({
           </div>
           <div>Gabriele M.</div>
         </div>
-        <div className="mt-[10px] ml-[2px] " style={{fontSize: '13.5px'}}>
+        <div className="mt-[10px] ml-[2px] " style={{ fontSize: "13.5px" }}>
           <SearchBar />
         </div>
         <div>
           <div
             className="text-[#808080] ml-[30px]"
             style={{
-              fontFamily: "Inter",
               fontWeight: "500px",
               fontSize: "16px",
               marginBottom: "20px",

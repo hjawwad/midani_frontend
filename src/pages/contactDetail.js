@@ -56,7 +56,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
 
   const [isAddModal, setIsAddModal] = useState(false);
   const [fields, setFields] = useState([]);
-  const [addField, setAddField] = useState(false)
+  const [addField, setAddField] = useState(false);
   const [dropdown, setDropDown] = useState(true);
 
   const handleSubmit = async (event) => {
@@ -152,7 +152,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
   const handleAddCloseModal = () => setIsAddModal(false);
 
   return (
-    <div className="bg-[#000000] w-full">
+    <div className="bg-[#1f1f1f] w-full">
       {selectedRow && (
         <>
           <div className="flex w-full">
@@ -178,9 +178,9 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                     {selectedRow?.name ? selectedRow.name : "Gabriele Morace"}
                   </div>
                 </div>
-                <button className="mb-[25px] ml-[70px] bg-[#0353CC] p-2 rounded-xl">
+                {/* <button className="mb-[25px] ml-[70px] bg-[#0353CC] p-2 rounded-xl">
                   Send Email
-                </button>
+                </button> */}
               </div>
               <h1 className="border border-[#3A3A3A]"></h1>
 
@@ -213,7 +213,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                   </div>
                                   <input
                                     disabled="true"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     id="name"
                                     value={selectedRow?.name}
                                     placeholder="Name & Surname"
@@ -230,7 +230,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
 
                                   <input
                                     disabled="true"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     value={selectedRow?.tag}
                                     placeholder="Tags"
                                   />
@@ -245,7 +245,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                   <input
                                     disabled="true"
                                     type="text"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     value={selectedRow?.meet}
                                     placeholder="Where did we meet?"
                                   />
@@ -266,7 +266,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                           )
                                         : ""
                                     }
-                                    className="pb-[6px] pt-[5px] pl-2 text-xl text-[#ABABAB] border-slate-300 rounded-md bg-black ml-5"
+                                    className="pb-[6px] pt-[5px] pl-2 text-xl text-[#ABABAB] border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     placeholder="Birthday"
                                   />
                                 </div>
@@ -280,7 +280,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                   <input
                                     disabled="true"
                                     type="text"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     value={selectedRow?.phone}
                                     placeholder="Phone"
                                   />
@@ -295,7 +295,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                   <input
                                     disabled="true"
                                     type="text"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     value={selectedRow?.city}
                                     placeholder="City"
                                   />
@@ -310,7 +310,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                   <input
                                     disabled="true"
                                     type="text"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     value={selectedRow?.country}
                                     placeholder="Country"
                                   />
@@ -325,7 +325,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                   <input
                                     disabled="true"
                                     type="text"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     value={selectedRow?.linkedin}
                                     placeholder="LinkedIn"
                                   />
@@ -340,7 +340,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                   <input
                                     disabled="true"
                                     type="text"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     value={selectedRow?.twitter}
                                     placeholder="Twitter"
                                   />
@@ -355,7 +355,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                   <input
                                     disabled="true"
                                     type="email"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5 "
+                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5 "
                                     value={selectedRow?.email}
                                     placeholder="Email"
                                   />
@@ -370,7 +370,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                   <input
                                     disabled="true"
                                     type="text"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     value={selectedRow?.job}
                                     placeholder="Job"
                                   />
@@ -385,7 +385,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                   <input
                                     disabled="true"
                                     type="text"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-black ml-5"
+                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     value={selectedRow?.company}
                                     placeholder="Company"
                                   />
@@ -427,7 +427,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                           <div key={index} className="ml-[70px] ">
                             <label htmlFor={`name-${index}`}>Name:</label>
                             <input
-                              className="w-full bg-black text-xl text-white border border-slate-300 rounded-[16px] bg-black p-2 pl-5"
+                              className="w-full bg-[#1f1f1f] text-xl text-white border border-slate-300 rounded-[16px] bg-[#1f1f1f] p-2 pl-5"
                               type="text"
                               id={`name-${index}`}
                               name="name"
@@ -439,7 +439,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                             <label htmlFor={`value-${index}`}>Value:</label>
                             <input
                               type="text"
-                              className="w-full bg-black text-white text-xl border border-slate-300 rounded-[16px] bg-black p-2 pl-5"
+                              className="w-full bg-[#1f1f1f] text-white text-xl border border-slate-300 rounded-[16px] bg-[#1f1f1f] p-2 pl-5"
                               id={`value-${index}`}
                               name="value"
                               value={field.value}

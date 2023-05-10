@@ -21,8 +21,8 @@ function Dashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
-  const [tableShow, setTableShow] = useState(true)
-  const [showDetail, setShowDetail] = useState(false)
+  const [tableShow, setTableShow] = useState(true);
+  const [showDetail, setShowDetail] = useState(false);
 
   // const handleLogout = (e) => {
   //   e.preventDefault();
@@ -67,26 +67,28 @@ function Dashboard() {
         setShowDetail={setShowDetail}
       />
       <div className="w-full">
-        <header className="flex items-center p-4 pl-[50px]">
-          <div className="flex-shrink-0">
-            <Image
-              src="/home-icon.svg"
-              alt="Home Icon"
-              width={30}
-              height={30}
-              priority
-            />
-          </div>
-          <nav className="ml-6 flex space-x-4">
-            <div className="font-medium text-[24px]">{title}</div>
-          </nav>
-          {/* <div className="ml-auto flex items-center pr-[15px] cursor-pointer">
+        {tableShow && (
+          <header className="flex items-center p-4 pl-[50px]">
+            <div className="flex-shrink-0">
+              <Image
+                src="/home-icon.svg"
+                alt="Home Icon"
+                width={30}
+                height={30}
+                priority
+              />
+            </div>
+            <nav className="ml-6 flex space-x-4">
+              <div className="font-medium text-[24px]">{title}</div>
+            </nav>
+            {/* <div className="ml-auto flex items-center pr-[15px] cursor-pointer">
             <span className="ml-2 text-gray-800 font-medium pr-[15px] text-white">
               Share
             </span>
             <div onClick={handleLogout}>...</div>
           </div> */}
-        </header>
+          </header>
+        )}
         {tableShow ? (
           <Table
             data={contactData === "" ? selectedGroup?.data : contactData}
