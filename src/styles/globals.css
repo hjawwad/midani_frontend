@@ -57,3 +57,11 @@ body {
   margin: 0 !important;
   align-items: end !important;
 }
+
+th {
+  font-weight: lighter;
+}
+
+tr {
+  font-weight: lighter;
+}

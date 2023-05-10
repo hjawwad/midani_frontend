@@ -68,7 +68,6 @@ const Table = ({
     // setIsModalOpen(true);
   };
 
-
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
@@ -142,34 +141,34 @@ const Table = ({
         <table className="table-fixed w-full border-collapse border border-[#303030]">
           <thead>
             <tr>
-              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+              <th className="text-left p-[10px] border border-[#303030] text-[#808080]">
                 PEOPLE
               </th>
-              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+              <th className="text-left p-[10px] border border-[#303030] text-[#808080]">
                 EMAIL
               </th>
-              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+              <th className="text-left p-[10px] border border-[#303030] text-[#808080]">
                 DOB
               </th>
-              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+              <th className="text-left p-[10px] border border-[#303030] text-[#808080]">
                 CITY
               </th>
-              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+              <th className="text-left p-[10px] border border-[#303030] text-[#808080]">
                 COUNTRY
               </th>
-              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+              <th className="text-left p-[10px] border border-[#303030] text-[#808080]">
                 JOB
               </th>
-              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+              <th className="text-left p-[10px] border border-[#303030] text-[#808080]">
                 COMPANY
               </th>
-              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+              <th className="text-left p-[10px] border border-[#303030] text-[#808080]">
                 PHONE
               </th>
-              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+              <th className="text-left p-[10px] border border-[#303030] text-[#808080]">
                 TWITTER
               </th>
-              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+              <th className="text-left p-[10px] border border-[#303030] text-[#808080]">
                 LINKEDIN
               </th>
             </tr>
@@ -181,34 +180,34 @@ const Table = ({
                 className="cursor-pointer"
                 onClick={() => handleOpenModal(item)}
               >
-                <td className="p-[10px] pl-[40px] border border-[#303030]">
+                <td className="p-[10px] border border-[#303030]">
                   {item.name ? item.name : ""}
                 </td>
-                <td className="p-[10px] pl-[40px] border border-[#303030] whitespace-nowrap overflow-hidden">
+                <td className="p-[10px] border border-[#303030] whitespace-nowrap overflow-hidden">
                   {item.email ? item.email : "-"}
                 </td>
-                <td className="p-[10px] pl-[40px] border border-[#303030] whitespace-nowrap overflow-hidden">
+                <td className="p-[10px] border border-[#303030] whitespace-nowrap overflow-hidden">
                   {item.dob ? moment(item.dob).format("DD-MM-YYYY") : "-"}
                 </td>
-                <td className="p-[10px] pl-[40px] border border-[#303030]">
+                <td className="p-[10px] border border-[#303030]">
                   {item.city ? item.city : "-"}
                 </td>
-                <td className="p-[10px] pl-[40px] border border-[#303030]">
+                <td className="p-[10px] border border-[#303030]">
                   {item.country ? item.country : "-"}
                 </td>
-                <td className="p-[10px] pl-[40px] border border-[#303030]">
+                <td className="p-[10px] border border-[#303030]">
                   {item.job ? item.job : "-"}
                 </td>
-                <td className="p-[10px] pl-[40px] border border-[#303030]">
+                <td className="p-[10px] border border-[#303030]">
                   {item.company_name ? item.company_name : "-"}
                 </td>
-                <td className="p-[10px] pl-[40px] border border-[#303030]">
+                <td className="p-[10px] border border-[#303030]">
                   {item.phone ? item.phone : "-"}
                 </td>
-                <td className="p-[10px] pl-[40px] border border-[#303030]">
+                <td className="p-[10px] border border-[#303030]">
                   {item.twitter ? item.twitter : "-"}
                 </td>
-                <td className="p-[10px] pl-[40px] border border-[#303030]">
+                <td className="p-[10px] border border-[#303030]">
                   {item.linkedin ? item.linkedin : "-"}
                 </td>
               </tr>
