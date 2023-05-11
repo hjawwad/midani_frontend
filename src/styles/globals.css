@@ -53,7 +53,7 @@ body {
 }
 
 .react-tabs__tab-list {
-  height: 140px !important;
+  height: 85px !important;
   margin: 0 !important;
   align-items: end !important;
 }

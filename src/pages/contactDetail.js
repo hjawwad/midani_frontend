@@ -161,11 +161,11 @@ function ContactDetail({ setTableShow, setShowDetail }) {
             <div className="w-[50%] ">
               <div
                 style={{
-                  height: "140px",
+                  height: "85px",
                   padding: "20px",
                 }}
               >
-                <div className="flex w-full text-[#fffff] text-[28px] border-bottom mb-5">
+                <div className="flex w-full text-[#fffff] text-[28px] border-bottom">
                   <div>
                     {selectedRow?.image ? (
                       selectedRow.image
@@ -173,10 +173,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                       <PersonCircleIcon />
                     )}
                   </div>
-                  <div
-                    className="pl-5 pt-1"
-                    style={{ fontWeight: "500px", fontFamily: "Inter" }}
-                  >
+                  <div className="pl-5 pt-1" style={{ fontWeight: "500px" }}>
                     {selectedRow?.name ? selectedRow.name : "Gabriele Morace"}
                   </div>
                 </div>

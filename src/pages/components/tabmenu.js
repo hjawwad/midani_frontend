@@ -119,13 +119,13 @@ function TabMenu() {
           interactions.map((item) => (
             <div key={item._id} className="flex items-center m-3">
               <div className="mr-[19px] text-center rounded-[8px] border border-[#313131] pl-[20px] pr-[20px]">
-                <p className="text-[#F66363] text-[28px]">
+                <p className="text-[#F66363] text-[18px]">
                   {getInteractionMonth(item.date)}
                 </p>
-                <p className="text-[28px]">{getInteractionDate(item.date)}</p>
+                <p className="text-[18px]">{getInteractionDate(item.date)}</p>
               </div>
               <div className="pb-[20px]">
-                <p className="text-xl pt-[20px]">{item.name}</p>
+                <p className="text-l pt-[20px]">{item.name}</p>
                 <span>{item.description}. </span>
               </div>
             </div>
