@@ -139,7 +139,7 @@ function CreateContact({
         phone: phone,
         linkedin: linkedin,
         twitter: twitter,
-        dob: dob != "" ? moment(dob).format("DD-MM-YYYY") : "",
+        dob: dob,
         meet: meet,
         group_id: selectedGroup?._id,
       };

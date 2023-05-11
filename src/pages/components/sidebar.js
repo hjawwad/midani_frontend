@@ -78,7 +78,7 @@ const Sidebar = ({
 
   return (
     <div
-      className="w-[300px] min-w-[280px] bg-[#1f1f1f] border border-[#303030]"
+      className="w-[250px] min-w-[250px] bg-[#1f1f1f] border border-[#303030]"
       style={{
         display: "flex",
         flexDirection: "column",
@@ -87,7 +87,7 @@ const Sidebar = ({
     >
       <div style={{ justifyContent: "flex-start" }}>
         <div
-          className="text-[20px] pl-2 pt-2 text-[#808080] ml-[22px] mt-[30px] cursor-pointer bg-[#292929] rounded-md border border-[#303030] w-[240px] h-[45px] "
+          className="text-[20px] pl-2 pt-2 text-[#808080] ml-[22px] mt-[30px] cursor-pointer bg-[#292929] rounded-md border border-[#303030] w-[200px] h-[45px] "
           style={{
             display: "inline-flex",
           }}

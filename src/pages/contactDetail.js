@@ -40,7 +40,7 @@ const CompanyName = ({ companyId }) => {
     }
   }, [companyId]);
 
-  return <p className="text-left text-xl">{companyName}</p>;
+  return <p className="text-left text-l">{companyName}</p>;
 };
 
 function ContactDetail({ setTableShow, setShowDetail }) {
@@ -201,21 +201,21 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                   </div>
                   {dropdown && (
                     <>
-                      <div className="w-full p-[20px] pb-[5px]">
-                        <div className="items-center justify-center  pb-[22px]">
-                          <form onSubmit="" className="text-left pt-5">
+                      <div className="w-full p-[20px]">
+                        <div className="items-center justify-center ">
+                          <form onSubmit="" className="text-left">
                             <div>
                               <div className=" border-none border-0 ">
                                 <div
-                                  className="pb-[25px] mr-[5px]"
-                                  style={{ display: "flex" }}
+                                  className="pb-[10px] mr-[5px]"
+                                  style={{ display: "flex", fontSize: "1rem" }}
                                 >
                                   <div className="pb-[6px] text-[#6A6A6A]">
                                     <PersonIcon />
                                   </div>
                                   <input
                                     disabled="true"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
+                                    className="text-l border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     id="name"
                                     value={selectedRow?.name}
                                     placeholder="Name & Surname"
@@ -223,22 +223,22 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                 </div>
 
                                 <div
-                                  className="pb-[25px] mr-[5px]"
+                                  className="pb-[10px] mr-[5px]"
                                   style={{ display: "flex" }}
                                 >
                                   <div className="pb-[6px] text-[#6A6A6A]">
                                     <LocalOfferIcon />
                                   </div>
-
                                   <input
                                     disabled="true"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
+                                    type="text"
+                                    className="text-l border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     value={selectedRow?.tag}
-                                    placeholder="Tags"
+                                    placeholder="Where did we meet?"
                                   />
                                 </div>
                                 <div
-                                  className="pb-[25px] mr-[5px]"
+                                  className="pb-[10px] mr-[5px]"
                                   style={{ display: "flex" }}
                                 >
                                   <div className="pb-[6px] text-[#6A6A6A]">
@@ -247,13 +247,13 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                   <input
                                     disabled="true"
                                     type="text"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
+                                    className="text-l border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     value={selectedRow?.meet}
                                     placeholder="Where did we meet?"
                                   />
                                 </div>
                                 <div
-                                  className="pb-[25px] mr-[5px]"
+                                  className="pb-[10px] mr-[5px]"
                                   style={{ display: "flex" }}
                                 >
                                   <div className="pb-[6px] text-[#6A6A6A]">
@@ -268,12 +268,12 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                           )
                                         : ""
                                     }
-                                    className="pb-[6px] pt-[5px] pl-2 text-xl text-[#ABABAB] border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
+                                    className="pb-[6px] pt-[5px] text-l text-[#ABABAB] border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     placeholder="Birthday"
                                   />
                                 </div>
                                 <div
-                                  className="pb-[25px] mr-[5px]"
+                                  className="pb-[10px] mr-[5px]"
                                   style={{ display: "flex" }}
                                 >
                                   <div className="pb-[6px] text-[#6A6A6A]">
@@ -282,13 +282,13 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                   <input
                                     disabled="true"
                                     type="text"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
+                                    className="text-l border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     value={selectedRow?.phone}
                                     placeholder="Phone"
                                   />
                                 </div>
                                 <div
-                                  className="pb-[25px] mr-[5px]"
+                                  className="pb-[10px] mr-[5px]"
                                   style={{ display: "flex" }}
                                 >
                                   <div className="pb-[6px] text-[#6A6A6A]">
@@ -297,13 +297,13 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                   <input
                                     disabled="true"
                                     type="text"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
+                                    className="text-l border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     value={selectedRow?.city}
                                     placeholder="City"
                                   />
                                 </div>
                                 <div
-                                  className="pb-[25px] mr-[5px]"
+                                  className="pb-[10px] mr-[5px]"
                                   style={{ display: "flex" }}
                                 >
                                   <div className="pb-[6px] text-[#6A6A6A]">
@@ -312,13 +312,13 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                   <input
                                     disabled="true"
                                     type="text"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
+                                    className="text-l border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     value={selectedRow?.country}
                                     placeholder="Country"
                                   />
                                 </div>
                                 <div
-                                  className="pb-[25px] mr-[5px]"
+                                  className="pb-[10px] mr-[5px]"
                                   style={{ display: "flex" }}
                                 >
                                   <div className="pb-[6px] text-[#6A6A6A]">
@@ -327,13 +327,13 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                   <input
                                     disabled="true"
                                     type="text"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
+                                    className="text-l border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     value={selectedRow?.linkedin}
                                     placeholder="LinkedIn"
                                   />
                                 </div>
                                 <div
-                                  className="pb-[25px] mr-[5px]"
+                                  className="pb-[10px] mr-[5px]"
                                   style={{ display: "flex" }}
                                 >
                                   <div className="pb-[6px] text-[#6A6A6A]">
@@ -342,13 +342,13 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                   <input
                                     disabled="true"
                                     type="text"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
+                                    className="text-l border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     value={selectedRow?.twitter}
                                     placeholder="Twitter"
                                   />
                                 </div>
                                 <div
-                                  className="pb-[25px] mr-[5px]"
+                                  className="pb-[10px] mr-[5px]"
                                   style={{ display: "flex" }}
                                 >
                                   <div className="pb-[6px] text-[#6A6A6A]">
@@ -357,13 +357,13 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                   <input
                                     disabled="true"
                                     type="email"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5 "
+                                    className="text-l border-slate-300 rounded-md bg-[#1f1f1f] ml-5 "
                                     value={selectedRow?.email}
                                     placeholder="Email"
                                   />
                                 </div>
                                 <div
-                                  className="pb-[25px] mr-[5px]"
+                                  className="pb-[10px] mr-[5px]"
                                   style={{ display: "flex" }}
                                 >
                                   <div className="pb-[6px] text-[#6A6A6A]">
@@ -372,13 +372,13 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                   <input
                                     disabled="true"
                                     type="text"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
+                                    className="text-l border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     value={selectedRow?.job}
                                     placeholder="Job"
                                   />
                                 </div>
                                 <div
-                                  className="pb-[25px] mr-[5px]"
+                                  className="pb-[10px] mr-[5px]"
                                   style={{ display: "flex" }}
                                 >
                                   <div className=" text-[#6A6A6A]">
@@ -387,7 +387,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                                   <input
                                     disabled="true"
                                     type="text"
-                                    className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
+                                    className="text-l border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                                     value={selectedRow?.company_name}
                                     placeholder="Company"
                                   />
@@ -399,14 +399,14 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                       </div>
                       {selectedRow.newField &&
                         selectedRow.newField.map((field, index) => (
-                          <div key={index}>
+                          <div key={index} style={{ display: "flex" }}>
                             <label
                               htmlFor={`name-${index}`}
-                              className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
+                              className="text-l border-slate-300 rounded-md bg-[#1f1f1f] ml-5"
                             >
                               {field[Object.keys(field)[0]]}
                             </label>
-                            <p className="text-xl pl-2 border-slate-300 rounded-md bg-[#1f1f1f] ml-5">
+                            <p className="text-l border-slate-300 rounded-md bg-[#1f1f1f] ml-5">
                               {field[Object.keys(field)[1]]}
                             </p>
                           </div>
@@ -417,7 +417,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                           <div key={index} className="ml-[70px] ">
                             <label htmlFor={`name-${index}`}>Name:</label>
                             <input
-                              className="w-full bg-[#1f1f1f] text-xl text-white border border-slate-300 rounded-[16px] bg-[#1f1f1f] p-2 pl-5"
+                              className="w-full bg-[#1f1f1f] text-l text-white border border-slate-300 rounded-[16px] bg-[#1f1f1f] p-2 pl-5"
                               type="text"
                               id={`name-${index}`}
                               name="name"
@@ -429,7 +429,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                             <label htmlFor={`value-${index}`}>Value:</label>
                             <input
                               type="text"
-                              className="w-full bg-[#1f1f1f] text-white text-xl border border-slate-300 rounded-[16px] bg-[#1f1f1f] p-2 pl-5"
+                              className="w-full bg-[#1f1f1f] text-white text-l border border-slate-300 rounded-[16px] bg-[#1f1f1f] p-2 pl-5"
                               id={`value-${index}`}
                               name="value"
                               value={field.value}
@@ -439,7 +439,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                             />
 
                             <button
-                              className="text-xl border border-slate-300  ml-[70px] rounded-md p-2 w-full border-none"
+                              className="text-l border border-slate-300  ml-[70px] rounded-md p-2 w-full border-none"
                               type="submit"
                             >
                               Save
@@ -448,7 +448,7 @@ function ContactDetail({ setTableShow, setShowDetail }) {
                         ))}
                         {!fields.length && (
                           <button
-                            className="text-[15px] ml-[70px] border border-slate-300 bg-[#0353CC] rounded-[15px] p-2 w-full border-none"
+                            className="text-[15px] mt-[15px] ml-[70px] border border-slate-300 bg-[#0353CC] rounded-[15px] p-2 w-full border-none"
                             type="button"
                             style={{ width: "100px" }}
                             onClick={handleAddField}
@@ -460,13 +460,13 @@ function ContactDetail({ setTableShow, setShowDetail }) {
 
                       <div style={{ display: "inline-flex" }}>
                         <button
-                          className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
+                          className="text-l border border-slate-300 rounded-md p-2 w-full border-none"
                           onClick={() => handleAddOpenModal()}
                         >
                           Edit
                         </button>
                         <button
-                          className="text-xl border border-slate-300 rounded-md p-2 w-full border-none"
+                          className="text-l border border-slate-300 rounded-md p-2 w-full border-none"
                           onClick={handleDelete}
                         >
                           Delete

@@ -93,7 +93,7 @@ function TabMenu() {
           data.map((item) => (
             <div
               key={item._id}
-              className="border border-[#303030] rounded-[8px] p-[13px] pl-[46px] pr-[26px] mb-[20px]"
+              className="border border-[#303030] rounded-[8px] m-3 p-[13px] pl-[46px] pr-[26px] mb-[20px]"
             >
               {console.log("dataaaa: ", item)}
               <p className="text-[#303030]">{getCommentDate(item.created)}</p>
@@ -117,7 +117,7 @@ function TabMenu() {
         {interactions &&
           interactions.length &&
           interactions.map((item) => (
-            <div key={item._id} className="flex items-center">
+            <div key={item._id} className="flex items-center m-3">
               <div className="mr-[19px] text-center rounded-[8px] border border-[#313131] pl-[20px] pr-[20px]">
                 <p className="text-[#F66363] text-[28px]">
                   {getInteractionMonth(item.date)}
