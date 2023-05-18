@@ -3,7 +3,12 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import CreateComment from "./createComment";
 import CreateInteractions from "./createInteractions";
-import { getAllComments, getAllInteractions } from "../api/register";
+import {
+  getAllComments,
+  getAllInteractions,
+  deleteCommentById,
+} from "../api/register";
+import DropDownMenu from "./dropDownMenu";
 
 function TabMenu() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -83,9 +88,6 @@ function TabMenu() {
         <Tab>Reminders</Tab>
       </TabList>
       <h1 className="border border-[#3A3A3A]"></h1>
-      {/* <TabPanel>
-        <h2></h2>
-      </TabPanel> */}
 
       <TabPanel>
         {data &&
@@ -93,11 +95,16 @@ function TabMenu() {
           data.map((item) => (
             <div
               key={item._id}
-              className="border border-[#303030] rounded-[8px] m-3 p-[13px] pl-[46px] pr-[26px] mb-[20px]"
+              className="flex justify-between items-center border border-[#303030] rounded-[8px] m-3 p-[13px] pl-[46px] pr-[26px] mb-[20px]"
             >
-              {console.log("dataaaa: ", item)}
-              <p className="text-[#303030]">{getCommentDate(item.created)}</p>
-              <p className="pt-[10px] pb-[13px]">{item.comment}</p>
+              <div>
+                <p className="text-[#303030]">{getCommentDate(item.created)}</p>
+                <p className="pt-[10px] pb-[13px]">{item.comment}</p>
+              </div>
+              <DropDownMenu
+                handleDelete={deleteCommentById}
+                item={item}
+              ></DropDownMenu>
             </div>
           ))}
         <button
@@ -117,17 +124,23 @@ function TabMenu() {
         {interactions &&
           interactions.length &&
           interactions.map((item) => (
-            <div key={item._id} className="flex items-center m-3">
-              <div className="mr-[19px] text-center rounded-[8px] border border-[#313131] pl-[20px] pr-[20px]">
-                <p className="text-[#F66363] text-[18px]">
-                  {getInteractionMonth(item.date)}
-                </p>
-                <p className="text-[18px]">{getInteractionDate(item.date)}</p>
+            <div
+              key={item._id}
+              className="flex justify-between items-center m-3 border border-[#303030] rounded-[8px]"
+            >
+              <div className="flex items-center m-2">
+                <div className="mr-[19px] text-center rounded-[8px] border border-[#313131] pl-[20px] pr-[20px]">
+                  <p className="text-[#F66363] text-[18px]">
+                    {getInteractionMonth(item.date)}
+                  </p>
+                  <p className="text-[18px]">{getInteractionDate(item.date)}</p>
+                </div>
+                <div className="pb-[20px]">
+                  <p className="text-l pt-[20px]">{item.name}</p>
+                  <span>{item.description}. </span>
+                </div>
               </div>
-              <div className="pb-[20px]">
-                <p className="text-l pt-[20px]">{item.name}</p>
-                <span>{item.description}. </span>
-              </div>
+              <DropDownMenu></DropDownMenu>
             </div>
           ))}
         <button

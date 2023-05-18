@@ -118,6 +118,18 @@ export async function createComment(contact_id, data) {
     throw new Error("Create Company By Group failed. Please try again later.");
   }
 }
+
+export async function deleteCommentById(contact_id, comment_id) {
+  try {
+    const response = await instance.delete(
+      `/api/contacts/${contact_id}/comments/${comment_id}`
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error("Comment deleted Failed");
+  }
+}
+
 export async function getAllInteractions(contact_id) {
   try {
     const response = await instance.get(
