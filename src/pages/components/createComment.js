@@ -6,7 +6,7 @@ import showErrorAlert from "./utility/showErrorAlert";
 
 ReactModal.setAppElement("#__next");
 
-function CreateComment({ isOpen, onRequestClose, selectedRow }) {
+function CreateComment({ isOpen, onRequestClose, onClose, selectedRow }) {
   const customStyles = {
     content: {
       maxWidth: "500px",
@@ -31,6 +31,7 @@ function CreateComment({ isOpen, onRequestClose, selectedRow }) {
       response = await createComment(selectedRow._id, { comment: description });
       setIsLoading(false);
       if (response.status) {
+        setDescription("");
         showSuccessAlert(response.message);
       } else {
         showErrorAlert("Something went wrong!");
@@ -49,7 +50,7 @@ function CreateComment({ isOpen, onRequestClose, selectedRow }) {
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <form onSubmit={handleSubmit}>
+      <form>
         <textarea
           className="w-full bg-black  pl-[34px] pr-[34px] border border-slate-300"
           id="message"
@@ -60,7 +61,7 @@ function CreateComment({ isOpen, onRequestClose, selectedRow }) {
           value={description}
         ></textarea>
         <button
-          onClick={onRequestClose}
+          onClick={() => onClose(false)}
           className="w-1/3 fixed bottom-0 left-0 mb-8 ml-8 p-4 rounded-[8px] text-black bg-white rounded-[8px] border border-white"
         >
           Cancel

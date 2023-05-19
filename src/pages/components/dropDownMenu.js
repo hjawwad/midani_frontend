@@ -11,8 +11,9 @@ import {
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import showSuccessAlert from "./utility/showSuccessAlert";
 
-const DropDownMenu = ({ handleDelete, item }) => {
+const DropDownMenu = ({ handleDelete, item, setChange }) => {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
@@ -28,9 +29,17 @@ const DropDownMenu = ({ handleDelete, item }) => {
     setOpen(false);
   };
 
-  const handleDeleteClick = () => {
+  const handleDeleteClick = async () => {
     try {
-      handleDelete(item.contact_id, item._id);
+      const response = await handleDelete(item.contact_id, item._id);
+      if (response.status) {
+        setOpen(false);
+        setChange(false);
+        showSuccessAlert(response.message);
+      } else {
+        showErrorAlert("Something went wrong!");
+        return;
+      }
     } catch {
       console.log("detaed request failed");
     }
@@ -93,7 +102,7 @@ const DropDownMenu = ({ handleDelete, item }) => {
                   aria-labelledby="composition-button"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem onClick={handleClose}>
+                  <MenuItem onClick={onEditComment}>
                     <ModeEditIcon />
                     <span style={{ marginLeft: "5px" }}>Edit</span>
                   </MenuItem>

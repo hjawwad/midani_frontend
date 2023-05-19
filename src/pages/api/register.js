@@ -119,6 +119,18 @@ export async function createComment(contact_id, data) {
   }
 }
 
+export async function updateCommentById(contact_id, comment_id) {
+  try {
+    const response = await instance.put(
+      `/api/contacts/${contact_id}/comments/${comment_id}`,
+      data
+    );
+    return response;
+  } catch (error) {
+    throw new Error("Update Company By Group failed. Please try again later.");
+  }
+}
+
 export async function deleteCommentById(contact_id, comment_id) {
   try {
     const response = await instance.delete(
@@ -141,6 +153,17 @@ export async function getAllInteractions(contact_id) {
   }
 }
 
+export async function deleteInteractionById(contact_id, interaction_id) {
+  try {
+    const response = await instance.delete(
+      `/api/contacts/${contact_id}/interactions/${interaction_id}`
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error("Interaction deleted Failed");
+  }
+}
+
 export async function createInteraction(contact_id, data) {
   try {
     const response = await instance.post(
@@ -150,6 +173,18 @@ export async function createInteraction(contact_id, data) {
     return response;
   } catch (error) {
     throw new Error("Create Company By Group failed. Please try again later.");
+  }
+}
+
+export async function updateInteractionById(contact_id, interaction_id) {
+  try {
+    const response = await instance.put(
+      `/api/contacts/${contact_id}/interactions/${interaction_id}`,
+      data
+    );
+    return response;
+  } catch (error) {
+    throw new Error("Update Company By Group failed. Please try again later.");
   }
 }
 
