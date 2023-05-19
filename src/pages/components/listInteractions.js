@@ -10,6 +10,7 @@ import CreateInteractions from "./createInteractions";
 const ListInteractions = ({ setChange }) => {
   const [selectedRow, setSelectedRow] = useState({});
   const [interactions, setInteractions] = useState(null);
+  const [interaction, setInteraction] = useState(null);
   const [isInteractionModalOpen, setIsInteractionModalOpen] = useState(false);
 
   const getInteractionMonth = (currentDate) => {
@@ -71,6 +72,9 @@ const ListInteractions = ({ setChange }) => {
               handleEdit={updateInteractionById}
               handleDelete={deleteInteractionById}
               item={item}
+              onCreateInteractions={onCreateInteractions}
+              setInteraction={setInteraction}
+              interaction={true}
               setChange={setChange}
             ></DropDownMenu>
           </div>
@@ -85,6 +89,7 @@ const ListInteractions = ({ setChange }) => {
         isOpen={isInteractionModalOpen}
         onRequestClose={handleInteractionCloseModal}
         selectedRow={selectedRow}
+        interaction={interaction}
       />
     </>
   );

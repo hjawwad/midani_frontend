@@ -119,7 +119,7 @@ export async function createComment(contact_id, data) {
   }
 }
 
-export async function updateCommentById(contact_id, comment_id) {
+export async function updateCommentById(contact_id, data, comment_id) {
   try {
     const response = await instance.put(
       `/api/contacts/${contact_id}/comments/${comment_id}`,
@@ -176,7 +176,7 @@ export async function createInteraction(contact_id, data) {
   }
 }
 
-export async function updateInteractionById(contact_id, interaction_id) {
+export async function updateInteractionById(contact_id, data, interaction_id) {
   try {
     const response = await instance.put(
       `/api/contacts/${contact_id}/interactions/${interaction_id}`,

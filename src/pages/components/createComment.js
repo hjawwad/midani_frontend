@@ -1,12 +1,18 @@
 import ReactModal from "react-modal";
-import { useState } from "react";
-import { createComment } from "../api/register";
+import { useState, useEffect } from "react";
+import { createComment, updateCommentById } from "../api/register";
 import showSuccessAlert from "./utility/showSuccessAlert";
 import showErrorAlert from "./utility/showErrorAlert";
 
 ReactModal.setAppElement("#__next");
 
-function CreateComment({ isOpen, onRequestClose, onClose, selectedRow }) {
+const CreateComment = ({
+  isOpen,
+  onRequestClose,
+  onClose,
+  selectedRow,
+  comment,
+}) => {
   const customStyles = {
     content: {
       maxWidth: "500px",
@@ -17,7 +23,6 @@ function CreateComment({ isOpen, onRequestClose, onClose, selectedRow }) {
     overlay: {},
   };
   const [description, setDescription] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,23 +30,47 @@ function CreateComment({ isOpen, onRequestClose, onClose, selectedRow }) {
       showErrorAlert("Comment should not be null");
       return;
     }
-    setIsLoading(true);
     let response = "";
     try {
-      response = await createComment(selectedRow._id, { comment: description });
-      setIsLoading(false);
-      if (response.status) {
-        setDescription("");
-        showSuccessAlert(response.message);
+      if (!comment) {
+        response = await createComment(selectedRow._id, {
+          comment: description,
+        });
+
+        if (response.status) {
+          setDescription("");
+          showSuccessAlert(response.message);
+        } else {
+          showErrorAlert("Something went wrong!");
+          return;
+        }
       } else {
-        showErrorAlert("Something went wrong!");
-        return;
+        response = await updateCommentById(
+          selectedRow._id,
+          {
+            comment: description,
+          },
+          comment._id
+        );
+        if (response.status) {
+          setDescription("");
+          showSuccessAlert(response.message);
+        } else {
+          showErrorAlert("Something went wrong!");
+          return;
+        }
       }
     } catch (error) {
       showErrorAlert("Create Comment failed. Please try again later.");
     }
     onRequestClose();
   };
+
+  useEffect(() => {
+    if (comment) {
+      setDescription(comment.comment);
+    }
+  }, [comment]);
 
   return (
     <ReactModal
@@ -75,6 +104,6 @@ function CreateComment({ isOpen, onRequestClose, onClose, selectedRow }) {
       </form>
     </ReactModal>
   );
-}
+};
 
 export default CreateComment;

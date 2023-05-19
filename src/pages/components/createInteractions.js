@@ -1,10 +1,15 @@
 import ReactModal from "react-modal";
-import { useState } from "react";
-import { createInteraction } from "../api/register";
+import { useEffect, useState } from "react";
+import { createInteraction, updateInteractionById } from "../api/register";
 
 ReactModal.setAppElement("#__next");
 
-function CreateInteractions({ isOpen, onRequestClose, selectedRow }) {
+function CreateInteractions({
+  isOpen,
+  onRequestClose,
+  selectedRow,
+  interaction,
+}) {
   const customStyles = {
     content: {
       maxWidth: "600px",
@@ -13,7 +18,7 @@ function CreateInteractions({ isOpen, onRequestClose, selectedRow }) {
     },
     overlay: {},
   };
-  const [eventName, setEvent] = useState("");
+  const [eventName, setEventName] = useState("");
   const [date, setDate] = useState("");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
@@ -24,22 +29,48 @@ function CreateInteractions({ isOpen, onRequestClose, selectedRow }) {
     event.preventDefault();
     let response = "";
     try {
-      response = await createInteraction(selectedRow._id, {
-        name: eventName,
-        date: date,
-        location: location,
-        description: description,
-      });
+      if (!interaction) {
+        response = await createInteraction(selectedRow._id, {
+          name: eventName,
+          date: date,
+          location: location,
+          description: description,
+        });
 
-      setSuccessMessage("Login successful!");
-      setError(null);
-      handleLoginClick();
+        setSuccessMessage("Login successful!");
+        setError(null);
+        handleLoginClick();
+      } else {
+        response = await updateInteractionById(
+          selectedRow._id,
+          {
+            name: eventName,
+            date: date,
+            location: location,
+            description: description,
+          },
+          interaction._id
+        );
+
+        setSuccessMessage("Login successful!");
+        setError(null);
+        handleLoginClick();
+      }
     } catch (error) {
       setError("Create Comment failed. Please try again later.");
       setSuccessMessage(null);
     }
     onRequestClose();
   };
+
+  useEffect(() => {
+    if (interaction) {
+      setDate(interaction.date);
+      setEventName(interaction.name);
+      setLocation(interaction.location);
+      setDescription(interaction.description);
+    }
+  }, [interaction]);
 
   return (
     <ReactModal
@@ -58,7 +89,7 @@ function CreateInteractions({ isOpen, onRequestClose, selectedRow }) {
             className="w-full bg-black text-xl border border-slate-300 rounded-[16px] bg-black p-2 pl-5"
             id="name"
             placeholder="Name of the event"
-            onChange={(event) => setEvent(event.target.value)}
+            onChange={(event) => setEventName(event.target.value)}
             value={eventName}
           />
         </div>

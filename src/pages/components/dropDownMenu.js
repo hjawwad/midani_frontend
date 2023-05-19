@@ -13,7 +13,17 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import showSuccessAlert from "./utility/showSuccessAlert";
 
-const DropDownMenu = ({ handleDelete, item, setChange }) => {
+const DropDownMenu = ({
+  handleDelete,
+  item,
+  setChange,
+  onEditComment,
+  onCreateInteractions,
+  setInteraction,
+  setComment,
+  comment = false,
+  interaction = false,
+}) => {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
@@ -45,14 +55,14 @@ const DropDownMenu = ({ handleDelete, item, setChange }) => {
     }
   };
 
-  function handleListKeyDown(event) {
+  const handleListKeyDown = (event) => {
     if (event.key === "Tab") {
       event.preventDefault();
       setOpen(false);
     } else if (event.key === "Escape") {
       setOpen(false);
     }
-  }
+  };
 
   // return focus to the button when we transitioned from !open -> open
   const prevOpen = React.useRef(open);
@@ -63,6 +73,16 @@ const DropDownMenu = ({ handleDelete, item, setChange }) => {
 
     prevOpen.current = open;
   }, [open]);
+
+  const onEdit = () => {
+    if (comment) {
+      setComment(item);
+      onEditComment();
+    } else if (interaction) {
+      onCreateInteractions();
+      setInteraction(item);
+    }
+  };
 
   return (
     <>
@@ -102,7 +122,7 @@ const DropDownMenu = ({ handleDelete, item, setChange }) => {
                   aria-labelledby="composition-button"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem onClick={onEditComment}>
+                  <MenuItem onClick={onEdit}>
                     <ModeEditIcon />
                     <span style={{ marginLeft: "5px" }}>Edit</span>
                   </MenuItem>

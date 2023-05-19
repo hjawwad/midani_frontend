@@ -11,6 +11,7 @@ const ListComments = ({ setChange }) => {
   const [selectedRow, setSelectedRow] = useState({});
   const [data, setData] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [comment, setComment] = useState(null);
 
   const getCommentDate = (currentDate) => {
     const date = new Date(currentDate);
@@ -64,6 +65,8 @@ const ListComments = ({ setChange }) => {
               handleEdit={updateCommentById}
               handleDelete={deleteCommentById}
               item={item}
+              setComment={setComment}
+              comment={true}
               setChange={setChange}
             ></DropDownMenu>
           </div>
@@ -79,6 +82,7 @@ const ListComments = ({ setChange }) => {
         isOpen={isModalOpen}
         onRequestClose={handleCommentCloseModal}
         onClose={setIsModalOpen}
+        comment={comment}
         selectedRow={selectedRow}
       />
     </>
