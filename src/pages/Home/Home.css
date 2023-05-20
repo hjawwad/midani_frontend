@@ -1,0 +1,15 @@
+.homecontainer .backgroundImg1 {
+  background: url("/public/images/main.png") no-repeat;
+  opacity: 0.9;
+  min-height: 100vh;
+  background-color: black;
+  height: auto;
+}
+
+.homecontainer .title {
+  font-weight: 600;
+  font-size: 30px;
+  color: white !important;
+  border-bottom: 2px solid #c4253b;
+  padding-bottom: 10px;
+}

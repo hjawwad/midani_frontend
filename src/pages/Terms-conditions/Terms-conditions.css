@@ -1,0 +1,33 @@
+.termscontainer .title {
+  font-weight: 600;
+  font-size: 30px;
+  color: white;
+  border-bottom: 2px solid #c4253b;
+  padding-bottom: 10px;
+}
+
+.termscontainer .backgroundImg1 {
+  background: url("/public/images/main.png") no-repeat;
+  opacity: 0.9;
+  min-height: 100vh;
+  background-color: black;
+  width: 100%;
+  background-repeat: no-repeat;
+  height: auto;
+}
+
+.termscontainer .terms {
+  width: 90%;
+  color: white;
+  font-size: 20px;
+  padding-bottom: 50px;
+}
+
+.termscontainer .terms a {
+  color: white;
+  text-decoration: none;
+}
+
+.termscontainer .terms h4 {
+  font-weight: 600 !important;
+}

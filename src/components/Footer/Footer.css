@@ -1,0 +1,31 @@
+footer {
+  padding: 20px 0;
+}
+footer p {
+  color: white;
+  opacity: 0.9 !important;
+  white-space: nowrap !important;
+}
+
+footer h6 {
+  white-space: nowrap !important;
+  font-size: 14px;
+}
+
+.footerbackgroundImg1 {
+  background: url("/public/images/main.png") no-repeat;
+  opacity: 0.9;
+  background-color: black;
+  height: auto;
+}
+
+footer .logo {
+  justify-content: end;
+  align-items: flex-end;
+}
+
+.colyright {
+  color: white;
+  opacity: 0.6;
+  font-size: 20px;
+}
