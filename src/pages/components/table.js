@@ -1,14 +1,16 @@
 import Image from "next/image";
 import Modal from "./modal";
 import CreateContact from "./createContact";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getCompany } from "../api/register";
 import { useRouter } from "next/router";
+import { ThemeContext } from "../dashboard";
 var moment = require("moment");
 
 const CompanyName = ({ companyId }) => {
   const [companyName, setCompanyName] = useState("");
   const [companyLogo, setCompanyLogo] = useState("");
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,6 +53,11 @@ const Table = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddModal, setIsAddModal] = useState(false);
   const [selectedRow, setSelectedRow] = useState("");
+  const mode = useContext(ThemeContext);
+
+  const borderColor = {
+    border: mode.dark ? "yellow " : "#D0D5DD",
+  };
 
   if (selectedGroup?.count > 1) {
     selectedGroup = selectedGroup.data;
@@ -113,7 +120,8 @@ const Table = ({
         <div className="ml-auto flex items-center">
           {/* <span className="ml-2 text-gray-800 font-medium pr-[10px] inline-flex text-white">
             <div className="m-auto text-[#808080]">Filter by &nbsp;</div>
-            <div className="border border-10 border-[#303030] rounded-[8px] p-[4px] pl-[8px] pr-[8px] text-white">
+            <div className="border border-10 border-[#303030] rounded-[8px] p-[4px] pl-[8px] pr-[8px] text-white"
+            style={{color: mode.darkMode ? 'white': 'black' }}>
               Email all
             </div>
           </span> */}
@@ -137,88 +145,102 @@ const Table = ({
         setAdded={setAdded}
         buttonText="Create"
       />
-      <div className="ml-3">
-        {data?.length ? (
-          <table className="table-fixed w-full border-collapse border border-[#303030] ">
-            <thead>
-              <tr>
-                <th className="text-left p-[10px] border border-[#303030] text-[#808080]">
-                  PEOPLE
-                </th>
-                <th className="text-left p-[10px] border border-[#303030] text-[#808080]">
-                  EMAIL
-                </th>
-                <th className="text-left p-[10px] border border-[#303030] text-[#808080]">
-                  DOB
-                </th>
-                <th className="text-left p-[10px] border border-[#303030] text-[#808080]">
-                  CITY
-                </th>
-                <th className="text-left p-[10px] border border-[#303030] text-[#808080]">
-                  COUNTRY
-                </th>
-                <th className="text-left p-[10px] border border-[#303030] text-[#808080]">
-                  JOB
-                </th>
-                <th className="text-left p-[10px] border border-[#303030] text-[#808080]">
-                  COMPANY
-                </th>
-                <th className="text-left p-[10px] border border-[#303030] text-[#808080]">
-                  PHONE
-                </th>
-                <th className="text-left p-[10px] border border-[#303030] text-[#808080]">
-                  TWITTER
-                </th>
-                <th className="text-left p-[10px] border border-[#303030] text-[#808080]">
-                  LINKEDIN
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((item) => (
-                <tr
-                  key={item.id}
-                  className="cursor-pointer"
-                  onClick={() => handleOpenModal(item)}
+      {data?.length ? (
+        <table className="table-fixed w-full border-collapse border">
+          <thead>
+            <tr>
+              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+                PEOPLE
+              </th>
+              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+                EMAIL
+              </th>
+              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+                DOB
+              </th>
+              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+                CITY
+              </th>
+              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+                COUNTRY
+              </th>
+              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+                JOB
+              </th>
+              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+                COMPANY
+              </th>
+              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+                PHONE
+              </th>
+              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+                TWITTER
+              </th>
+              <th className="text-left p-[10px] pl-[40px] border border-[#303030] text-[#808080]">
+                LINKEDIN
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item) => (
+              <tr
+                key={item.id}
+                className="cursor-pointer"
+                onClick={() => handleOpenModal(item)}
+              >
+                <td
+                  className="p-[10px] pl-[40px] border border-[#303030]"
+                  style={{
+                    ...(mode.darkMode == true
+                      ? document.body.style.setProperty(
+                          "--foreground-rgb",
+                          "255, 255, 255"
+                        )
+                      : document.body.style.setProperty(
+                          "--foreground-rgb",
+                          "0, 0, 0"
+                        )),
+                  }}
                 >
-                  <td className="fontSize p-[10px] border border-[#303030]">
-                    {item.name ? item.name : ""}
-                  </td>
-                  <td className="fontSize p-[10px] border border-[#303030] whitespace-nowrap overflow-hidden">
-                    {item.email ? item.email : "-"}
-                  </td>
-                  <td className="fontSize p-[10px] border border-[#303030] whitespace-nowrap overflow-hidden">
-                    {item.dob ? moment(item.dob).format("DD-MM-YYYY") : "-"}
-                  </td>
-                  <td className="fontSize p-[10px] border border-[#303030]">
-                    {item.city ? item.city : "-"}
-                  </td>
-                  <td className="fontSize p-[10px] border border-[#303030]">
-                    {item.country ? item.country : "-"}
-                  </td>
-                  <td className="fontSize p-[10px] border border-[#303030]">
-                    {item.job ? item.job : "-"}
-                  </td>
-                  <td className="fontSize p-[10px] border border-[#303030]">
-                    {item.company_name ? item.company_name : "-"}
-                  </td>
-                  <td className="fontSize p-[10px] border border-[#303030]">
-                    {item.phone ? item.phone : "-"}
-                  </td>
-                  <td className="fontSize p-[10px] border border-[#303030]">
-                    {item.twitter ? item.twitter : "-"}
-                  </td>
-                  <td className="fontSize p-[10px] border border-[#303030]">
-                    {item.linkedin ? item.linkedin : "-"}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <div className="w-full text-center pt-[40px]">No Records Found!</div>
-        )}
-      </div>
+                  {item.name ? item.name : ""}
+                </td>
+                <td
+                  className="p-[10px] pl-[40px] border border-[#303030] whitespace-nowrap overflow-hidden"
+                  // style={borderColor}
+                >
+                  {item.email ? item.email : "-"}
+                </td>
+                <td className="p-[10px] pl-[40px] border border-[#303030] whitespace-nowrap overflow-hidden">
+                  {item.dob ? moment(item.dob).format("DD-MM-YYYY") : "-"}
+                </td>
+                <td className="p-[10px] pl-[40px] border border-[#303030]">
+                  {item.city ? item.city : "-"}
+                </td>
+                <td className="p-[10px] pl-[40px] border border-[#303030] ">
+                  {item.country ? item.country : "-"}
+                </td>
+                <td className="p-[10px] pl-[40px] border border-[#303030]">
+                  {item.job ? item.job : "-"}
+                </td>
+                <td className="p-[10px] pl-[40px] border border-[#303030]">
+                  {item.company_name ? item.company_name : "-"}
+                </td>
+                <td className="p-[10px] pl-[40px] border border-[#303030]">
+                  {item.phone ? item.phone : "-"}
+                </td>
+                <td className="p-[10px] pl-[40px] border border-[#303030]">
+                  {item.twitter ? item.twitter : "-"}
+                </td>
+                <td className="p-[10px] pl-[40px] border border-[#303030]">
+                  {item.linkedin ? item.linkedin : "-"}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <div className="w-full text-center pt-[40px]">No Records Found!</div>
+      )}
     </div>
   );
 };
