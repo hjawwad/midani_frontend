@@ -1,0 +1,48 @@
+.detailcontainer .backgroundImg1 {
+  background: url("/public/images/background1.png") no-repeat;
+  opacity: 1;
+  min-height: 100vh;
+  background-color: black;
+  height: auto;
+}
+.detailcontainer .backgroundImg2 {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding-left: 30px;
+  padding-bottom: 10px;
+  border-radius: 20px;
+}
+
+.detailcontainer .content {
+  margin-top: 60px;
+}
+
+.detailcontainer .details {
+  background-color: #232323;
+
+  width: 70%;
+  margin: 0 auto;
+  margin-top: -30px;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  color: white;
+}
+
+.detailcontainer .details p {
+  width: 90%;
+  color: white;
+  opacity: 0.9;
+}
+
+.detailcontainer .details span {
+  margin-left: 20px;
+  color: white;
+  opacity: 0.9;
+}

@@ -7,7 +7,8 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import HomePage from "./pages/Home/Home";
 import TermsCoditions from "./pages/Terms-conditions/Terms-conditions";
 import PrivacyPolicy from "./pages/Privacy-policy/Privacy-policy";
-import CustomNavbar from "./components/Navbar/Navabr";
+import News from "./pages/News/News";
+import NewsDetail from "./pages/News-detail/News-detail";
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
       {/* <CustomNavbar /> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/detail" element={<NewsDetail />} />
         <Route path="/terms" element={<TermsCoditions />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
       </Routes>

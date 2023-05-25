@@ -1,0 +1,37 @@
+.searchContainer {
+  padding: 50px 0;
+}
+
+.searchContainer .title {
+  font-weight: 600;
+  font-size: 30px;
+  color: white !important;
+  border-bottom: 2px solid #c4253b;
+  padding-bottom: 10px;
+}
+
+.searchContainer .search {
+  width: 40%;
+  height: 40px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.searchContainer .search input {
+  width: 75%;
+  height: 100%;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 24px;
+  padding-left: 20px;
+}
+
+.searchContainer .search button {
+  height: 100%;
+  width: 100px;
+  margin-left: 20px;
+  background: #bc0d1a;
+  border: none;
+  border-radius: 24px;
+  color: white;
+}
