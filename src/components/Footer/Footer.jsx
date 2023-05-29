@@ -78,7 +78,7 @@ const CustomFooter = () => {
               <div className="d-flex flex-column">
                 <h6 className="text-uppercase fw-bold mb-4">Legal</h6>
                 <p>
-                  <Link to="#!" className="text-reset">
+                  <Link to="/imprint" className="text-reset">
                     Imprint
                   </Link>
                 </p>

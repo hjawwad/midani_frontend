@@ -10,25 +10,28 @@ const TermsCoditions = () => {
       <div className="termscontainer">
         <div className="backgroundImg1">
           <CustomNavbar />
-          <div className="m-5 mt-4 mb-0">
+          <div className="container m-5 mt-4 mb-0">
             <div className="d-flex justify-content-center">
               <h3 className="text-center title">Terms And Conditions</h3>
             </div>
             <div className="terms">
-              <p>Welcome to MIDANI.COM!</p>
-              <p>Terms and Conditions</p>
-              <p>
+              <div>Welcome to MIDANI.COM!</div>
+              <br />
+              <div>Terms and Conditions</div>
+              <br />
+              <div>
                 These terms and conditions outline the rules and regulations for
                 the use of Midani’'s Website, located at https://midani.com/.
-              </p>
-              <p>
+              </div>
+              <br />
+              <div>
                 By accessing this website we assume you accept these terms and
                 conditions. Do not continue to use midani.com if you do not
                 agree to take all of the terms and conditions stated on this
                 page. Our Terms and Conditions were created with the help of the
                 Terms And Conditions Generator.
-              </p>
-              <p>
+              </div>
+              <div className="mt-3">
                 The following terminology applies to these Terms and Conditions,
                 Privacy Statement and Disclaimer Notice and all Agreements:
                 "Client", "You" and "Your" refers to you, the person log on this
@@ -44,37 +47,44 @@ const TermsCoditions = () => {
                 above terminology or other words in the singular, plural,
                 capitalization and/or he/she or they, are taken as
                 interchangeable and therefore as referring to same.
-              </p>
-              <h2 className="mt-5">Cookies</h2>
-              <p>
+              </div>
+              <div className="mt-5">
+                <strong>Cookies</strong>
+              </div>
+              <div>
                 We employ the use of cookies. By accessing midani.com, you
                 agreed to use cookies in agreement with the Midani's Privacy
                 Policy.
-              </p>
-              <p>
+              </div>
+              <div className="mt-3">
                 Most interactive websites use cookies to let us retrieve the
                 user’s details for each visit. Cookies are used by our website
                 to enable the functionality of certain areas to make it easier
                 for people visiting our website. Some of our
                 affiliate/advertising partners may also use cookies.
-              </p>
-              <h2 className="mt-5">License</h2>
-              <p>
+              </div>
+              <div className="mt-5">
+                <strong>License</strong>
+              </div>
+              <div>
                 Unless otherwise stated, Midani and/or its licensors own the
                 intellectual property rights for all material on midani.com. All
                 intellectual property rights are reserved. You may access this
                 from midani.com for your own personal use subjected to
                 restrictions set in these terms and conditions.
-              </p>
-              <h2 className="mt-5">You must not</h2>
-              <p>
+              </div>
+              <div className="mt-5">
+                <strong>You must not</strong>
+              </div>
+              <br />
+              <div>
                 Republish material from midani.com <br /> Sell, rent or
                 sub-license material from midani.com <br />
                 Reproduce, duplicate or copy material from midani.com <br />
                 Redistribute content from midani.com <br />
                 This Agreement shall begin on the date hereof.
-              </p>
-              <p>
+              </div>
+              <div className="mt-3">
                 Parts of this website offer an opportunity for users to post and
                 exchange opinions and information in certain areas of the
                 website. Midani does not filter, edit, publish or review
@@ -86,14 +96,20 @@ const TermsCoditions = () => {
                 Comments or for any liability, damages or expenses caused and/or
                 suffered as a result of any use of and/or posting of and/or
                 appearance of the Comments on this website.
-              </p>
-              <p>
+              </div>
+              <div className="mt-3">
                 Midani reserves the right to monitor all Comments and to remove
                 any Comments which can be considered inappropriate, offensive or
                 causes breach of these Terms and Conditions.
-              </p>
-              <h2 className="mt-5">You warrant and represent that</h2>
-              <p>
+              </div>
+              <br />
+              <br />
+
+              <div>
+                <strong>You warrant and represent that</strong>
+              </div>
+              <br />
+              <div>
                 You are entitled to post the Comments on our website and have
                 all necessary licenses and consents to do so; <br /> The
                 Comments do not invade any intellectual property right,
@@ -108,12 +124,18 @@ const TermsCoditions = () => {
                 You hereby grant Midani a non-exclusive license to use,
                 reproduce, edit and authorize others to use, reproduce and edit
                 any of your Comments in any and all forms, formats or media.
-              </p>
-              <h4 style={{ marginTop: "60px" }}>
-                Hyperlinking to our Content <br /> The following organizations
-                may link to our Website without prior written approval:
-              </h4>
-              <p>
+              </div>
+              <br />
+              <br />
+
+              <div>
+                <strong>
+                  Hyperlinking to our Content <br /> The following organizations
+                  may link to our Website without prior written approval:
+                </strong>
+              </div>
+              <br />
+              <div>
                 Government agencies;
                 <br /> Search engines; <br />
                 News organizations; <br />
@@ -130,12 +152,15 @@ const TermsCoditions = () => {
                 endorsement or approval of the linking party and its products
                 and/or services; and (c) fits within the context of the linking
                 party’s site.
-              </p>
-              <h4 style={{ marginTop: "60px" }}>
+              </div>
+              <br />
+              <br />
+
+              <div>
                 We may consider and approve other link requests from the
                 following types of organizations:
-              </h4>
-              <p>
+              </div>
+              <div>
                 commonly-known consumer and/or business information sources;{" "}
                 <br />
                 dot.com community sites; <br />
@@ -151,8 +176,8 @@ const TermsCoditions = () => {
                 us from the visibility of the hyperlink compensates the absence
                 of Esporsa; and (d) the link is in the context of general
                 resource information.
-              </p>
-              <p>
+              </div>
+              <div>
                 These organizations may link to our home page so long as the
                 link: (a) is not in any way deceptive; (b) does not falsely
                 imply sponsorship, endorsement or approval of the linking party
@@ -165,11 +190,11 @@ const TermsCoditions = () => {
                 URL of your site, a list of any URLs from which you intend to
                 link to our Website, and a list of the URLs on our site to which
                 you would like to link. Wait 2-3 weeks for a response.
-              </p>
+              </div>
               <h4 style={{ marginTop: "60px" }}>
                 Approved organizations may hyperlink to our Website as follows:
               </h4>
-              <p>
+              <div>
                 By use of our corporate name; or <br />
                 By use of the uniform resource locator being linked to; or
                 <br /> By use of any other description of our Website being
@@ -177,28 +202,28 @@ const TermsCoditions = () => {
                 content on the linking party’s site.
                 <br /> No use of Midani's logo or other artwork will be allowed
                 for linking absent a trademark license agreement.
-              </p>
+              </div>
               <h4 style={{ marginTop: "60px" }}>iFrames</h4>
-              <p>
+              <div>
                 Without prior approval and written permission, you may not
                 create frames around our Webpages that alter in any way the
                 visual presentation or appearance of our Website.
-              </p>
+              </div>
               <h4 style={{ marginTop: "60px" }}>Content Liability</h4>
-              <p>
+              <div>
                 We shall not be hold responsible for any content that appears on
                 your Website. You agree to protect and defend us against all
                 claims that is rising on your Website. No link(s) should appear
                 on any Website that may be interpreted as libelous, obscene or
                 criminal, or which infringes, otherwise violates, or advocates
                 the infringement or other violation of, any third party rights.
-              </p>
+              </div>
               <h4 style={{ marginTop: "60px" }}>Your Privacy</h4>
-              <p>
+              <div>
                 Please read <Link to="/privacy"> Privacy Policy</Link>
-              </p>
+              </div>
               <h4 style={{ marginTop: "60px" }}>Reservation of Rights</h4>
-              <p>
+              <div>
                 We reserve the right to request that you remove all links or any
                 particular link to our Website. You approve to immediately
                 remove all links to our Website upon request. We also reserve
@@ -206,30 +231,30 @@ const TermsCoditions = () => {
                 policy at any time. By continuously linking to our Website, you
                 agree to be bound to and follow these linking terms and
                 conditions.
-              </p>
+              </div>
               <h4 style={{ marginTop: "60px" }}>
                 Removal of links from our website
               </h4>
-              <p>
+              <div>
                 If you find any link on our Website that is offensive for any
                 reason, you are free to contact and inform us any moment. We
                 will consider requests to remove links but we are not obligated
                 to or so or to respond to you directly.
-              </p>
-              <p>
+              </div>
+              <div>
                 We do not ensure that the information on this website is
                 correct, we do not warrant its completeness or accuracy; nor do
                 we promise to ensure that the website remains available or that
                 the material on the website is kept up to date.
-              </p>
+              </div>
               <h4 style={{ marginTop: "60px" }}>Disclaimer</h4>
-              <p>
+              <div>
                 To the maximum extent permitted by applicable law, we exclude
                 all representations, warranties and conditions relating to our
                 website and the use of this website. Nothing in this disclaimer
                 will:
-              </p>
-              <p>
+              </div>
+              <div>
                 limit or exclude our or your liability for death or personal
                 injury; limit or exclude our or your liability for fraud or
                 fraudulent misrepresentation; limit any of our or your
@@ -241,12 +266,12 @@ const TermsCoditions = () => {
                 govern all liabilities arising under the disclaimer, including
                 liabilities arising in contract, in tort and for breach of
                 statutory duty.
-              </p>
-              <p>
+              </div>
+              <div>
                 As long as the website and the information and services on the
                 website are provided free of charge, we will not be liable for
                 any loss or damage of any nature.
-              </p>
+              </div>
             </div>
           </div>
         </div>

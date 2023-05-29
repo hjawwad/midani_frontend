@@ -1,0 +1,11 @@
+.homecontainer .backgroundImg1 {
+  background: url("/public/images/main.png") no-repeat;
+  opacity: 0.9;
+  min-height: 100vh;
+  background-color: black;
+  height: auto;
+}
+
+.cutom-font {
+  font-family: 'Poppins';
+}

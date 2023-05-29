@@ -9,17 +9,23 @@ import TermsCoditions from "./pages/Terms-conditions/Terms-conditions";
 import PrivacyPolicy from "./pages/Privacy-policy/Privacy-policy";
 import News from "./pages/News/News";
 import NewsDetail from "./pages/News-detail/News-detail";
+import Contact from "./pages/Contact/Contact";
+import About from "./pages/About/About";
+import Imprint from "./pages/Imprint/Imprint";
+import CustomNavbar from "./components/Navbar/Navabr";
 
 function App() {
   return (
     <>
-      {/* <CustomNavbar /> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/news" element={<News />} />
         <Route path="/detail" element={<NewsDetail />} />
         <Route path="/terms" element={<TermsCoditions />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/imprint" element={<Imprint />} />
       </Routes>
     </>
   );

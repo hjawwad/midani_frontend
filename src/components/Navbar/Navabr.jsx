@@ -25,8 +25,8 @@ const CustomNavbar = () => {
             <Nav.Link href="#Brands">Brands story</Nav.Link>
             <Nav.Link href="/news">News</Nav.Link>
             <Nav.Link href="#OTT">OTT</Nav.Link>
-            <Nav.Link href="#About">About</Nav.Link>
-            <Nav.Link href="#Contact">Contact us</Nav.Link>
+            <Nav.Link href="/about">About</Nav.Link>
+            <Nav.Link href="/contact">Contact us</Nav.Link>
           </Nav>
           <Nav>
             <select>
