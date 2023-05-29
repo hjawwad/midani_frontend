@@ -46,3 +46,25 @@
   color: white;
   opacity: 0.9;
 }
+.detailcontainer .content2 {
+  margin: 0 30px;
+  height: 530px;
+}
+@media screen and (max-width: 390px) {
+  .detailcontainer .details {
+    width: 100%;
+    margin-top: 300px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .detailcontainer .backgroundImg1 {
+    background: url("/public/images/news.png") no-repeat;
+  }
+  .detailcontainer .backgroundImg2 {
+    background: none !important;
+  }
+  .detailcontainer .content2 {
+    margin: 0;
+    height: 0;
+  }
+}

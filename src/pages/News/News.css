@@ -58,7 +58,7 @@
 }
 .newscontainer .border-bottom {
   margin-left: 30px;
-  width: 100%;
+  /* width: 100%; */
   border-bottom: 1px solid white;
   opacity: 0.4;
   margin-bottom: 30px;
@@ -82,4 +82,34 @@
 .newscontainer .all-news {
   margin: 30px;
   margin-bottom: 0;
+}
+
+@media screen and (max-width: 390px) {
+  .newscontainer .desc {
+    width: 90%;
+    font-size: 14px;
+  }
+  .newscontainer .backgroundImg2 {
+    background-position: center !important;
+  }
+  .newscontainer .mobile {
+    display: none;
+  }
+
+  .newscontainer .news,
+  .newscontainer .border-bottom {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+  .newscontainer .news-list {
+    width: 100%;
+    font-size: 12px;
+  }
+  .newscontainer .backgroundImg2 h3 {
+    font-size: 17px;
+    font-weight: 700;
+  }
+  .newscontainer .backgroundImg2 p {
+    width: 80%;
+  }
 }

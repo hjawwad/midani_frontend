@@ -41,13 +41,14 @@ const News = () => {
                 <span>Basketball</span>
                 <span>Tennis</span>
                 <span>Hockey</span>
-                <span>Interviews</span>
-                <span>
+                <span className="mobile">Interviews</span>
+                <span className="mobile">
                   <ChevronRightIcon />
                 </span>
               </div>
 
               <img
+                className="mobile"
                 src="/images/search.png"
                 alt=""
                 style={{ width: "30px", height: "30px", marginRight: "30px" }}

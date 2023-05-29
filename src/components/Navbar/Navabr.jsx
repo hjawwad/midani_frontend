@@ -1,24 +1,18 @@
 import React from "react";
-import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 import "./Navbar.css";
 
 const CustomNavbar = () => {
+  const location = useLocation();
   return (
-    <Navbar expand="lg">
+    <Navbar expand="lg" bg="transparent" variant="dark">
       <Navbar.Brand className="logo" href="/">
         <img src="/images/logo.png" alt="" />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            width: "90%",
-            marginLeft: "auto",
-          }}
-        >
+        <div className="nav1">
           <Nav>
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="#Sales">Sales</Nav.Link>
@@ -29,11 +23,20 @@ const CustomNavbar = () => {
             <Nav.Link href="/contact">Contact us</Nav.Link>
           </Nav>
           <Nav>
-            <select>
-              <option value="Eng">Eng</option>
-              <option value="Ar">Ar</option>
-            </select>
-            <button className="downloadbtn">Download</button>
+            <div className="navcontainer d-flex">
+              <select className="desktop">
+                <option value="Eng">Eng</option>
+                <option value="Ar">Ar</option>
+              </select>
+              <div className="mobile">
+                <span className="active">Eng</span>
+                <span>{" | "}</span>
+                <span>Ar</span>
+              </div>
+            </div>
+            {location?.pathname === "/" && (
+              <button className="downloadbtn">Download</button>
+            )}
           </Nav>
         </div>
       </Navbar.Collapse>

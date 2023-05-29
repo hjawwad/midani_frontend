@@ -29,3 +29,23 @@ footer .logo {
   opacity: 0.6;
   font-size: 20px;
 }
+.show-mobile {
+  display: none;
+}
+@media screen and (max-width: 390px) {
+  .footerbackgroundImg1 .mobile {
+    margin-top: 20px;
+    width: 40%;
+  }
+  footer .logo {
+    justify-content: end;
+    align-items: flex-start;
+  }
+  footer .hide {
+    display: none;
+  }
+  footer .show-mobile {
+    display: block;
+    margin: 10px 0;
+  }
+}

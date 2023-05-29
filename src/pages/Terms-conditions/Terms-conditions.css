@@ -31,3 +31,17 @@
 .termscontainer .terms h4 {
   font-weight: 600 !important;
 }
+
+@media screen and (max-width: 390px) {
+  .termscontainer .termscontainer2 {
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+  }
+  .termscontainer .title2 {
+    margin-top: 50px;
+    margin-bottom: 100px !important;
+  }
+  .termscontainer .terms {
+    font-size: 14px;
+  }
+}

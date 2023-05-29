@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const CustomFooter = () => {
   return (
-    <MDBFooter className="text-center text-lg-start text-white footerbackgroundImg1">
+    <MDBFooter className="text-lg-start text-white footerbackgroundImg1">
       <section className="m-5 mb-0">
         <MDBRow className="mt-3">
           <MDBCol md="6" lg="7" xl="7" className="mx-auto ">
@@ -35,11 +35,17 @@ const CustomFooter = () => {
                 <MDBIcon fab icon="github" />
               </Link>
             </div>
+            <img
+              className="show-mobile"
+              src="/images/f-logo.png"
+              style={{ width: "250px" }}
+              alt=""
+            />
           </MDBCol>
 
           <MDBCol md="6" lg="5" xl="5" className="mx-auto mycol">
             <div className="d-flex justify-content-between flex-wrap">
-              <div className="d-flex flex-column">
+              <div className="d-flex flex-column mobile">
                 <h6 className="text-uppercase fw-bold mb-4">Work with us</h6>
                 <p>
                   <Link to="#!" className="text-reset">
@@ -57,7 +63,7 @@ const CustomFooter = () => {
                   </Link>
                 </p>
               </div>
-              <div className="d-flex flex-column">
+              <div className="d-flex flex-column mobile">
                 <h6 className="text-uppercase fw-bold mb-4">About</h6>
                 <p>
                   <Link to="#!" className="text-reset">
@@ -70,12 +76,12 @@ const CustomFooter = () => {
                   </Link>
                 </p>
               </div>
-              <div className="d-flex flex-column">
+              <div className="d-flex flex-column mobile">
                 <h6 className="text-uppercase fw-bold mb-4">Try our app</h6>
                 <p>App store</p>
                 <p>Google play</p>
               </div>
-              <div className="d-flex flex-column">
+              <div className="d-flex flex-column mobile">
                 <h6 className="text-uppercase fw-bold mb-4">Legal</h6>
                 <p>
                   <Link to="/imprint" className="text-reset">
@@ -98,7 +104,12 @@ const CustomFooter = () => {
               className="d-flex flex-column logo"
               style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}
             >
-              <img src="/images/f-logo.png" style={{ width: "250px" }} alt="" />
+              <img
+                className="hide"
+                src="/images/f-logo.png"
+                style={{ width: "250px" }}
+                alt=""
+              />
               <span className="colyright">© 2023 Midani</span>
             </div>
           </MDBCol>

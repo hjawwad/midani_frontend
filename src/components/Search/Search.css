@@ -1,5 +1,6 @@
 .searchContainer {
   padding: 50px 0;
+  background-color: black;
 }
 
 .searchContainer .title {
@@ -34,4 +35,28 @@
   border: none;
   border-radius: 24px;
   color: white;
+}
+
+@media screen and (max-width: 390px) {
+  .searchContainer .search {
+    width: 90%;
+    margin: 0 30px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .searchContainer .search input {
+    width: 100%;
+    height: 40px !important;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 24px;
+    padding-left: 20px;
+  }
+  .searchContainer .search button {
+    width: 100px;
+    height: 40px;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
 }

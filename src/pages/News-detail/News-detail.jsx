@@ -10,7 +10,7 @@ const NewsDetail = () => {
         <div className="backgroundImg1">
           <CustomNavbar />
           <div className="content">
-            <div style={{ margin: "0 30px", height: "530px" }}>
+            <div className="content2">
               <div
                 className="backgroundImg2"
                 style={{
