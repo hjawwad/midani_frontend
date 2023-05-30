@@ -11,7 +11,7 @@ const CustomFooter = () => {
         <MDBRow className="mt-3">
           <MDBCol md="6" lg="7" xl="7" className="mx-auto ">
             <h6 className="text-uppercase fw-bold mb-4">
-              <img src="/images/footer.png" alt="" />
+              <img src="/images/elogo.svg" alt="" />
             </h6>
             <p>No one gets you closer!</p>
             <p>follow us on:</p>
@@ -37,7 +37,7 @@ const CustomFooter = () => {
             </div>
             <img
               className="show-mobile"
-              src="/images/f-logo.png"
+              src="/images/footerlogo.svg"
               style={{ width: "250px" }}
               alt=""
             />
@@ -106,7 +106,7 @@ const CustomFooter = () => {
             >
               <img
                 className="hide"
-                src="/images/f-logo.png"
+                src="/images/footerlogo.svg"
                 style={{ width: "250px" }}
                 alt=""
               />

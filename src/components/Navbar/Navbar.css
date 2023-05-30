@@ -3,6 +3,7 @@
 }
 .navbar {
   margin: 0 10px;
+  font-family: 'Poppins';
 }
 .navbar a {
   color: #ffffff !important;
@@ -46,6 +47,16 @@ select {
 }
 .navcontainer .mobile {
   display: none;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: white !important;
+  opacity: 0.6;
+}
+
+.nacActive {
+  color: red !important;
+
 }
 
 @media screen and (max-width: 1300px) {

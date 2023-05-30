@@ -10,7 +10,7 @@ const TermsCoditions = () => {
       <div className="termscontainer">
         <div className="backgroundImg1">
           <CustomNavbar />
-          <div className="container m-5 mt-4 mb-0">
+          <div className=" m-5 mt-4 mb-0">
             <div className="d-flex justify-content-center">
               <h3 className="text-center title">Terms And Conditions</h3>
             </div>

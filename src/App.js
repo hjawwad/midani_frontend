@@ -12,6 +12,9 @@ import NewsDetail from "./pages/News-detail/News-detail";
 import Contact from "./pages/Contact/Contact";
 import About from "./pages/About/About";
 import Imprint from "./pages/Imprint/Imprint";
+import Sales from "./pages/Sales/Index";
+import BrandsStory from "./pages/Brand/Index";
+import OTT from "./pages/OTT/Index";
 import CustomNavbar from "./components/Navbar/Navabr";
 
 function App() {
@@ -26,6 +29,9 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/imprint" element={<Imprint />} />
+        <Route path="/ott" element={<OTT />} />
+        <Route path="/sales" element={<Sales />} />
+        <Route path="/brandsstory" element={<BrandsStory />} />
       </Routes>
     </>
   );
