@@ -6,25 +6,64 @@ import "./About.css";
 
 const About = () => {
   const [showFullParagraph, setShowFullParagraph] = useState(false);
+  const [showFullParagraph2, setShowFullParagraph2] = useState(false);
+  const [showFullParagraph3, setShowFullParagraph3] = useState(false);
+  const [showFullParagraph4, setShowFullParagraph4] = useState(false);
+  const [showFullParagraph5, setShowFullParagraph5] = useState(false);
+  const [showFullParagraph6, setShowFullParagraph6] = useState(false);
+  const [showFullParagraph7, setShowFullParagraph7] = useState(false);
+  const [showFullParagraph8, setShowFullParagraph8] = useState(false);
 
+  const toggleParagraph1 = () => {
+    setShowFullParagraph(!showFullParagraph);
+  };
+
+  const toggleParagraph2 = () => {
+    setShowFullParagraph2(!showFullParagraph2);
+  };
+
+  const toggleParagraph3 = () => {
+    setShowFullParagraph3(!showFullParagraph3);
+  };
+
+  const toggleParagraph4 = () => {
+    setShowFullParagraph4(!showFullParagraph4);
+  };
+
+  const toggleParagraph5 = () => {
+    setShowFullParagraph5(!showFullParagraph5);
+  };
+
+  const toggleParagraph6 = () => {
+    setShowFullParagraph6(!showFullParagraph6);
+  };
+
+  const toggleParagraph7 = () => {
+    setShowFullParagraph7(!showFullParagraph7);
+  };
+
+  const toggleParagraph8 = () => {
+    setShowFullParagraph8(!showFullParagraph8);
+  };
+
+  const renderParagraph = (paragraph, showFullParagraph, toggleParagraph) => {
+    if (showFullParagraph) {
+      return paragraph;
+    }
+    return paragraph.substring(0, 640) + "...";
+  };
   const toggleParagraph = () => {
     setShowFullParagraph(!showFullParagraph);
   };
 
-  const renderParagraph = (paragraph) => {
-    if (showFullParagraph) {
-      return paragraph;
-    }
-    return paragraph.slice(0, paragraph.length / 2) + "...";
-  };
   return (
     <div>
       <div className="homecontainer">
         <div className="backgroundImg1">
           <CustomNavbar />
-          <div className="container">
-            <div className="row mt-6">
-              <div className="col-lg-6">
+          <div className="d-flex flex-column align-items-center">
+            <div className="mt-6 main-about" style={{ width: "90%" }}>
+              <div className="internal-div">
                 <div className="para-heading text-white custom-underline">
                   A New Kind of Bond
                 </div>
@@ -45,14 +84,14 @@ const About = () => {
                   {showFullParagraph || (
                     <button
                       className="btn btn-link text-white"
-                      onClick={toggleParagraph}
+                      onClick={toggleParagraph1}
                     >
                       Read More
                     </button>
                   )}
                 </p>
               </div>
-              <div className="col-lg-6 d-flex justify-content-center">
+              <div className="d-flex internal-div justify-content-center">
                 <img
                   src="/images/iPhone14-0.svg"
                   className="img-fluid bg-black mobile-border"
@@ -60,21 +99,27 @@ const About = () => {
                 ></img>
               </div>
             </div>
-            <div className="row mt-6">
-              <div className="col-lg-6 d-flex justify-content-center">
+            {/* <div className="backgroundLine1">
+              <div className="backgroundLine2"> */}
+            <div
+              className=" main-about reverse-col mt-6"
+              style={{ width: "90%" }}
+            >
+              <div className="internal-div d-flex justify-content-center">
                 <img
                   src="/images/iPhone14-1.svg"
                   className="img-fluid bg-black mobile-border"
                   alt="Responsive"
                 ></img>
               </div>
-              <div className="col-lg-6">
+              <div className="internal-div float-sm-left">
                 <div className="para-heading text-white custom-underline">
-                  What does Midani do?
+                  What does Midani do
+                  <span style={{ color: "#BC0D1A" }}>?</span>
                 </div>
                 <p className="about-para text-white">
                   {renderParagraph(
-                    `  Midani is mainly a keyboard app that combines many features
+                    `Midani is mainly a keyboard app that combines many features
                   that facilitate for sports fans, above all, the way to seek,
                   reach and connect with their favorite team. The user himself
                   will be the lead, in other words, he will be able to control
@@ -96,16 +141,18 @@ const About = () => {
                   {showFullParagraph || (
                     <button
                       className="btn btn-link text-white"
-                      onClick={toggleParagraph}
+                      onClick={toggleParagraph2}
                     >
                       Read More
                     </button>
                   )}
                 </p>
               </div>
+              {/* </div>
+              </div> */}
             </div>
-            <div className="row mt-6">
-              <div className="col-lg-6">
+            <div className="main-about mt-6" style={{ width: "90%" }}>
+              <div className="internal-div">
                 <div className="para-heading text-white custom-underline">
                   What problem do we solve?
                 </div>
@@ -128,14 +175,14 @@ const About = () => {
                   {showFullParagraph || (
                     <button
                       className="btn btn-link text-white"
-                      onClick={toggleParagraph}
+                      onClick={toggleParagraph3}
                     >
                       Read More
                     </button>
                   )}
                 </p>
               </div>
-              <div className="col-lg-6 d-flex justify-content-center">
+              <div className="internal-div d-flex justify-content-center">
                 <img
                   src="/images/iPhone14-2.svg"
                   className="img-fluid bg-black mobile-border"
@@ -143,15 +190,18 @@ const About = () => {
                 ></img>
               </div>
             </div>
-            <div className="row mt-6">
-              <div className="col-lg-6 d-flex justify-content-center">
+            <div
+              className="main-about reverse-col mt-6"
+              style={{ width: "90%" }}
+            >
+              <div className="internal-div d-flex justify-content-center">
                 <img
                   src="/images/iPhone14-1.svg"
                   className="img-fluid bg-black mobile-border"
                   alt="Responsive"
                 ></img>
               </div>
-              <div className="col-lg-6">
+              <div className="internal-div">
                 <div className="para-heading text-white custom-underline">
                   What makes us special?
                 </div>
@@ -171,7 +221,7 @@ const About = () => {
                   {showFullParagraph || (
                     <button
                       className="btn btn-link text-white"
-                      onClick={toggleParagraph}
+                      onClick={toggleParagraph4}
                     >
                       Read More
                     </button>
@@ -179,8 +229,8 @@ const About = () => {
                 </p>
               </div>
             </div>
-            <div className="row mt-6">
-              <div className="col-lg-6">
+            <div className="main-about mt-6" style={{ width: "90%" }}>
+              <div className="internal-div">
                 <div className="para-heading text-white custom-underline">
                   Why should someone download Midani rather than something else?
                 </div>
@@ -201,14 +251,14 @@ const About = () => {
                   {showFullParagraph || (
                     <button
                       className="btn btn-link text-white"
-                      onClick={toggleParagraph}
+                      onClick={toggleParagraph5}
                     >
                       Read More
                     </button>
                   )}
                 </p>
               </div>
-              <div className="col-lg-6 d-flex justify-content-center">
+              <div className="internal-div d-flex justify-content-center">
                 <img
                   src="/images/iPhone14-4.svg"
                   className="img-fluid bg-black mobile-border"
@@ -216,15 +266,18 @@ const About = () => {
                 ></img>
               </div>
             </div>
-            <div className="row mt-6">
-              <div className="col-lg-6 d-flex justify-content-center">
+            <div
+              className="main-about reverse-col mt-6"
+              style={{ width: "90%" }}
+            >
+              <div className="internal-div d-flex justify-content-center">
                 <img
                   src="/images/iPhone14-5.svg"
                   className="img-fluid bg-black mobile-border"
                   alt="Responsive"
                 ></img>
               </div>
-              <div className="col-lg-6">
+              <div className="internal-div">
                 <div className="para-heading text-white custom-underline">
                   Our platforms
                 </div>
@@ -239,7 +292,7 @@ const About = () => {
                   {showFullParagraph || (
                     <button
                       className="btn btn-link text-white"
-                      onClick={toggleParagraph}
+                      onClick={toggleParagraph6}
                     >
                       Read More
                     </button>
@@ -247,8 +300,8 @@ const About = () => {
                 </p>
               </div>
             </div>
-            <div className="row mt-6">
-              <div className="col-lg-6">
+            <div className="main-about mt-6" style={{ width: "90%" }}>
+              <div className="internal-div">
                 <div className="para-heading text-white custom-underline">
                   No one gets you closer than us
                 </div>
@@ -264,14 +317,14 @@ const About = () => {
                   {showFullParagraph || (
                     <button
                       className="btn btn-link text-white"
-                      onClick={toggleParagraph}
+                      onClick={toggleParagraph7}
                     >
                       Read More
                     </button>
                   )}
                 </p>
               </div>
-              <div className="col-lg-6 d-flex justify-content-center">
+              <div className="internal-div d-flex justify-content-center">
                 <img
                   src="/images/iPhone14-6.svg"
                   className="img-fluid bg-black mobile-border"
@@ -280,7 +333,7 @@ const About = () => {
               </div>
             </div>
             <div>
-              <div className=" d-flex justify-content-center mb-4">
+              <div className=" d-flex reverse-col justify-content-center mb-4">
                 <div className="custom-underline-text">
                   Why fans love Midani
                 </div>
@@ -382,9 +435,8 @@ const About = () => {
                 </p>
               </div>
             </div>
-
-            <Search />
           </div>
+          <Search />
         </div>
       </div>
       <CustomFooter />
@@ -393,48 +445,3 @@ const About = () => {
 };
 
 export default About;
-
-// import React, { useState } from "react";
-// import CustomFooter from "../../components/Footer/Footer";
-// import CustomNavbar from "../../components/Navbar/Navabr";
-// import "./About.css";
-
-// const About = () => {
-
-//   return (
-//     <div>
-//       <div className="homecontainer">
-//         <div className="backgroundImg1">
-//           <CustomNavbar />
-//           <div className="container">
-//             <div className="row mt-6">
-//               <div className="col-lg-6">
-//                 <div className="para-heading text-white custom-underline">
-//                   A New Kind of Bond
-//                 </div>
-//                 <p className="about-para text-white">
-//                   {renderParagraph(
-//                     "Midani is a platform that combines sports teams with their fans and vice versa! Technology is spreading all over the market including sports. Hence, Midani gives the opportunity to both sports givers and receivers to engage in all means related to digital platforms. It comes back with benefits to both sides by providing them with their needs. On one hand, fans will reach, support and stay updated on all the announcements their team might publish, while on the other hand sports teams and clubs will have the advantage of spreading all over the digital world, reaching out to their fans and approaching revenues."
-//                   )}
-//                   {showFullParagraph || (
-//                     <button
-//                       className="btn btn-link text-white"
-//                       onClick={toggleParagraph}
-//                     >
-//                       Read More
-//                     </button>
-//                   )}
-//                 </p>
-//               </div>
-//               {/* ... */}
-//             </div>
-//             {/* ... */}
-//           </div>
-//         </div>
-//       </div>
-//       <CustomFooter />
-//     </div>
-//   );
-// };
-
-// export default About;

@@ -6,9 +6,29 @@
   height: auto;
 }
 
+.backgroundLine1 {
+  background-image: url("/public/images/v-line1.svg");
+  margin-top: 5px;
+}
+
+.backgroundLine2 {
+  background-image: url("/public/images/v-line1.svg");
+}
+.backgroundLine3 {
+  background-image: url("/public/images/v-line1.svg");
+}
 .about-image {
   height: 676px;
   width: 313px;
+}
+
+.main-about {
+  width: 100%;
+  display: flex;
+}
+
+.internal-div {
+  width: 50%;
 }
 
 .about-para {
@@ -20,14 +40,13 @@
 }
 
 .mobile-border  {
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: 50px;
+  border-radius: 60px;
   height: 675px;
 }
 
 .para-heading {
   font-family: 'Poppins';
-  font-size: 41px;
+  font-size: 27px;
   font-weight: 600;
 }
 
@@ -61,4 +80,17 @@
   bottom: -6px;
   width: 100%;
   border-bottom: 2px solid #C4253B;
+}
+
+@media screen and (max-width: 390px) {
+  .main-about {
+    flex-direction: column;
+  }
+
+  .reverse-col {
+    flex-direction: column-reverse;
+  }
+  .internal-div {
+      width: 100%;
+    }
 }
