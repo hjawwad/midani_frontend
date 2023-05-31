@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 import { Navbar, Nav } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import "./Navbar.css";
 
 const CustomNavbar = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const [navActive, setNavActive] = useState(
     localStorage.getItem("navActive") || "home"
   );
+
+  const { i18n } = useTranslation();
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
+
   return (
     <Navbar expand="lg" bg="transparent" variant="dark">
       <Navbar.Brand
@@ -35,7 +44,7 @@ const CustomNavbar = () => {
                 localStorage.setItem("navActive", "home");
               }}
             >
-              Home
+              {t("navbar.home")}
             </Nav.Link>
             <Nav.Link
               style={{
@@ -48,7 +57,7 @@ const CustomNavbar = () => {
                 localStorage.setItem("navActive", "sales");
               }}
             >
-              Sales
+              {t("navbar.sales")}
             </Nav.Link>
             <Nav.Link
               style={{
@@ -61,7 +70,7 @@ const CustomNavbar = () => {
               }}
               href="/brandsstory"
             >
-              Brands story
+              {t("navbar.brands")}
             </Nav.Link>
             <Nav.Link
               style={{
@@ -74,7 +83,7 @@ const CustomNavbar = () => {
                 localStorage.setItem("navActive", "news");
               }}
             >
-              News
+              {t("navbar.news")}
             </Nav.Link>
             <Nav.Link
               style={{
@@ -87,7 +96,7 @@ const CustomNavbar = () => {
                 localStorage.setItem("navActive", "ott");
               }}
             >
-              OTT
+              {t("navbar.ott")}
             </Nav.Link>
             <Nav.Link
               style={{
@@ -100,7 +109,7 @@ const CustomNavbar = () => {
               }}
               href="/about"
             >
-              About
+              {t("navbar.about")}
             </Nav.Link>
             <Nav.Link
               style={{
@@ -113,14 +122,17 @@ const CustomNavbar = () => {
               }}
               href="/contact"
             >
-              Contact us
+              {t("navbar.contact")}
             </Nav.Link>
           </Nav>
           <Nav>
             <div className="navcontainer d-flex">
-              <select className="desktop">
-                <option value="Eng">Eng</option>
-                <option value="Ar">Ar</option>
+              <select
+                className="desktop"
+                onChange={(e) => changeLanguage(e.target.value)}
+              >
+                <option value="en">Eng</option>
+                <option value="ar">Ar</option>
               </select>
               <div className="mobile">
                 <span className="active">Eng</span>

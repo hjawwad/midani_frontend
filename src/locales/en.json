@@ -1,0 +1,23 @@
+{
+  "navbar": {
+    "home": "Home",
+    "sales": "sales",
+    "brands": "Brands story",
+    "news": "News",
+    "ott": "OTT",
+    "about": "About",
+    "contact": "Contact us"
+  },
+  "news": {
+    "title": "MAKING WAVES",
+    "desc": "We don’t just break news, we make news. Check out what’s hot below and stay in the know with our social media.",
+    "imgTitle": "Lorem ipsum dolor sit ame",
+    "imgDesc": " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet ante ligula.",
+    "all": "View all",
+    "football": "Football",
+    "basketball": "Basketball",
+    "tennis": "Tennis",
+    "hockey": "Hockey",
+    "interviews": "Interviews"
+  }
+}

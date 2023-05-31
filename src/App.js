@@ -15,9 +15,14 @@ import Imprint from "./pages/Imprint/Imprint";
 import Sales from "./pages/Sales/Index";
 import BrandsStory from "./pages/Brand/Index";
 import OTT from "./pages/OTT/Index";
-import CustomNavbar from "./components/Navbar/Navabr";
+import { useEffect } from "react";
+import i18next from "i18next";
 
 function App() {
+  useEffect(() => {
+    i18next.changeLanguage("en");
+  }, []);
+
   return (
     <>
       <Routes>
