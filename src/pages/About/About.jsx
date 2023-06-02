@@ -5,17 +5,16 @@ import Search from "../../components/Search/Search";
 import "./About.css";
 
 const About = () => {
-  const [showFullParagraph, setShowFullParagraph] = useState(false);
+  const [showFullParagraph1, setShowFullParagraph1] = useState(true);
   const [showFullParagraph2, setShowFullParagraph2] = useState(false);
   const [showFullParagraph3, setShowFullParagraph3] = useState(false);
   const [showFullParagraph4, setShowFullParagraph4] = useState(false);
   const [showFullParagraph5, setShowFullParagraph5] = useState(false);
   const [showFullParagraph6, setShowFullParagraph6] = useState(false);
   const [showFullParagraph7, setShowFullParagraph7] = useState(false);
-  const [showFullParagraph8, setShowFullParagraph8] = useState(false);
 
   const toggleParagraph1 = () => {
-    setShowFullParagraph(!showFullParagraph);
+    setShowFullParagraph1(!showFullParagraph1);
   };
 
   const toggleParagraph2 = () => {
@@ -42,24 +41,17 @@ const About = () => {
     setShowFullParagraph7(!showFullParagraph7);
   };
 
-  const toggleParagraph8 = () => {
-    setShowFullParagraph8(!showFullParagraph8);
-  };
-
-  const renderParagraph = (paragraph, showFullParagraph, toggleParagraph) => {
+  const renderParagraph = (paragraph, showFullParagraph) => {
     if (showFullParagraph) {
       return paragraph;
     }
-    return paragraph.substring(0, 640) + "...";
-  };
-  const toggleParagraph = () => {
-    setShowFullParagraph(!showFullParagraph);
+    return paragraph.substring(0, 640);
   };
 
   return (
     <div>
       <div className="homecontainer">
-        <div className="backgroundImg1">
+        <div className="backgroundImg111">
           <CustomNavbar />
           <div className="d-flex flex-column align-items-center">
             <div className="mt-6 main-about" style={{ width: "90%" }}>
@@ -79,47 +71,92 @@ const About = () => {
                   announcements their team might publish, while on the other
                   hand sports teams and clubs will have the advantage of
                   spreading all over the digital world, reaching out to their
-                  fans and approaching revenues.`
-                  )}
-                  {showFullParagraph || (
-                    <button
-                      className="btn btn-link text-white"
-                      onClick={toggleParagraph1}
-                    >
-                      Read More
-                    </button>
+                  fans and approaching revenues.`,
+                    showFullParagraph1
                   )}
                 </p>
+                {showFullParagraph1 || (
+                  <>
+                    <br />
+                    <div
+                      className="text-white readButton"
+                      onClick={toggleParagraph1}
+                    >
+                      <strong>Read More</strong>
+                    </div>
+                  </>
+                )}
               </div>
               <div className="d-flex internal-div justify-content-center">
-                <img
-                  src="/images/iPhone14-0.svg"
-                  className="img-fluid bg-black mobile-border"
-                  alt="Responsive"
-                ></img>
+                <img src="/images/iPhone14-0.svg" alt="Responsive"></img>
               </div>
             </div>
-            {/* <div className="backgroundLine1">
-              <div className="backgroundLine2"> */}
-            <div
-              className=" main-about reverse-col mt-6"
-              style={{ width: "90%" }}
-            >
-              <div className="internal-div d-flex justify-content-center">
+
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <div
+                style={{ position: "relative", top: "350px" }}
+                className="vectors"
+              >
                 <img
-                  src="/images/iPhone14-1.svg"
-                  className="img-fluid bg-black mobile-border"
+                  src="/images/v-line1.png"
+                  style={{
+                    position: "absolute",
+                    top: "10px",
+                    zIndex: -1,
+                    backgroundSize: "contain",
+                    objectFit: "contain",
+                  }}
+                  alt="Responsive"
+                ></img>
+                <img
+                  src="/images/v-line1.png"
+                  style={{
+                    position: "absolute",
+                    top: "30px",
+                    zIndex: -1,
+                    backgroundSize: "contain",
+                    objectFit: "contain",
+                  }}
+                  alt="Responsive"
+                ></img>
+                <img
+                  src="/images/v-line1.png"
+                  style={{
+                    position: "absolute",
+                    top: "50px",
+                    zIndex: -1,
+                    backgroundSize: "contain",
+                    objectFit: "contain",
+                  }}
+                  alt="Responsive"
+                ></img>
+                <img
+                  src="/images/v-line1.png"
+                  style={{
+                    position: "absolute",
+                    top: "70px",
+                    zIndex: -1,
+                    backgroundSize: "contain",
+                    objectFit: "contain",
+                  }}
                   alt="Responsive"
                 ></img>
               </div>
-              <div className="internal-div float-sm-left">
-                <div className="para-heading text-white custom-underline">
-                  What does Midani do
-                  <span style={{ color: "#BC0D1A" }}>?</span>
+              <div
+                className="main-about reverse-col mt-6"
+                style={{ width: "90%" }}
+              >
+                <div className="internal-div d-flex justify-content-center">
+                  <img src="/images/iPhone14-1.svg" alt="Responsive"></img>
                 </div>
-                <p className="about-para text-white">
-                  {renderParagraph(
-                    `Midani is mainly a keyboard app that combines many features
+                <div className="internal-div float-sm-left">
+                  <div className="para-heading text-white custom-underline">
+                    What does Midani do
+                    <span style={{ color: "#BC0D1A" }}>?</span>
+                  </div>
+                  <p className="about-para text-white">
+                    {renderParagraph(
+                      `Midani is mainly a keyboard app that combines many features
                   that facilitate for sports fans, above all, the way to seek,
                   reach and connect with their favorite team. The user himself
                   will be the lead, in other words, he will be able to control
@@ -136,29 +173,93 @@ const About = () => {
                   brands merchandising, and all the forms needed as a means of
                   communication. Why use a traditional keyboard and browser when
                   you can have them both in an app specially made to meet your
-                  expectations.`
+                  expectations.`,
+                      showFullParagraph2
+                    )}
+                  </p>
+                  {showFullParagraph2 || (
+                    <>
+                      <br />
+                      <div
+                        className="text-white readButton"
+                        onClick={toggleParagraph2}
+                      >
+                        <strong>Read More</strong>
+                      </div>
+                    </>
                   )}
-                  {showFullParagraph || (
-                    <button
-                      className="btn btn-link text-white"
-                      onClick={toggleParagraph2}
-                    >
-                      Read More
-                    </button>
-                  )}
-                </p>
-              </div>
-              {/* </div>
-              </div> */}
-            </div>
-            <div className="main-about mt-6" style={{ width: "90%" }}>
-              <div className="internal-div">
-                <div className="para-heading text-white custom-underline">
-                  What problem do we solve?
                 </div>
-                <p className="about-para text-white">
-                  {renderParagraph(
-                    `If we really need to put it under the title “problem”, it
+              </div>
+            </div>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <div
+                style={{ position: "relative", top: "700px" }}
+                className="vectors"
+              >
+                <img
+                  src="/images/v-line2.svg"
+                  style={{
+                    position: "absolute",
+                    top: "10px",
+                    zIndex: -1,
+                    backgroundSize: "contain",
+                    objectFit: "contain",
+                  }}
+                  alt="Responsive"
+                ></img>
+                <img
+                  src="/images/v-line2.svg"
+                  style={{
+                    position: "absolute",
+                    top: "30px",
+                    zIndex: -1,
+                    backgroundSize: "contain",
+                    objectFit: "contain",
+                  }}
+                  alt="Responsive"
+                ></img>
+                <img
+                  src="/images/v-line2.svg"
+                  style={{
+                    position: "absolute",
+                    top: "50px",
+                    zIndex: -1,
+                    backgroundSize: "contain",
+                    objectFit: "contain",
+                  }}
+                  alt="Responsive"
+                ></img>
+                <img
+                  src="/images/v-line2.svg"
+                  style={{
+                    position: "absolute",
+                    top: "70px",
+                    zIndex: -1,
+                    backgroundSize: "contain",
+                    objectFit: "contain",
+                  }}
+                  alt="Responsive"
+                ></img>
+                <img
+                  src="/images/v-line2.svg"
+                  style={{
+                    position: "absolute",
+                    top: "90px",
+                    zIndex: -1,
+                    backgroundSize: "contain",
+                    objectFit: "contain",
+                  }}
+                  alt="Responsive"
+                ></img>
+              </div>
+              <div className="main-about mt-6" style={{ width: "90%" }}>
+                <div className="internal-div">
+                  <div className="para-heading text-white custom-underline">
+                    What problem do we solve?
+                  </div>
+                  <p className="about-para text-white">
+                    {renderParagraph(
+                      `If we really need to put it under the title “problem”, it
                   would be the lack of direct and easy communication between
                   fans and their favorite teams. It is to be considered the road
                   that links both parties, by providing the fans the freedom to
@@ -170,43 +271,43 @@ const About = () => {
                   planet; we ourselves have customized a new planet for sports
                   lovers! What is better known as good communication than a
                   specialized chat box for the club community? We surely offer
-                  it in Midani!`
+                  it in Midani!`,
+                      showFullParagraph3
+                    )}
+                  </p>
+                  {showFullParagraph3 || (
+                    <>
+                      <br />
+                      <div
+                        className="text-white readButton"
+                        onClick={toggleParagraph3}
+                      >
+                        <strong>Read More</strong>
+                      </div>
+                    </>
                   )}
-                  {showFullParagraph || (
-                    <button
-                      className="btn btn-link text-white"
-                      onClick={toggleParagraph3}
-                    >
-                      Read More
-                    </button>
-                  )}
-                </p>
-              </div>
-              <div className="internal-div d-flex justify-content-center">
-                <img
-                  src="/images/iPhone14-2.svg"
-                  className="img-fluid bg-black mobile-border"
-                  alt="Responsive"
-                ></img>
+                </div>
+                <div className="internal-div d-flex justify-content-center">
+                  <img src="/images/iPhone14-2.svg" alt="Responsive"></img>
+                </div>
               </div>
             </div>
-            <div
-              className="main-about reverse-col mt-6"
-              style={{ width: "90%" }}
-            >
-              <div className="internal-div d-flex justify-content-center">
-                <img
-                  src="/images/iPhone14-1.svg"
-                  className="img-fluid bg-black mobile-border"
-                  alt="Responsive"
-                ></img>
-              </div>
-              <div className="internal-div">
-                <div className="para-heading text-white custom-underline">
-                  What makes us special?
+
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <div
+                className="main-about reverse-col mt-6"
+                style={{ width: "90%" }}
+              >
+                <div className="internal-div d-flex justify-content-center">
+                  <img src="/images/iPhone14-1.svg" alt="Responsive"></img>
                 </div>
-                <p className="about-para text-white">
-                  {renderParagraph(`Other than being the only app specialized for sports needs and
+                <div className="internal-div">
+                  <div className="para-heading text-white custom-underline">
+                    What makes us special?
+                  </div>
+                  <p className="about-para text-white">
+                    {renderParagraph(
+                      `Other than being the only app specialized for sports needs and
                   communication in the Middle East, Midani allows the user to
                   build up his own favourite team in an app, it helps him
                   communicate with other users having the same interests and it
@@ -217,25 +318,33 @@ const About = () => {
                   a club or a team other than a pleased crowd. Midani is going
                   to corner the market; it is a one-of-a-kind app that will
                   definitely flip the marketplace of sports by providing the
-                  best quality needed to satisfy all its users.`)}
-                  {showFullParagraph || (
-                    <button
-                      className="btn btn-link text-white"
-                      onClick={toggleParagraph4}
-                    >
-                      Read More
-                    </button>
+                  best quality needed to satisfy all its users.`,
+                      showFullParagraph4
+                    )}
+                  </p>
+                  {showFullParagraph4 || (
+                    <>
+                      <br />
+                      <div
+                        className="text-white readButton"
+                        onClick={toggleParagraph4}
+                      >
+                        <strong>Read More</strong>
+                      </div>
+                    </>
                   )}
-                </p>
+                </div>
               </div>
             </div>
+
             <div className="main-about mt-6" style={{ width: "90%" }}>
               <div className="internal-div">
                 <div className="para-heading text-white custom-underline">
                   Why should someone download Midani rather than something else?
                 </div>
                 <p className="about-para text-white">
-                  {renderParagraph(`We are all familiar with the sentence that says, “One size
+                  {renderParagraph(
+                    `We are all familiar with the sentence that says, “One size
                   fits all”. Well, with Midani it is indeed a great fit! Thanks
                   to being all based on customization to meet the client’s
                   needs, Midani is like no other app. Apart from being totally
@@ -247,23 +356,24 @@ const About = () => {
                   one click, you are there, being the fan, leader, and playmaker
                   of your own field. With Midani whether you are a fan or a
                   team, you are always a priority for us in the means of
-                  innovation and modernization.`)}
-                  {showFullParagraph || (
-                    <button
-                      className="btn btn-link text-white"
-                      onClick={toggleParagraph5}
-                    >
-                      Read More
-                    </button>
+                  innovation and modernization.`,
+                    showFullParagraph5
                   )}
                 </p>
+                {showFullParagraph5 || (
+                  <>
+                    <br />
+                    <div
+                      className="text-white readButton"
+                      onClick={toggleParagraph5}
+                    >
+                      <strong>Read More</strong>
+                    </div>
+                  </>
+                )}
               </div>
               <div className="internal-div d-flex justify-content-center">
-                <img
-                  src="/images/iPhone14-4.svg"
-                  className="img-fluid bg-black mobile-border"
-                  alt="Responsive"
-                ></img>
+                <img src="/images/iPhone14-4.svg" alt="Responsive"></img>
               </div>
             </div>
             <div
@@ -271,33 +381,35 @@ const About = () => {
               style={{ width: "90%" }}
             >
               <div className="internal-div d-flex justify-content-center">
-                <img
-                  src="/images/iPhone14-5.svg"
-                  className="img-fluid bg-black mobile-border"
-                  alt="Responsive"
-                ></img>
+                <img src="/images/iPhone14-5.svg" alt="Responsive"></img>
               </div>
               <div className="internal-div">
                 <div className="para-heading text-white custom-underline">
                   Our platforms
                 </div>
                 <p className="about-para text-white">
-                  {renderParagraph(`Midani is the new technology bond for sports lovers and their
+                  {renderParagraph(
+                    `Midani is the new technology bond for sports lovers and their
                   teams. A sports customizable keyboard app that has uncountable
                   features for both teams and fans. Build your team keyboard,
                   stay updated, follow matches, chat with your community, and
                   buy tickets and products! With Midani, whether you are a team
                   or a fan you have the ability to lead. It is complimentary,
-                  satisfying and worth trying!`)}
-                  {showFullParagraph || (
-                    <button
-                      className="btn btn-link text-white"
-                      onClick={toggleParagraph6}
-                    >
-                      Read More
-                    </button>
+                  satisfying and worth trying!`,
+                    showFullParagraph6
                   )}
                 </p>
+                {showFullParagraph6 || (
+                  <>
+                    <br />
+                    <div
+                      className="text-white readButton"
+                      onClick={toggleParagraph6}
+                    >
+                      <strong>Read More</strong>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
             <div className="main-about mt-6" style={{ width: "90%" }}>
@@ -306,30 +418,32 @@ const About = () => {
                   No one gets you closer than us
                 </div>
                 <p className="about-para text-white">
-                  {renderParagraph(`This new fan experience is the best because we work with the
+                  {renderParagraph(
+                    `This new fan experience is the best because we work with the
                   best in the business to deliver a mutually beneficial
                   solution. It’s simple: our partners’ content is valuable to
                   fans, our fans are valuable to our partners, who sharpen their
                   content to give our fans even more value and on and on it
                   goes. A virtuous cycle where everybody wins: fans,
                   advertisers, broadcasters, publishers, clubs, leagues,
-                  federations and players.`)}
-                  {showFullParagraph || (
-                    <button
-                      className="btn btn-link text-white"
-                      onClick={toggleParagraph7}
-                    >
-                      Read More
-                    </button>
+                  federations and players.`,
+                    showFullParagraph7
                   )}
                 </p>
+                {showFullParagraph7 || (
+                  <>
+                    <br />
+                    <div
+                      className="text-white readButton"
+                      onClick={toggleParagraph7}
+                    >
+                      <strong>Read More</strong>
+                    </div>
+                  </>
+                )}
               </div>
               <div className="internal-div d-flex justify-content-center">
-                <img
-                  src="/images/iPhone14-6.svg"
-                  className="img-fluid bg-black mobile-border"
-                  alt="Responsive"
-                ></img>
+                <img src="/images/iPhone14-6.svg" alt="Responsive"></img>
               </div>
             </div>
             <div>
@@ -339,37 +453,21 @@ const About = () => {
                 </div>
               </div>
               <div className="d-flex justify-content-center align-items-center">
-                <img
-                  src="/images/Vector.png"
-                  className="img-fluid"
-                  alt="Responsive"
-                />
+                <img src="/images/Vector.png" alt="Responsive" />
                 <p className="ml-2 text-white">Non-stop News</p>
               </div>
               <div className="d-flex justify-content-center align-items-center mt-2">
-                <img
-                  src="/images/Vector.png"
-                  className="img-fluid"
-                  alt="Responsive"
-                />
+                <img src="/images/Vector.png" alt="Responsive" />
                 <p className="ml-2 text-white">Personalized feed of sports</p>
               </div>
               <div className="d-flex justify-content-center align-items-center mt-2">
-                <img
-                  src="/images/Vector.png"
-                  className="img-fluid"
-                  alt="Responsive"
-                />
+                <img src="/images/Vector.png" alt="Responsive" />
                 <p className="ml-2 text-white">
                   Live Streaming without a Subscription
                 </p>
               </div>
               <div className="d-flex justify-content-center align-items-center mt-2">
-                <img
-                  src="/images/Vector.png"
-                  className="img-fluid"
-                  alt="Responsive"
-                />
+                <img src="/images/Vector.png" alt="Responsive" />
                 <p className="ml-2 text-white">
                   Premium non-intrusive advertising experience
                 </p>
@@ -383,52 +481,32 @@ const About = () => {
                 </div>
               </div>
               <div className="d-flex justify-content-center align-items-center">
-                <img
-                  src="/images/Vector.png"
-                  className="img-fluid"
-                  alt="Responsive"
-                />
+                <img src="/images/Vector.png" alt="Responsive" />
                 <p className="ml-2 text-white">
                   No Piracy, no hate speech, no user-generated content
                 </p>
               </div>
               <div className="d-flex justify-content-center align-items-center mt-2">
-                <img
-                  src="/images/Vector.png"
-                  className="img-fluid"
-                  alt="Responsive"
-                />
+                <img src="/images/Vector.png" alt="Responsive" />
                 <p className="ml-2 text-white">
                   Exclusive and original plug-and-play content for premium
                   publishers
                 </p>
               </div>
               <div className="d-flex justify-content-center align-items-center mt-2">
-                <img
-                  src="/images/Vector.png"
-                  className="img-fluid"
-                  alt="Responsive"
-                />
+                <img src="/images/Vector.png" alt="Responsive" />
                 <p className="ml-2 text-white">
                   Connect with young, engaged Sports fans
                 </p>
               </div>
               <div className="d-flex justify-content-center align-items-center mt-2">
-                <img
-                  src="/images/Vector.png"
-                  className="img-fluid"
-                  alt="Responsive"
-                />
+                <img src="/images/Vector.png" alt="Responsive" />
                 <p className="ml-2 text-white">
                   Increased Global reach and data insights
                 </p>
               </div>
               <div className="d-flex justify-content-center align-items-center mt-2">
-                <img
-                  src="/images/Vector.png"
-                  className="img-fluid"
-                  alt="Responsive"
-                />
+                <img src="/images/Vector.png" alt="Responsive" />
                 <p className="ml-2 text-white">
                   We elevate your brand - and you rub shoulders with the game's
                   elite!

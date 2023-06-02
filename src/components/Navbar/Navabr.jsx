@@ -18,7 +18,12 @@ const CustomNavbar = () => {
   };
 
   return (
-    <Navbar expand="lg" bg="transparent" variant="dark">
+    <Navbar
+      style={{ display: "flex", flexDirection: "row-reverse" }}
+      expand="lg"
+      bg="transparent"
+      variant="dark"
+    >
       <Navbar.Brand
         className="logo"
         onClick={() => {
@@ -31,8 +36,11 @@ const CustomNavbar = () => {
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <div className="nav1">
-          <Nav>
+        <div
+          className="nav1"
+          style={{ display: "flex", flexDirection: "row-reverse" }}
+        >
+          <Nav style={{ display: "flex", flexDirection: "row-reverse" }}>
             <Nav.Link
               style={{
                 color: navActive === "home" && "white",
@@ -125,7 +133,7 @@ const CustomNavbar = () => {
               {t("navbar.contact")}
             </Nav.Link>
           </Nav>
-          <Nav>
+          <Nav style={{ display: "flex", flexDirection: "row-reverse" }}>
             <div className="navcontainer d-flex">
               <select
                 className="desktop"

@@ -1,7 +1,7 @@
-.homecontainer .backgroundImg1 {
-  background: url("/public/images/main.png") no-repeat;
+.homecontainer .backgroundImg111 {
+  background: url("/public/images/main.svg") no-repeat;
   opacity: 0.9;
-  min-height: 100vh;
+  min-height: 90vh;
   background-color: black;
   height: auto;
 }
@@ -31,12 +31,21 @@
   width: 50%;
 }
 
+.readButton {
+  cursor: pointer;
+      font-size: 15px;
+      margin-top: -30px;
+      width: 100px
+}
+
 .about-para {
+  margin-top: 30px;
   font-style: normal;
   font-family: 'Poppins';
   font-weight: 400;
+  opacity: 0.8;
   font-size: 17px;
-  line-height: 50px;
+  line-height: 40px;
 }
 
 .mobile-border  {
@@ -85,6 +94,16 @@
 @media screen and (max-width: 390px) {
   .main-about {
     flex-direction: column;
+  }
+
+  .vectors {
+    display: none;
+  }
+  
+  .readButton {
+    display: flex;
+    justify-content: center;
+    margin-top: -100px;
   }
 
   .reverse-col {
