@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
@@ -11,15 +11,21 @@ const CustomNavbar = () => {
     localStorage.getItem("navActive") || "home"
   );
 
+  const lan = localStorage.getItem("language") || "en";
   const { i18n } = useTranslation();
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
+    localStorage.setItem("language", lng);
   };
+
+  useEffect(() => {
+    i18n.changeLanguage(lan);
+  }, [i18n, lan]);
 
   return (
     <Navbar
-      style={{ display: "flex", flexDirection: "row-reverse" }}
+      className={`${i18n.language === "ar" && "custom-navbar-ar"}`}
       expand="lg"
       bg="transparent"
       variant="dark"
@@ -32,15 +38,22 @@ const CustomNavbar = () => {
         }}
         href="/"
       >
-        <img src="/images/elogo.svg" alt="" />
+        {i18n.language === "ar" ? (
+          <img src="/images/arabic-logo.svg" alt="" />
+        ) : (
+          <img src="/images/elogo.svg" alt="" />
+        )}
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <div
-          className="nav1"
-          style={{ display: "flex", flexDirection: "row-reverse" }}
+          className={`${i18n.language === "ar" && "custom-navbar-ar"} nav1`}
+          style={{
+            marginRight: i18n.language === "ar" && "auto",
+            marginLeft: i18n.language === "ar" && 0,
+          }}
         >
-          <Nav style={{ display: "flex", flexDirection: "row-reverse" }}>
+          <Nav className={`${i18n.language === "ar" && "custom-navbar-ar"}`}>
             <Nav.Link
               style={{
                 color: navActive === "home" && "white",
@@ -133,14 +146,18 @@ const CustomNavbar = () => {
               {t("navbar.contact")}
             </Nav.Link>
           </Nav>
-          <Nav style={{ display: "flex", flexDirection: "row-reverse" }}>
+          <Nav className={`${i18n.language === "ar" && "custom-navbar-ar"}`}>
             <div className="navcontainer d-flex">
               <select
                 className="desktop"
                 onChange={(e) => changeLanguage(e.target.value)}
               >
-                <option value="en">Eng</option>
-                <option value="ar">Ar</option>
+                <option value="en" selected={lan === "en"}>
+                  Eng
+                </option>
+                <option value="ar" selected={lan === "ar"}>
+                  Ar
+                </option>
               </select>
               <div className="mobile">
                 <span className="active">Eng</span>

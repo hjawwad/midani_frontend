@@ -3,7 +3,7 @@
 }
 .navbar {
   margin: 0 10px;
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
 .navbar a {
   color: #ffffff !important;
@@ -56,9 +56,11 @@ select {
 
 .nacActive {
   color: red !important;
-
 }
-
+.custom-navbar-ar {
+  display: flex;
+  flex-direction: row-reverse;
+}
 @media screen and (max-width: 1300px) {
   .nav1 {
     width: 98%;

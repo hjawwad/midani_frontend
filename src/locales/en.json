@@ -18,6 +18,19 @@
     "basketball": "Basketball",
     "tennis": "Tennis",
     "hockey": "Hockey",
-    "interviews": "Interviews"
+    "interviews": "Interviews",
+    "cardTitle": "Title of News",
+    "cardDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet ante ligula. ",
+    "readMore": "Read post"
+  },
+  "imprint": {
+    "title": "Register Entry:",
+    "name": "Register in the Commercial Registry number 1540",
+    "law": " Existing and registered under the laws of the Amiri Decree No. 8 of 2015",
+    "new1": "APPLICABLE LAW AND DISPUTE RESOLUTION",
+    "new2": "Applicable Law",
+    "new3": "This Agreement (including any non-contractual matters and obligations arising therefrom or associated therewith) shall be governed by, and construed in accordance with, the laws of the United Arab Emirates.",
+    "new4": "Online Dispute Resolution",
+    "new5": " Any dispute, controversy, proceedings, or claim between the Parties relating to this Agreement (including any non-contractual matters and obligations arising therefrom or associated therewith) within a period of shall fall within the jurisdiction of the courts of Dubai, UAE"
   }
 }

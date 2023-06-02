@@ -19,9 +19,11 @@ import { useEffect } from "react";
 import i18next from "i18next";
 
 function App() {
+  const lan = localStorage.getItem("language") || "en";
+
   useEffect(() => {
-    i18next.changeLanguage("en");
-  }, []);
+    i18next.changeLanguage(lan);
+  }, [lan]);
 
   return (
     <>

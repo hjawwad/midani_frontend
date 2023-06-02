@@ -2,48 +2,72 @@ import React from "react";
 import CustomFooter from "../../components/Footer/Footer";
 import CustomNavbar from "../../components/Navbar/Navabr";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+
 import "./News.css";
 import NewsCard from "../../components/Card/News-card";
 import Search from "../../components/Search/Search";
 
+import { useTranslation } from "react-i18next";
+
 const News = () => {
+  const { t } = useTranslation();
+  const { i18n } = useTranslation();
   return (
     <>
       <div className="newscontainer">
         <div className="backgroundImg1">
           <CustomNavbar />
           <div className="d-flex justify-content-center">
-            <h3 className="text-center title">MAKING WAVES.</h3>
+            <h3 className="text-center title"> {t("news.title")}</h3>
           </div>
-          <p className="text-center desc">
-            We don’t just break news, we make news. Check out what’s hot below
-            and stay in the know with our social media.
-          </p>
+          <p className="text-center desc">{t("news.desc")}</p>
           <div className="content">
             <div style={{ margin: "0 30px", height: "530px" }}>
               <div
                 className="backgroundImg2"
                 style={{
                   background: `url(${"/images/news.png"}) no-repeat`,
+                  display: "flex",
+                  paddingRight: i18n.language === "ar" && "30px",
+                  alignItems: i18n.language === "ar" && "end",
                 }}
               >
-                <h3>Lorem ipsum dolor sit ame</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Aliquam sit amet ante ligula.{" "}
+                <h3>{t("news.imgTitle")}</h3>
+                <p
+                  style={{
+                    textAlign: i18n.language === "ar" && "right",
+                    unicodeBidi: i18n.language === "ar" && "isolate",
+                    direction: i18n.language === "ar" && "rtl",
+                  }}
+                >
+                  {t("news.imgDesc")}.
                 </p>
               </div>
             </div>
-            <div className="news">
-              <div className="news-list">
-                <span className="active">View all</span>
-                <span>Football</span>
-                <span>Basketball</span>
-                <span>Tennis</span>
-                <span>Hockey</span>
-                <span className="mobile">Interviews</span>
+            <div
+              className={`${
+                i18n.language === "ar" && "custom-navbar-ar"
+              }  news`}
+              style={{ paddingRight: i18n.language === "ar" && "30px" }}
+            >
+              <div
+                className={`${
+                  i18n.language === "ar" && "custom-navbar-ar"
+                } news-list`}
+              >
+                <span className="active">{t("news.all")}</span>
+                <span>{t("news.football")}</span>
+                <span>{t("news.basketball")}</span>
+                <span>{t("news.tennis")}</span>
+                <span className="mobile">{t("news.hockey")}</span>
+                <span>{t("news.interviews")}</span>
                 <span className="mobile">
-                  <ChevronRightIcon />
+                  {i18n.language === "ar" ? (
+                    <ChevronLeftIcon />
+                  ) : (
+                    <ChevronRightIcon />
+                  )}
                 </span>
               </div>
 
