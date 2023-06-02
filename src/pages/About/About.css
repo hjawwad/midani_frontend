@@ -109,7 +109,12 @@
   .reverse-col {
     flex-direction: column-reverse;
   }
+
   .internal-div {
       width: 100%;
     }
+  .mobile-version {
+    width: 90%;
+    justify-content: center;
+  }
 }

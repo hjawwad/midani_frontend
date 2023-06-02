@@ -1,3 +1,4 @@
+import { style } from "@mui/system";
 import React, { useState, useEffect } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
@@ -53,7 +54,12 @@ const CustomNavbar = () => {
             marginLeft: i18n.language === "ar" && 0,
           }}
         >
-          <Nav className={`${i18n.language === "ar" && "custom-navbar-ar"}`}>
+          <Nav
+            className={`${i18n.language === "ar" && "custom-navbar-ar"}`}
+            style={{
+              flexDirection: `${i18n.language === "ar" && "row-reverse"}`,
+            }}
+          >
             <Nav.Link
               style={{
                 color: navActive === "home" && "white",
