@@ -3,35 +3,84 @@ import "./Footer.css";
 
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const CustomFooter = () => {
+  const { t, i18n } = useTranslation();
+
   return (
     <MDBFooter className="text-lg-start text-white footerbackgroundImg1">
       <section className="m-5 mb-0">
-        <MDBRow className="mt-3">
-          <MDBCol md="6" lg="7" xl="7" className="mx-auto ">
+        <MDBRow
+          className={`${i18n.language === "ar" && "custom-navbar-ar"} mt-3`}
+        >
+          <MDBCol
+            style={{ textAlign: i18n.language === "ar" && "right" }}
+            md="6"
+            lg="7"
+            xl="7"
+            className="mx-auto "
+          >
             <h6 className="text-uppercase fw-bold mb-4">
-              <img src="/images/elogo.svg" alt="" />
+              {i18n.language === "ar" ? (
+                <img src="/images/arabic-logo.svg" alt="" />
+              ) : (
+                <img src="/images/elogo.svg" alt="" />
+              )}
             </h6>
-            <p>No one gets you closer!</p>
-            <p>follow us on:</p>
+            <p className={`${i18n.language === "ar" && "comma"}`}>
+              {t("footer.text1")}
+            </p>
+            <p className={`${i18n.language === "ar" && "comma"}`}>
+              {t("footer.text2")}
+            </p>
             <div>
-              <Link to="" className="me-4 text-reset">
+              <Link
+                to=""
+                className={`${
+                  i18n.language === "ar" ? "ml4" : "me-4"
+                } text-reset`}
+              >
                 <MDBIcon fab icon="facebook-f" />
               </Link>
-              <Link to="" className="me-4 text-reset">
+              <Link
+                to=""
+                className={`${
+                  i18n.language === "ar" ? "ml4" : "me-4"
+                } text-reset`}
+              >
                 <MDBIcon fab icon="twitter" />
               </Link>
-              <Link to="" className="me-4 text-reset">
+              <Link
+                to=""
+                className={`${
+                  i18n.language === "ar" ? "ml4" : "me-4"
+                } text-reset`}
+              >
                 <MDBIcon fab icon="google" />
               </Link>
-              <Link to="" className="me-4 text-reset">
+              <Link
+                to=""
+                className={`${
+                  i18n.language === "ar" ? "ml4" : "me-4"
+                } text-reset`}
+              >
                 <MDBIcon fab icon="instagram" />
               </Link>
-              <Link to="" className="me-4 text-reset">
+              <Link
+                to=""
+                className={`${
+                  i18n.language === "ar" ? "ml4" : "me-4"
+                } text-reset`}
+              >
                 <MDBIcon fab icon="linkedin" />
               </Link>
-              <Link to="" className="me-4 text-reset">
+              <Link
+                to=""
+                className={`${
+                  i18n.language === "ar" ? "ml4" : "me-4"
+                } text-reset`}
+              >
                 <MDBIcon fab icon="github" />
               </Link>
             </div>
@@ -44,65 +93,81 @@ const CustomFooter = () => {
           </MDBCol>
 
           <MDBCol md="6" lg="5" xl="5" className="mx-auto mycol">
-            <div className="d-flex justify-content-between flex-wrap">
+            <div
+              className={`${
+                i18n.language === "ar" && "custom-navbar-ar"
+              } d-flex justify-content-between flex-wrap`}
+              style={{ textAlign: i18n.language === "ar" && "right" }}
+            >
               <div className="d-flex flex-column mobile">
-                <h6 className="text-uppercase fw-bold mb-4">Work with us</h6>
+                <h6 className="text-uppercase fw-bold mb-4">
+                  {t("footer.heading1")}
+                </h6>
                 <p>
                   <Link to="#!" className="text-reset">
-                    Sales
+                    {t("footer.sales")}
                   </Link>
                 </p>
                 <p>
                   <Link to="#!" className="text-reset">
-                    OTT
+                    {t("footer.ott")}
                   </Link>
                 </p>
                 <p>
                   <Link to="#!" className="text-reset">
-                    Brands story
+                    {t("footer.brands")}
                   </Link>
                 </p>
               </div>
               <div className="d-flex flex-column mobile">
-                <h6 className="text-uppercase fw-bold mb-4">About</h6>
+                <h6 className="text-uppercase fw-bold mb-4">
+                  {t("footer.heading2")}
+                </h6>
                 <p>
                   <Link to="#!" className="text-reset">
-                    News
+                    {t("footer.news")}
                   </Link>
                 </p>
                 <p>
                   <Link to="#!" className="text-reset">
-                    Contact
+                    {t("footer.contact")}
                   </Link>
                 </p>
               </div>
               <div className="d-flex flex-column mobile">
-                <h6 className="text-uppercase fw-bold mb-4">Try our app</h6>
-                <p>App store</p>
-                <p>Google play</p>
+                <h6 className="text-uppercase fw-bold mb-4">
+                  {t("footer.heading3")}
+                </h6>
+                <p>{t("footer.playstore")}</p>
+                <p>{t("footer.googlePlay")}</p>
               </div>
               <div className="d-flex flex-column mobile">
-                <h6 className="text-uppercase fw-bold mb-4">Legal</h6>
+                <h6 className="text-uppercase fw-bold mb-4">
+                  {t("footer.heading4")}
+                </h6>
                 <p>
                   <Link to="/imprint" className="text-reset">
-                    Imprint
+                    {t("footer.imprint")}
                   </Link>
                 </p>
                 <p>
                   <Link to="/privacy" className="text-reset">
-                    Privacy policy
+                    {t("footer.privacypolicy")}
                   </Link>
                 </p>
                 <p>
                   <Link to="/terms" className="text-reset">
-                    Terms of use
+                    {t("footer.terms")}
                   </Link>
                 </p>
               </div>
             </div>
             <div
               className="d-flex flex-column logo"
-              style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}
+              style={{
+                backgroundColor: "rgba(0, 0, 0, 0.05)",
+                alignItems: i18n.language === "ar" && "flex-start",
+              }}
             >
               <img
                 className="hide"

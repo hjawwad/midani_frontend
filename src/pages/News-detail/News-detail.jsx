@@ -2,8 +2,10 @@ import CustomFooter from "../../components/Footer/Footer";
 import CustomNavbar from "../../components/Navbar/Navabr";
 import Search from "../../components/Search/Search";
 import "./News-detail.css";
+import { useTranslation } from "react-i18next";
 
 const NewsDetail = () => {
+  const { t, i18n } = useTranslation();
   return (
     <>
       <div className="detailcontainer">
@@ -18,29 +20,78 @@ const NewsDetail = () => {
                 }}
               />
             </div>
-            <div className="details">
-              <h2>Lorem ipsum dolor sit ame</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-                euismod dolor eros, in lacinia magna lacinia in. Nunc odio
-                tortor, aliquam sit amet tellus at, ullamcorper egestas ligula.
-                Phasellus dapibus neque id justo ultricies, in vestibulum nisi
-                pharetra. Donec pharetra dolor ultricies gravida vehicula.
-                Pellentesque felis diam, efficitur nec mi a, facilisis
-                scelerisque justo. Proin viverra, ex ut porttitor consequat, est
-                nunc pharetra dolor, id vestibulum risus velit in enim. Nullam
-                vitae felis nec neque sagittis cursus ut in diam. Integer metus
-                sem, convallis id ante a, tristique ultrices turpis. Nam in urna
-                sit amet odio cursus sagittis non at erat. Vestibulum id enim
-                suscipit, convallis nibh sit amet, lacinia lorem. Pellentesque
-                commodo mauris a lectus congue porttitor. Vivamus ligula erat,
-                mattis ac nibh vel, molestie cursus neque. Ut suscipit
-                pellentesque eros ut feugiat. Proin efficitur nulla at risus
-                dignissim, a varius orci tempus. Praesent id interdum nisi, ac
-                mollis ipsum. Sed porta cursus felis nec luctus.
+            <div
+              className="details"
+              style={{
+                textAlign: i18n.language === "ar" && "right",
+              }}
+            >
+              <h2>{t("newsDetails.title")}</h2>
+              <p
+                className={`${i18n.language === "ar" && "comma"}`}
+                style={{
+                  marginLeft: i18n.language === "ar" && "auto",
+                  width: i18n.language === "ar" && "100%",
+                }}
+              >
+                {t("newsDetails.text1")}
               </p>
-              <span>Lorem ipsum dolor sit amet, consectetur</span>
-              <span>Lorem ipsum dolor sit amet, consectetur</span>
+              <p
+                className={`${i18n.language === "ar" && "comma"}`}
+                style={{
+                  marginLeft: i18n.language === "ar" && "auto",
+                  width: i18n.language === "ar" && "100%",
+                }}
+              >
+                {t("newsDetails.text2")}
+              </p>
+              <p
+                className={`${i18n.language === "ar" && "comma"}`}
+                style={{
+                  marginLeft: i18n.language === "ar" && "auto",
+                  width: i18n.language === "ar" && "100%",
+                }}
+              >
+                {t("newsDetails.text3")}
+              </p>
+              <p
+                className={`${i18n.language === "ar" && "comma"}`}
+                style={{
+                  marginLeft: i18n.language === "ar" && "auto",
+                  width: i18n.language === "ar" && "100%",
+                }}
+              >
+                {t("newsDetails.text4")}
+              </p>
+              <p
+                className={`${i18n.language === "ar" && "comma"}`}
+                style={{
+                  marginLeft: i18n.language === "ar" && "auto",
+                  width: i18n.language === "ar" && "100%",
+                }}
+              >
+                {t("newsDetails.text5")}
+              </p>
+              <p
+                className={`${i18n.language === "ar" && "comma"}`}
+                style={{
+                  marginLeft: i18n.language === "ar" && "auto",
+                  width: i18n.language === "ar" && "100%",
+                }}
+              >
+                {t("newsDetails.text6")}
+              </p>
+              <p
+                className={`${i18n.language === "ar" && "comma"}`}
+                style={{
+                  marginLeft: i18n.language === "ar" && "auto",
+                  width: i18n.language === "ar" && "100%",
+                }}
+              >
+                {t("newsDetails.text7")}
+              </p>
+              {/* <span>Lorem ipsum dolor sit amet, consectetur</span>
+              <span>Lorem ipsum dolor sit amet, consectetur</span> */}
             </div>
           </div>
           <Search />
